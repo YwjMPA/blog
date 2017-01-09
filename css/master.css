@@ -1,0 +1,47 @@
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+header {
+  display: flex;
+  text-align:center;
+}
+
+.nav-brand {
+  width: 30%;
+}
+
+nav {
+  width: 50%;
+}
+
+nav>ul {
+  margin: 0;
+  padding: 0;
+}
+
+.nav-list {
+  list-style: none;
+  display: flex;
+}
+
+.nav-item {
+  width: 33.33%;
+}
+
+.nav-user {
+  width: 20%;
+}
+
+footer {
+  width: 100%;
+  text-align: center;
+}
