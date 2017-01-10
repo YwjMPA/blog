@@ -1,6 +1,56 @@
 const React = require('react');
 const ReactDOM = require('react-dom');
+const Article = require('./js/article').article;
+// fake data
+let dataTag = [
+  {
+    "id": 1,
+    "name": "HTML"
+  },
+  {
+    "id": 2,
+    "name": "CSS"
+  },
+  {
+    "id": 3,
+    "name": "JavaScript"
+  },
+  {
+    "id": 4,
+    "name": "React"
+  },
+  {
+    "id": 5,
+    "name": "Nodejs"
+  }
+]
 
+let dataArticle = [
+  {
+    "id": 1,
+    "title": "HTML",
+    "content": "HyperText Markup Language (HTML) is the standard markup language for creating web pages and web applications. With Cascading Style Sheets (CSS), and JavaScript, it forms a triad of cornerstone technologies for the World Wide Web. Web browsers receive HTML documents from a webserver or from local storage and render them into multimedia web pages. HTML describes the structure of a web page semantically and originally included cues for the appearance of the document.",
+    "click_count": 201,
+    "date_publish": "2014-01-28 06:19:59.613412",
+    "description": "HTML is a markup language for describing web documents (web pages)."
+  },
+  {
+    "id": 2,
+    "title": "CSS",
+    "content": "HyperText Markup Language (HTML) is the standard markup language for creating web pages and web applications. With Cascading Style Sheets (CSS), and JavaScript, it forms a triad of cornerstone technologies for the World Wide Web. Web browsers receive HTML documents from a webserver or from local storage and render them into multimedia web pages. HTML describes the structure of a web page semantically and originally included cues for the appearance of the document.",
+    "click_count": 201,
+    "date_publish": "2015-02-17 06:19:59.613412",
+    "description": "Cascading Style Sheets (CSS) is a style sheet language used for describing the presentation of a document written in a markup language."
+  },
+  {
+    "id": 3,
+    "title": "JavaScript",
+    "content": "HyperText Markup Language (HTML) is the standard markup language for creating web pages and web applications. With Cascading Style Sheets (CSS), and JavaScript, it forms a triad of cornerstone technologies for the World Wide Web. Web browsers receive HTML documents from a webserver or from local storage and render them into multimedia web pages. HTML describes the structure of a web page semantically and originally included cues for the appearance of the document.",
+    "click_count": 201,
+    "date_publish": "2016-12-02 06:19:59.613412",
+    "description": "JavaScript is a high-level, dynamic, untyped, and interpreted programming language."
+  },
+]
 // header
 function Header() {
   return (
@@ -13,40 +63,55 @@ function Header() {
           <li className="nav-item">Contact</li>
         </ul>
       </nav>
-      <div className="nav-user">Log in</div>
+      <span className="nav-user"><i className="fa fa-user-circle-o"></i> Log in</span>
     </header>
   )
 }
 // body
-class Article extends React.Component {
-  render() {
-    return (
-      <section>Article</section>
-    );
-  }
-}
 class Archives extends React.Component {
   render() {
     return (
-      <section>Archives</section>
+      <section>
+        <i className="fa fa-calendar"></i>Archives
+      </section>
     );
   }
 }
+
+function Tag(props) {
+  return (
+    <span><a href="">{props.name}</a></span>
+  )
+}
+
 class Tags extends React.Component {
+  constructor(props) {
+    super(props);
+  }
   render() {
+    let tagList = this.props.dataTag.map((val) =>
+      <Tag key={val.id} name={val.name}/>
+    );
     return (
-      <section>Tags</section>
+      <section>
+        <i className="fa fa-tags"></i>Tags
+        <br />
+        {tagList}
+      </section>
     );
   }
 }
 class Main extends React.Component {
+  constructor(props) {
+    super(props)
+  }
+  // Article Component is from ./js/article.js
   render() {
     return (
-      <main>
-          <Article />
+      <main className="container" >
+          <Article dataArticle={this.props.dataArticle}/>
           <Archives />
-          <Tags />
-          <hr />
+          <Tags dataTag={this.props.dataTag}/>
       </main>
     );
   }
@@ -65,11 +130,15 @@ function Footer() {
 }
 // home
 class Homepage extends React.Component{
+  constructor(props) {
+    super(props);
+  }
   render() {
     return (
       <div>
         <Header />
-        <Main />
+        <Main dataArticle={this.props.dataArticle}
+              dataTag={this.props.dataTag}/>
         <Footer />
       </div>
     );
@@ -77,6 +146,6 @@ class Homepage extends React.Component{
 }
 
 ReactDOM.render(
-  <Homepage />,
+  <Homepage dataArticle={dataArticle} dataTag={dataTag} />,
 	document.getElementById('root')
 );
