@@ -1,5 +1,5 @@
 const React = require('react');
-const articleHref = location.href + '/html/article.html';
+const articleHref = location.href + 'html/article.html';
 
 function formatDate(date) {
   let shortDate = date.slice(0, 10).split("-");
