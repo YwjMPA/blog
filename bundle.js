@@ -21780,7 +21780,7 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	var React = __webpack_require__(1);
-	var articleHref = location.href + '/html/article.html';
+	var articleUrl = location.href + 'html/article.html';
 
 	function formatDate(date) {
 	  var shortDate = date.slice(0, 10).split("-");
@@ -21804,7 +21804,7 @@
 	        { className: 'article-header' },
 	        React.createElement(
 	          'a',
-	          { href: articleHref },
+	          { href: articleUrl },
 	          this.props.title
 	        )
 	      );
