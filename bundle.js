@@ -193,7 +193,8 @@
 	      });
 	      return React.createElement(
 	        'section',
-	        null,
+	        { className: 'tags' },
+	        React.createElement('hr', null),
 	        React.createElement('i', { className: 'fa fa-tags' }),
 	        'Tags',
 	        React.createElement('br', null),

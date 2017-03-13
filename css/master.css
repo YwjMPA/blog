@@ -87,10 +87,20 @@ main {
 }
 
 .article-info i {
-  color: #ac47e0;
+  color: #689eff;
 }
   /* archives */
   /* tags */
+.tags {
+
+}
+
+.tags>span {
+  font-size: 70%;
+  padding: 0 1px;
+  border: 1px solid black;
+  margin: 1px;
+}
 /* footer */
 footer {
   width: 100%;
