@@ -1,6 +1,7 @@
 const React = require('react');
 const ReactDOM = require('react-dom');
-const Article = require('./js/article').article;
+const Main = require('./js/main').main;
+
 // fake data
 let dataTag = [
   {
@@ -51,6 +52,7 @@ let dataArticle = [
     "description": "JavaScript is a high-level, dynamic, untyped, and interpreted programming language."
   },
 ]
+
 // header
 function Header() {
   return (
@@ -67,55 +69,8 @@ function Header() {
     </header>
   )
 }
-// body
-class Archives extends React.Component {
-  render() {
-    return (
-      <section>
-        <i className="fa fa-calendar"></i>Archives
-      </section>
-    );
-  }
-}
 
-function Tag(props) {
-  return (
-    <span><a href="">{props.name}</a></span>
-  )
-}
 
-class Tags extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-  render() {
-    let tagList = this.props.dataTag.map((val) =>
-      <Tag key={val.id} name={val.name}/>
-    );
-    return (
-      <section>
-        <i className="fa fa-tags"></i>Tags
-        <br />
-        {tagList}
-      </section>
-    );
-  }
-}
-class Main extends React.Component {
-  constructor(props) {
-    super(props)
-  }
-  // Article Component is from ./js/article.js
-  render() {
-    return (
-      <main className="container" >
-          <Article dataArticle={this.props.dataArticle}/>
-          <Archives />
-          <Tags dataTag={this.props.dataTag}/>
-      </main>
-    );
-  }
-}
 // footer
 function Footer() {
   return (
@@ -128,11 +83,13 @@ function Footer() {
     </footer>
   )
 }
-// home
+
+// homepage
 class Homepage extends React.Component{
   constructor(props) {
     super(props);
   }
+  // Main Component come from ./js/main.js
   render() {
     return (
       <div>
