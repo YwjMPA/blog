@@ -66,9 +66,9 @@ function Header() {
           <li className="nav-item">Contact</li>
         </ul>
       </nav>
-      <span className="nav-user" id='logIn'>
+      <a className="nav-user" id='logIn'>
         <i className="fa fa-user-circle-o"></i> Log in
-      </span>
+      </a>
       <Modal />
     </header>
   )
