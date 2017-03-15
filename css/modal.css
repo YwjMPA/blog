@@ -17,6 +17,7 @@
   width: 80%;
   margin: 15% auto;
   border-radius: 5px;
+  box-shadow: 1px 1px 20px 1px #000;
   -webkit-animation-name: slideIn;
   -webkit-animation-duration: 0.4s;
   animation-name: slideIn;
@@ -71,11 +72,11 @@
 }
 
 @-webkit-keyframes slideIn {
-  from{top: -300px; opacity:0}
+  from{top: -30%; opacity:0}
   to{top: 0px; opacity: 1}
 }
 
 @keyframes slideIn {
-  from{top: -300px; opacity:0}
+  from{top: -30%; opacity:0}
   to{top: 0px; opacity: 1}
 }

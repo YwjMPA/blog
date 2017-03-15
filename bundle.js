@@ -134,7 +134,7 @@
 	      )
 	    ),
 	    React.createElement(
-	      'a',
+	      'div',
 	      { className: 'nav-user', id: 'logIn' },
 	      React.createElement('i', { className: 'fa fa-user-circle-o' }),
 	      ' Log in'
@@ -21975,12 +21975,12 @@
 	            { className: 'article-info' },
 	            React.createElement(ArticleTag, null),
 	            ' ',
-	            '   ',
+	            ' ',
 	            React.createElement(ArticleTime, { datePublished: val.date_publish }),
-	            '    ',
+	            ' ',
 	            React.createElement(ArticleComment, null),
 	            ' ',
-	            '    ',
+	            ' ',
 	            React.createElement(ArticleView, { clickCount: val.click_count })
 	          )
 	        );
