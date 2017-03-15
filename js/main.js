@@ -51,9 +51,6 @@ class HomeMain extends React.Component {
 
 // main body
 class Main extends React.Component {
-  constructor(props) {
-    super(props)
-  }
   render() {
     let mainSection = null;
     if (location.href.indexOf('article.html') < 0) {

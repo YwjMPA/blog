@@ -1,6 +1,7 @@
 const React = require('react');
 const ReactDOM = require('react-dom');
 const Main = require('./js/main').main;
+const Modal = require('./js/modal').modal;
 
 // fake data
 let dataTag = [
@@ -65,11 +66,13 @@ function Header() {
           <li className="nav-item">Contact</li>
         </ul>
       </nav>
-      <span className="nav-user"><i className="fa fa-user-circle-o"></i> Log in</span>
+      <span className="nav-user" id='logIn'>
+        <i className="fa fa-user-circle-o"></i> Log in
+      </span>
+      <Modal />
     </header>
   )
 }
-
 
 // footer
 function Footer() {

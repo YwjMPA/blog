@@ -57,6 +57,7 @@
 	var React = __webpack_require__(1);
 	var ReactDOM = __webpack_require__(32);
 	var Main = __webpack_require__(178).main;
+	var Modal = __webpack_require__(181).modal;
 
 	// fake data
 	var dataTag = [{
@@ -134,10 +135,11 @@
 	    ),
 	    React.createElement(
 	      'span',
-	      { className: 'nav-user' },
+	      { className: 'nav-user', id: 'logIn' },
 	      React.createElement('i', { className: 'fa fa-user-circle-o' }),
 	      ' Log in'
-	    )
+	    ),
+	    React.createElement(Modal, null)
 	  );
 	}
 
@@ -21733,10 +21735,10 @@
 	var Main = function (_React$Component4) {
 	  _inherits(Main, _React$Component4);
 
-	  function Main(props) {
+	  function Main() {
 	    _classCallCheck(this, Main);
 
-	    return _possibleConstructorReturn(this, (Main.__proto__ || Object.getPrototypeOf(Main)).call(this, props));
+	    return _possibleConstructorReturn(this, (Main.__proto__ || Object.getPrototypeOf(Main)).apply(this, arguments));
 	  }
 
 	  _createClass(Main, [{
@@ -22274,6 +22276,186 @@
 
 	module.exports = {
 	  article: Article
+	};
+
+/***/ },
+/* 181 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var React = __webpack_require__(1);
+
+	var ModalHeader = function (_React$Component) {
+	  _inherits(ModalHeader, _React$Component);
+
+	  function ModalHeader() {
+	    _classCallCheck(this, ModalHeader);
+
+	    return _possibleConstructorReturn(this, (ModalHeader.__proto__ || Object.getPrototypeOf(ModalHeader)).apply(this, arguments));
+	  }
+
+	  _createClass(ModalHeader, [{
+	    key: "render",
+	    value: function render() {
+	      return React.createElement(
+	        "div",
+	        { className: "modal-header" },
+	        React.createElement(
+	          "span",
+	          { className: "close" },
+	          "\xD7"
+	        ),
+	        React.createElement(
+	          "h3",
+	          null,
+	          "Ywj",
+	          '\'',
+	          "s Blog"
+	        )
+	      );
+	    }
+	  }]);
+
+	  return ModalHeader;
+	}(React.Component);
+
+	var ModalBody = function (_React$Component2) {
+	  _inherits(ModalBody, _React$Component2);
+
+	  function ModalBody() {
+	    _classCallCheck(this, ModalBody);
+
+	    return _possibleConstructorReturn(this, (ModalBody.__proto__ || Object.getPrototypeOf(ModalBody)).apply(this, arguments));
+	  }
+
+	  _createClass(ModalBody, [{
+	    key: "render",
+	    value: function render() {
+	      return React.createElement(
+	        "div",
+	        { className: "modal-body" },
+	        React.createElement(
+	          "form",
+	          { action: "#" },
+	          React.createElement(
+	            "div",
+	            { className: "form-group" },
+	            React.createElement(
+	              "label",
+	              { htmlFor: "username" },
+	              "Username:"
+	            ),
+	            React.createElement("input", { type: "text", placeholder: "Username", id: "username" })
+	          ),
+	          React.createElement(
+	            "div",
+	            { className: "form-group" },
+	            React.createElement(
+	              "label",
+	              { htmlFor: "password" },
+	              "Password:"
+	            ),
+	            React.createElement("input", { type: "text", placeholder: "Password", id: "password" })
+	          ),
+	          React.createElement("input", { type: "submit", value: "Log in", id: "logSubmit" })
+	        )
+	      );
+	    }
+	  }]);
+
+	  return ModalBody;
+	}(React.Component);
+
+	var ModalFooter = function (_React$Component3) {
+	  _inherits(ModalFooter, _React$Component3);
+
+	  function ModalFooter() {
+	    _classCallCheck(this, ModalFooter);
+
+	    return _possibleConstructorReturn(this, (ModalFooter.__proto__ || Object.getPrototypeOf(ModalFooter)).apply(this, arguments));
+	  }
+
+	  _createClass(ModalFooter, [{
+	    key: "render",
+	    value: function render() {
+	      return React.createElement(
+	        "div",
+	        { className: "modal-footer" },
+	        "Don",
+	        '\'',
+	        "t have an account?",
+	        React.createElement(
+	          "a",
+	          { href: "" },
+	          "Sign up"
+	        )
+	      );
+	    }
+	  }]);
+
+	  return ModalFooter;
+	}(React.Component);
+
+	var ModalContent = function (_React$Component4) {
+	  _inherits(ModalContent, _React$Component4);
+
+	  function ModalContent() {
+	    _classCallCheck(this, ModalContent);
+
+	    return _possibleConstructorReturn(this, (ModalContent.__proto__ || Object.getPrototypeOf(ModalContent)).apply(this, arguments));
+	  }
+
+	  _createClass(ModalContent, [{
+	    key: "render",
+	    value: function render() {
+	      return React.createElement(
+	        "div",
+	        { className: "modal-content" },
+	        React.createElement(ModalHeader, null),
+	        React.createElement("hr", null),
+	        React.createElement(ModalBody, null),
+	        React.createElement(ModalFooter, null)
+	      );
+	    }
+	  }]);
+
+	  return ModalContent;
+	}(React.Component);
+
+	var MyModal = function (_React$Component5) {
+	  _inherits(MyModal, _React$Component5);
+
+	  function MyModal() {
+	    _classCallCheck(this, MyModal);
+
+	    return _possibleConstructorReturn(this, (MyModal.__proto__ || Object.getPrototypeOf(MyModal)).apply(this, arguments));
+	  }
+
+	  _createClass(MyModal, [{
+	    key: "render",
+	    value: function render() {
+	      return React.createElement(
+	        "div",
+	        { id: "modal", className: "modal" },
+	        React.createElement(ModalContent, null)
+	      );
+	    }
+	  }]);
+
+	  return MyModal;
+	}(React.Component);
+
+	module.exports = {
+	  modal: MyModal
 	};
 
 /***/ }

@@ -1,5 +1,5 @@
 const React = require('react');
-const articleHref = location.href + 'html/article.html';
+const articleUrl = location.href + 'html/article.html';
 
 function formatDate(date) {
   let shortDate = date.slice(0, 10).split("-");
@@ -10,7 +10,7 @@ class ArticleHeader extends React.Component {
   render() {
     return (
       <h3 className="article-header">
-        <a href={articleHref}>
+        <a href={articleUrl}>
           {this.props.title}
         </a>
       </h3>

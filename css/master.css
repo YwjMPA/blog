@@ -152,8 +152,13 @@ main {
   float: right;
 }
 
+
+
 /* footer */
 footer {
   width: 100%;
   text-align: center;
+  border-top: 1px solid black;
+  position: fixed;
+  bottom: 0;
 }

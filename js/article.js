@@ -1,6 +1,6 @@
 const React = require('react');
 
-class ArticleHeader extends React.Component{
+class ArticleHeader extends React.Component {
   render(){
     return (
       <h1 id='article-header'>Title</h1>
@@ -8,7 +8,7 @@ class ArticleHeader extends React.Component{
   }
 }
 
-class ArticleTag extends React.Component{
+class ArticleTag extends React.Component {
   render(){
     return (
       <span>
@@ -18,7 +18,7 @@ class ArticleTag extends React.Component{
   }
 }
 
-class ArticleView extends React.Component{
+class ArticleView extends React.Component {
   render(){
     return (
       <span>
@@ -29,7 +29,7 @@ class ArticleView extends React.Component{
   }
 }
 
-class ArticleTime extends React.Component{
+class ArticleTime extends React.Component {
   render(){
     return (
       <span id='article-time'>
@@ -39,7 +39,7 @@ class ArticleTime extends React.Component{
   }
 }
 
-class ArticleDescription extends React.Component{
+class ArticleDescription extends React.Component {
   render(){
     return (
       <div id='article-description'>
@@ -49,7 +49,7 @@ class ArticleDescription extends React.Component{
   }
 }
 
-class ArticleContent extends React.Component{
+class ArticleContent extends React.Component {
   render(){
     return (
       <div id='article-content'>
@@ -59,7 +59,7 @@ class ArticleContent extends React.Component{
   }
 }
 
-class CommentList extends React.Component{
+class CommentList extends React.Component {
   render(){
     return (
       <div>
