@@ -73,9 +73,9 @@ class ArticleSection extends React.Component {
         <ArticleHeader title={val.title}/>
         <ArticleDescription description={val.description}/>
         <div className="article-info">
-          <ArticleTag /> {'   '}
-          <ArticleTime datePublished={val.date_publish}/>{'    '}
-          <ArticleComment /> {'    '}
+          <ArticleTag /> {' '}
+          <ArticleTime datePublished={val.date_publish}/>{' '}
+          <ArticleComment /> {' '}
           <ArticleView clickCount={val.click_count}/>
         </div>
       </div>

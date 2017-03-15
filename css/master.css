@@ -61,6 +61,10 @@ nav>ul {
   color: #fff;
 }
 
+.nav-user:hover {
+  cursor: pointer;
+}
+
 /* main */
 main {
   margin-top: 15px;
