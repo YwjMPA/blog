@@ -74,7 +74,13 @@
 	  "name": "React"
 	}, {
 	  "id": 5,
+	  "name": "Vue"
+	}, {
+	  "id": 6,
 	  "name": "Nodejs"
+	}, {
+	  "id": 7,
+	  "name": "webpack"
 	}];
 
 	var dataArticle = [{
@@ -167,6 +173,7 @@
 	      React.createElement(
 	        'a',
 	        { className: 'github', href: 'https://github.com/ywjmpa' },
+	        ' ',
 	        React.createElement('i', { className: 'fa fa-github' })
 	      )
 	    )
@@ -21689,12 +21696,15 @@
 	      });
 	      return React.createElement(
 	        'section',
-	        { className: 'tags' },
-	        React.createElement('hr', null),
+	        { className: 'tag-section' },
 	        React.createElement('i', { className: 'fa fa-tags' }),
 	        'Tags',
 	        React.createElement('br', null),
-	        tagList
+	        React.createElement(
+	          'div',
+	          { className: 'tags' },
+	          tagList
+	        )
 	      );
 	    }
 	  }]);
@@ -21718,6 +21728,7 @@
 	        'div',
 	        null,
 	        React.createElement(ArticleSection, { dataArticle: this.props.dataArticle }),
+	        React.createElement('hr', null),
 	        React.createElement(Tags, { dataTag: this.props.dataTag })
 	      );
 	    }

@@ -27,11 +27,12 @@ class Tags extends React.Component {
       <Tag key={val.id} name={val.name}/>
     );
     return (
-      <section className="tags">
-        <hr />
+      <section className="tag-section">
         <i className="fa fa-tags"></i>Tags
         <br />
-        {tagList}
+        <div className="tags">
+          {tagList}
+        </div>
       </section>
     );
   }
@@ -42,6 +43,7 @@ class HomeMain extends React.Component {
     return (
       <div>
         <ArticleSection dataArticle={this.props.dataArticle}/>
+        <hr />
         <Tags dataTag={this.props.dataTag}/>
       </div>
     );
@@ -55,6 +57,7 @@ class Main extends React.Component {
     if (location.href.indexOf('article.html') < 0) {
       mainSection = <HomeMain dataArticle={this.props.dataArticle}
       dataTag= {this.props.dataTag}/>
+
     }else {
       mainSection = <Article />
     }

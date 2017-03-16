@@ -23,7 +23,15 @@ let dataTag = [
   },
   {
     "id": 5,
+    "name": "Vue"
+  },
+  {
+    "id": 6,
     "name": "Nodejs"
+  },
+  {
+    "id": 7,
+    "name": "webpack"
   }
 ]
 
@@ -85,7 +93,7 @@ function Footer() {
   return (
     <footer>
       <span>&copy; 2016 Wenjia Yu
-        <a className="github" href="https://github.com/ywjmpa">
+        <a className="github" href="https://github.com/ywjmpa">{' '}
           <i className="fa fa-github"></i>
         </a>
       </span>
