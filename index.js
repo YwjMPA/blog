@@ -61,14 +61,20 @@ function Header() {
       <div className="nav-brand">Ywj</div>
       <nav>
         <ul className="nav-list">
-          <li className="nav-item">Home</li>
-          <li className="nav-item">Protfolio</li>
-          <li className="nav-item">Contact</li>
+          <li className="nav-item">
+            <a href="https://ywjmpa.github.io/blog">Home</a>
+          </li>
+          <li className="nav-item">
+            <a href="https://ywjmpa.github.io/protfolio">Protfolio</a>
+          </li>
+          <li className="nav-item">
+            <a href="https://ywjmpa.github.io/blog/html/contact.html">Contact</a>
+          </li>
         </ul>
       </nav>
-      <button className="nav-user" id='logIn'>
+      <div className="nav-user" id='logIn'>
         <i className="fa fa-user-circle-o"></i> Log in
-      </button>
+      </div>
       <Modal />
     </header>
   )

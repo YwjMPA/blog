@@ -2,15 +2,15 @@ const React = require('react');
 const ArticleSection = require('./articleSection').article;
 const Article = require('./article').article;
 
-class Archives extends React.Component {
-  render() {
-    return (
-      <section>
-        <i className="fa fa-calendar"></i>Archives
-      </section>
-    );
-  }
-}
+// class Archives extends React.Component {
+//   render() {
+//     return (
+//       <section>
+//         <i className="fa fa-calendar"></i>Archives
+//       </section>
+//     );
+//   }
+// }
 
 function Tag(props) {
   return (
@@ -42,7 +42,6 @@ class HomeMain extends React.Component {
     return (
       <div>
         <ArticleSection dataArticle={this.props.dataArticle}/>
-        <Archives />
         <Tags dataTag={this.props.dataTag}/>
       </div>
     );

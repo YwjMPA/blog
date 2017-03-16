@@ -35,7 +35,7 @@ class ModalFooter extends React.Component {
   render() {
     return (
       <div className="modal-footer">
-        Don{'\''}t have an account?
+        Don{'\''}t have an account? {' '}
         <a href=''>Sign up</a>
       </div>
     );

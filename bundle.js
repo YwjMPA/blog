@@ -119,22 +119,34 @@
 	        React.createElement(
 	          'li',
 	          { className: 'nav-item' },
-	          'Home'
+	          React.createElement(
+	            'a',
+	            { href: 'https://ywjmpa.github.io/blog' },
+	            'Home'
+	          )
 	        ),
 	        React.createElement(
 	          'li',
 	          { className: 'nav-item' },
-	          'Protfolio'
+	          React.createElement(
+	            'a',
+	            { href: 'https://ywjmpa.github.io/protfolio' },
+	            'Protfolio'
+	          )
 	        ),
 	        React.createElement(
 	          'li',
 	          { className: 'nav-item' },
-	          'Contact'
+	          React.createElement(
+	            'a',
+	            { href: 'https://ywjmpa.github.io/blog/html/contact.html' },
+	            'Contact'
+	          )
 	        )
 	      )
 	    ),
 	    React.createElement(
-	      'button',
+	      'div',
 	      { className: 'nav-user', id: 'logIn' },
 	      React.createElement('i', { className: 'fa fa-user-circle-o' }),
 	      ' Log in'
@@ -21638,29 +21650,15 @@
 	var ArticleSection = __webpack_require__(179).article;
 	var Article = __webpack_require__(180).article;
 
-	var Archives = function (_React$Component) {
-	  _inherits(Archives, _React$Component);
-
-	  function Archives() {
-	    _classCallCheck(this, Archives);
-
-	    return _possibleConstructorReturn(this, (Archives.__proto__ || Object.getPrototypeOf(Archives)).apply(this, arguments));
-	  }
-
-	  _createClass(Archives, [{
-	    key: 'render',
-	    value: function render() {
-	      return React.createElement(
-	        'section',
-	        null,
-	        React.createElement('i', { className: 'fa fa-calendar' }),
-	        'Archives'
-	      );
-	    }
-	  }]);
-
-	  return Archives;
-	}(React.Component);
+	// class Archives extends React.Component {
+	//   render() {
+	//     return (
+	//       <section>
+	//         <i className="fa fa-calendar"></i>Archives
+	//       </section>
+	//     );
+	//   }
+	// }
 
 	function Tag(props) {
 	  return React.createElement(
@@ -21674,8 +21672,8 @@
 	  );
 	}
 
-	var Tags = function (_React$Component2) {
-	  _inherits(Tags, _React$Component2);
+	var Tags = function (_React$Component) {
+	  _inherits(Tags, _React$Component);
 
 	  function Tags(props) {
 	    _classCallCheck(this, Tags);
@@ -21704,8 +21702,8 @@
 	  return Tags;
 	}(React.Component);
 
-	var HomeMain = function (_React$Component3) {
-	  _inherits(HomeMain, _React$Component3);
+	var HomeMain = function (_React$Component2) {
+	  _inherits(HomeMain, _React$Component2);
 
 	  function HomeMain() {
 	    _classCallCheck(this, HomeMain);
@@ -21720,7 +21718,6 @@
 	        'div',
 	        null,
 	        React.createElement(ArticleSection, { dataArticle: this.props.dataArticle }),
-	        React.createElement(Archives, null),
 	        React.createElement(Tags, { dataTag: this.props.dataTag })
 	      );
 	    }
@@ -21732,8 +21729,8 @@
 	// main body
 
 
-	var Main = function (_React$Component4) {
-	  _inherits(Main, _React$Component4);
+	var Main = function (_React$Component3) {
+	  _inherits(Main, _React$Component3);
 
 	  function Main() {
 	    _classCallCheck(this, Main);
@@ -22392,7 +22389,8 @@
 	        { className: "modal-footer" },
 	        "Don",
 	        '\'',
-	        "t have an account?",
+	        "t have an account? ",
+	        ' ',
 	        React.createElement(
 	          "a",
 	          { href: "" },

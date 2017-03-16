@@ -9,12 +9,6 @@
     }
   );
 
-  logBtn.addEventListener('touch', function() {
-      logModal.style.display = 'block';
-    }
-  );
-
-
   span.onclick = function() {
     logModal.style.display = 'none';
   };
