@@ -18,9 +18,9 @@
   margin: 15% auto;
   border-radius: 5px;
   box-shadow: 1px 1px 20px 1px #000;
-  -webkit-animation-name: slideIn;
+  -webkit-animation-name: zoomIn;
   -webkit-animation-duration: 0.4s;
-  animation-name: slideIn;
+  animation-name: zoomIn;
   animation-duration: 0.4s;
 }
 
@@ -79,4 +79,14 @@
 @keyframes slideIn {
   from{top: -30%; opacity:0}
   to{top: 0px; opacity: 1}
+}
+
+@-webkit-keyframes zoomIn {
+  from{-webkit-transform: scale(0);}
+  to{-webkit-transform: scale(1);}
+}
+
+@@keyframes zoomIn {
+  from{transform: scale(0);}
+  to{transform: scale(1);}
 }

@@ -134,7 +134,7 @@
 	      )
 	    ),
 	    React.createElement(
-	      'div',
+	      'button',
 	      { className: 'nav-user', id: 'logIn' },
 	      React.createElement('i', { className: 'fa fa-user-circle-o' }),
 	      ' Log in'

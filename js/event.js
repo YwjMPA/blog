@@ -9,6 +9,12 @@ logIn.addEventListener('click', function() {
   }
 );
 
+logIn.addEventListener('touch', function() {
+    modal.style.display = 'block';
+  }
+);
+
+
 span.onclick = function() {
   modal.style.display = 'none';
 };
