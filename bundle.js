@@ -113,8 +113,21 @@
 	    null,
 	    React.createElement(
 	      'div',
-	      { className: 'nav-brand' },
-	      'Ywj'
+	      { className: 'row' },
+	      React.createElement(
+	        'div',
+	        { className: 'nav-brand' },
+	        'Ywj',
+	        '\'',
+	        's Blog'
+	      ),
+	      React.createElement(
+	        'button',
+	        { type: 'button', className: 'navbar-toggle' },
+	        React.createElement('span', { className: 'icon-bar' }),
+	        React.createElement('span', { className: 'icon-bar' }),
+	        React.createElement('span', { className: 'icon-bar' })
+	      )
 	    ),
 	    React.createElement(
 	      'nav',
@@ -149,13 +162,13 @@
 	            'Contact'
 	          )
 	        )
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'nav-user', id: 'logIn' },
+	        React.createElement('i', { className: 'fa fa-user-circle-o' }),
+	        ' Log in'
 	      )
-	    ),
-	    React.createElement(
-	      'div',
-	      { className: 'nav-user', id: 'logIn' },
-	      React.createElement('i', { className: 'fa fa-user-circle-o' }),
-	      ' Log in'
 	    ),
 	    React.createElement(Modal, null)
 	  );

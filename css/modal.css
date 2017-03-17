@@ -75,6 +75,7 @@
   border-radius: 5px;
   border: 1px solid #aaa;
   font-size: 15px;
+  outline: none;
 }
 #logSubmit:hover,
 #logSubmit:focus{
@@ -112,11 +113,11 @@
 }
 
 @-webkit-keyframes zoomIn {
-  from{-webkit-transform: scale(0);}
-  to{-webkit-transform: scale(1);}
+  from{-webkit-transform: scale(0); top: -30% ;  }
+  to{-webkit-transform: scale(1); top: 0px; }
 }
 
 @@keyframes zoomIn {
-  from{transform: scale(0);}
-  to{transform: scale(1);}
+  from{transform: scale(0); top: -30%;}
+  to{transform: scale(1); top: 0px;}
 }

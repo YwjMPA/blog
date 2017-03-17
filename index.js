@@ -66,7 +66,14 @@ let dataArticle = [
 function Header() {
   return (
     <header>
-      <div className="nav-brand">Ywj</div>
+      <div className="row">
+        <div className="nav-brand">Ywj{'\''}s Blog</div>
+        <button type="button" className="navbar-toggle">
+          <span className="icon-bar"></span>
+          <span className="icon-bar"></span>
+          <span className="icon-bar"></span>
+        </button>
+      </div>
       <nav>
         <ul className="nav-list">
           <li className="nav-item">
@@ -79,10 +86,10 @@ function Header() {
             <a href="https://ywjmpa.github.io/blog/html/contact.html">Contact</a>
           </li>
         </ul>
+        <div className="nav-user" id='logIn'>
+          <i className="fa fa-user-circle-o"></i> Log in
+        </div>
       </nav>
-      <div className="nav-user" id='logIn'>
-        <i className="fa fa-user-circle-o"></i> Log in
-      </div>
       <Modal />
     </header>
   )
