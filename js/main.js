@@ -1,18 +1,9 @@
 const React = require('react');
 const ArticleSection = require('./articleSection').article;
 const Article = require('./article').article;
+const ContactCard = require('./contact').contactCard;
 
-// class Archives extends React.Component {
-//   render() {
-//     return (
-//       <section>
-//         <i className="fa fa-calendar"></i>Archives
-//       </section>
-//     );
-//   }
-// }
-
-function Tag(props) {
+const Tag = (props) => {
   return (
     <span><a href="">{props.name}</a></span>
   )
@@ -54,12 +45,14 @@ class HomeMain extends React.Component {
 class Main extends React.Component {
   render() {
     let mainSection = null;
-    if (location.href.indexOf('article.html') < 0) {
+    // router logic code
+    if (location.href.indexOf('article.html') > 0) {
+      mainSection = <Article />
+    }else if (location.href.indexOf('contact.html') > 0) {
+      mainSection = <ContactCard />
+    }else {
       mainSection = <HomeMain dataArticle={this.props.dataArticle}
       dataTag= {this.props.dataTag}/>
-
-    }else {
-      mainSection = <Article />
     }
     // ArticleSection Component is from ./articleSection.js
     return (

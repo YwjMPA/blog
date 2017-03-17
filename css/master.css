@@ -33,9 +33,13 @@ header {
 }
 
 .navbar-toggle {
-  display: block;
+  display: flex;
+  cursor: pointer;
   width: 14%;
   outline: none;
+}
+.navbar-toggle div {
+  margin: auto;
 }
 
 .icon-bar {

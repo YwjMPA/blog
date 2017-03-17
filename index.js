@@ -63,40 +63,45 @@ let dataArticle = [
 ]
 
 // header
-function Header() {
-  return (
-    <header>
-      <div className="row">
-        <div className="nav-brand">Ywj{'\''}s Blog</div>
-        <button type="button" className="navbar-toggle">
-          <span className="icon-bar"></span>
-          <span className="icon-bar"></span>
-          <span className="icon-bar"></span>
-        </button>
-      </div>
-      <nav>
-        <ul className="nav-list">
-          <li className="nav-item">
-            <a href="https://ywjmpa.github.io/blog">Home</a>
-          </li>
-          <li className="nav-item">
-            <a href="https://ywjmpa.github.io/protfolio">Protfolio</a>
-          </li>
-          <li className="nav-item">
-            <a href="https://ywjmpa.github.io/blog/html/contact.html">Contact</a>
-          </li>
-        </ul>
-        <div className="nav-user" id='logIn'>
-          <i className="fa fa-user-circle-o"></i> Log in
+class Header extends React.Component{
+  render() {
+    const contactUrl = location.href + 'html/contact.html';
+    return (
+      <header>
+        <div className="row">
+          <div className="nav-brand">Ywj{'\''}s Blog</div>
+          <div className="navbar-toggle">
+            <div>
+              <span className="icon-bar"></span>
+              <span className="icon-bar"></span>
+              <span className="icon-bar"></span>
+            </div>
+          </div>
         </div>
-      </nav>
-      <Modal />
-    </header>
-  )
+        <nav>
+          <ul className="nav-list">
+            <li className="nav-item">
+              <a href="https://ywjmpa.github.io/blog">Home</a>
+            </li>
+            <li className="nav-item">
+              <a href="https://ywjmpa.github.io/protfolio">Protfolio</a>
+            </li>
+            <li className="nav-item">
+              <a href={contactUrl}>Contact</a>
+            </li>
+          </ul>
+          <div className="nav-user" id='logIn'>
+            <i className="fa fa-user-circle-o"></i> Log in
+          </div>
+        </nav>
+        <Modal />
+      </header>
+    )
+  }
 }
 
 // footer
-function Footer() {
+const Footer = () => {
   return (
     <footer>
       <span>&copy; 2016 Wenjia Yu

@@ -57,7 +57,7 @@
 	var React = __webpack_require__(1);
 	var ReactDOM = __webpack_require__(32);
 	var Main = __webpack_require__(178).main;
-	var Modal = __webpack_require__(181).modal;
+	var Modal = __webpack_require__(182).modal;
 
 	// fake data
 	var dataTag = [{
@@ -107,75 +107,98 @@
 	}];
 
 	// header
-	function Header() {
-	  return React.createElement(
-	    'header',
-	    null,
-	    React.createElement(
-	      'div',
-	      { className: 'row' },
-	      React.createElement(
-	        'div',
-	        { className: 'nav-brand' },
-	        'Ywj',
-	        '\'',
-	        's Blog'
-	      ),
-	      React.createElement(
-	        'button',
-	        { type: 'button', className: 'navbar-toggle' },
-	        React.createElement('span', { className: 'icon-bar' }),
-	        React.createElement('span', { className: 'icon-bar' }),
-	        React.createElement('span', { className: 'icon-bar' })
-	      )
-	    ),
-	    React.createElement(
-	      'nav',
-	      null,
-	      React.createElement(
-	        'ul',
-	        { className: 'nav-list' },
+
+	var Header = function (_React$Component) {
+	  _inherits(Header, _React$Component);
+
+	  function Header() {
+	    _classCallCheck(this, Header);
+
+	    return _possibleConstructorReturn(this, (Header.__proto__ || Object.getPrototypeOf(Header)).apply(this, arguments));
+	  }
+
+	  _createClass(Header, [{
+	    key: 'render',
+	    value: function render() {
+	      var contactUrl = location.href + 'html/contact.html';
+	      return React.createElement(
+	        'header',
+	        null,
 	        React.createElement(
-	          'li',
-	          { className: 'nav-item' },
+	          'div',
+	          { className: 'row' },
 	          React.createElement(
-	            'a',
-	            { href: 'https://ywjmpa.github.io/blog' },
-	            'Home'
+	            'div',
+	            { className: 'nav-brand' },
+	            'Ywj',
+	            '\'',
+	            's Blog'
+	          ),
+	          React.createElement(
+	            'div',
+	            { className: 'navbar-toggle' },
+	            React.createElement(
+	              'div',
+	              null,
+	              React.createElement('span', { className: 'icon-bar' }),
+	              React.createElement('span', { className: 'icon-bar' }),
+	              React.createElement('span', { className: 'icon-bar' })
+	            )
 	          )
 	        ),
 	        React.createElement(
-	          'li',
-	          { className: 'nav-item' },
+	          'nav',
+	          null,
 	          React.createElement(
-	            'a',
-	            { href: 'https://ywjmpa.github.io/protfolio' },
-	            'Protfolio'
+	            'ul',
+	            { className: 'nav-list' },
+	            React.createElement(
+	              'li',
+	              { className: 'nav-item' },
+	              React.createElement(
+	                'a',
+	                { href: 'https://ywjmpa.github.io/blog' },
+	                'Home'
+	              )
+	            ),
+	            React.createElement(
+	              'li',
+	              { className: 'nav-item' },
+	              React.createElement(
+	                'a',
+	                { href: 'https://ywjmpa.github.io/protfolio' },
+	                'Protfolio'
+	              )
+	            ),
+	            React.createElement(
+	              'li',
+	              { className: 'nav-item' },
+	              React.createElement(
+	                'a',
+	                { href: contactUrl },
+	                'Contact'
+	              )
+	            )
+	          ),
+	          React.createElement(
+	            'div',
+	            { className: 'nav-user', id: 'logIn' },
+	            React.createElement('i', { className: 'fa fa-user-circle-o' }),
+	            ' Log in'
 	          )
 	        ),
-	        React.createElement(
-	          'li',
-	          { className: 'nav-item' },
-	          React.createElement(
-	            'a',
-	            { href: 'https://ywjmpa.github.io/blog/html/contact.html' },
-	            'Contact'
-	          )
-	        )
-	      ),
-	      React.createElement(
-	        'div',
-	        { className: 'nav-user', id: 'logIn' },
-	        React.createElement('i', { className: 'fa fa-user-circle-o' }),
-	        ' Log in'
-	      )
-	    ),
-	    React.createElement(Modal, null)
-	  );
-	}
+	        React.createElement(Modal, null)
+	      );
+	    }
+	  }]);
+
+	  return Header;
+	}(React.Component);
 
 	// footer
-	function Footer() {
+
+
+	var Footer = function Footer() {
 	  return React.createElement(
 	    'footer',
 	    null,
@@ -191,12 +214,12 @@
 	      )
 	    )
 	  );
-	}
+	};
 
 	// homepage
 
-	var Homepage = function (_React$Component) {
-	  _inherits(Homepage, _React$Component);
+	var Homepage = function (_React$Component2) {
+	  _inherits(Homepage, _React$Component2);
 
 	  function Homepage(props) {
 	    _classCallCheck(this, Homepage);
@@ -21669,18 +21692,9 @@
 	var React = __webpack_require__(1);
 	var ArticleSection = __webpack_require__(179).article;
 	var Article = __webpack_require__(180).article;
+	var ContactCard = __webpack_require__(181).contactCard;
 
-	// class Archives extends React.Component {
-	//   render() {
-	//     return (
-	//       <section>
-	//         <i className="fa fa-calendar"></i>Archives
-	//       </section>
-	//     );
-	//   }
-	// }
-
-	function Tag(props) {
+	var Tag = function Tag(props) {
 	  return React.createElement(
 	    'span',
 	    null,
@@ -21690,7 +21704,7 @@
 	      props.name
 	    )
 	  );
-	}
+	};
 
 	var Tags = function (_React$Component) {
 	  _inherits(Tags, _React$Component);
@@ -21766,11 +21780,14 @@
 	    key: 'render',
 	    value: function render() {
 	      var mainSection = null;
-	      if (location.href.indexOf('article.html') < 0) {
+	      // router logic code
+	      if (location.href.indexOf('article.html') > 0) {
+	        mainSection = React.createElement(Article, null);
+	      } else if (location.href.indexOf('contact.html') > 0) {
+	        mainSection = React.createElement(ContactCard, null);
+	      } else {
 	        mainSection = React.createElement(HomeMain, { dataArticle: this.props.dataArticle,
 	          dataTag: this.props.dataTag });
-	      } else {
-	        mainSection = React.createElement(Article, null);
 	      }
 	      // ArticleSection Component is from ./articleSection.js
 	      return React.createElement(
@@ -22301,6 +22318,168 @@
 
 /***/ },
 /* 181 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var React = __webpack_require__(1);
+
+	var CardName = function (_React$Component) {
+	  _inherits(CardName, _React$Component);
+
+	  function CardName() {
+	    _classCallCheck(this, CardName);
+
+	    return _possibleConstructorReturn(this, (CardName.__proto__ || Object.getPrototypeOf(CardName)).apply(this, arguments));
+	  }
+
+	  _createClass(CardName, [{
+	    key: "render",
+	    value: function render() {
+	      return React.createElement(
+	        "h1",
+	        null,
+	        "Wenjia Yu"
+	      );
+	    }
+	  }]);
+
+	  return CardName;
+	}(React.Component);
+
+	var CardAddress = function (_React$Component2) {
+	  _inherits(CardAddress, _React$Component2);
+
+	  function CardAddress() {
+	    _classCallCheck(this, CardAddress);
+
+	    return _possibleConstructorReturn(this, (CardAddress.__proto__ || Object.getPrototypeOf(CardAddress)).apply(this, arguments));
+	  }
+
+	  _createClass(CardAddress, [{
+	    key: "render",
+	    value: function render() {
+	      return React.createElement(
+	        "p",
+	        null,
+	        React.createElement("i", { className: "fa fa-map-marker" }),
+	        " Beijing, China"
+	      );
+	    }
+	  }]);
+
+	  return CardAddress;
+	}(React.Component);
+
+	var CardEmail = function (_React$Component3) {
+	  _inherits(CardEmail, _React$Component3);
+
+	  function CardEmail() {
+	    _classCallCheck(this, CardEmail);
+
+	    return _possibleConstructorReturn(this, (CardEmail.__proto__ || Object.getPrototypeOf(CardEmail)).apply(this, arguments));
+	  }
+
+	  _createClass(CardEmail, [{
+	    key: "render",
+	    value: function render() {
+	      return React.createElement(
+	        "p",
+	        null,
+	        React.createElement("i", { className: "fa fa-envelope-o" }),
+	        'ywjmpa@gmail.com'
+	      );
+	    }
+	  }]);
+
+	  return CardEmail;
+	}(React.Component);
+
+	var CardSocialContact = function (_React$Component4) {
+	  _inherits(CardSocialContact, _React$Component4);
+
+	  function CardSocialContact() {
+	    _classCallCheck(this, CardSocialContact);
+
+	    return _possibleConstructorReturn(this, (CardSocialContact.__proto__ || Object.getPrototypeOf(CardSocialContact)).apply(this, arguments));
+	  }
+
+	  _createClass(CardSocialContact, [{
+	    key: "render",
+	    value: function render() {
+	      return React.createElement(
+	        "div",
+	        { className: "social-contact" },
+	        React.createElement(
+	          "a",
+	          { href: "#" },
+	          React.createElement("i", { className: "fa fa-linkedin-square" })
+	        ),
+	        React.createElement(
+	          "a",
+	          { href: "mailto:somnus.yuwenjia@foxmail.com" },
+	          React.createElement("i", { className: "fa fa-google" })
+	        ),
+	        React.createElement(
+	          "a",
+	          { className: "github", href: "https://github.com/ywjmpa" },
+	          React.createElement("i", { className: "fa fa-github" })
+	        )
+	      );
+	    }
+	  }]);
+
+	  return CardSocialContact;
+	}(React.Component);
+
+	var ContactCard = function (_React$Component5) {
+	  _inherits(ContactCard, _React$Component5);
+
+	  function ContactCard() {
+	    _classCallCheck(this, ContactCard);
+
+	    return _possibleConstructorReturn(this, (ContactCard.__proto__ || Object.getPrototypeOf(ContactCard)).apply(this, arguments));
+	  }
+
+	  _createClass(ContactCard, [{
+	    key: "render",
+	    value: function render() {
+	      return React.createElement(
+	        "section",
+	        { className: "contact-card" },
+	        React.createElement("img", { src: "http://99pcwallpapers.com/wp-content/uploads/Black-Wallpaper-For-PC.jpg",
+	          alt: "" }),
+	        React.createElement(CardName, null),
+	        React.createElement(CardAddress, null),
+	        React.createElement(CardEmail, null),
+	        React.createElement(CardSocialContact, null),
+	        React.createElement("br", null),
+	        React.createElement(
+	          "button",
+	          { type: "button", name: "button" },
+	          "Contact"
+	        )
+	      );
+	    }
+	  }]);
+
+	  return ContactCard;
+	}(React.Component);
+
+	module.exports = {
+	  contactCard: ContactCard
+	};
+
+/***/ },
+/* 182 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
