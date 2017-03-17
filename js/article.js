@@ -59,22 +59,31 @@ class ArticleContent extends React.Component {
   }
 }
 
-class CommentList extends React.Component {
+class CommentSection extends React.Component {
+  constructor (props) {
+    super(props);
+    this.handleClick = this.handleClick.bind(this);
+  }
+  handleClick() {
+
+  }
   render(){
     return (
-      <div>
+      <div className='comment-section'>
         <h4>Comment</h4>
-        <CommentSection />
+        <CommentList />
+        <textarea name="commentText" rows="5"></textarea>
+        <button id='commentBtn' onClick={this.handleClick}>comment</button>
       </div>
     );
   }
 }
 
-class CommentSection extends React.Component {
+class CommentList extends React.Component {
   render() {
     return (
-      <div id='article-comment'>
-        <div id='article-comment-info'>
+      <div className='article-comment'>
+        <div className='article-comment-info'>
           <span> Joker Yu :</span>
           <span>
             <i className="fa fa-clock-o"></i>{' '}01-28,2014
@@ -106,7 +115,7 @@ class Article extends React.Component {
         <hr />
         <ArticleContent />
         <hr />
-        <CommentList />
+        <CommentSection />
       </section>
     );
   }

@@ -22205,8 +22205,48 @@
 	  return ArticleContent;
 	}(React.Component);
 
-	var CommentList = function (_React$Component7) {
-	  _inherits(CommentList, _React$Component7);
+	var CommentSection = function (_React$Component7) {
+	  _inherits(CommentSection, _React$Component7);
+
+	  function CommentSection(props) {
+	    _classCallCheck(this, CommentSection);
+
+	    var _this7 = _possibleConstructorReturn(this, (CommentSection.__proto__ || Object.getPrototypeOf(CommentSection)).call(this, props));
+
+	    _this7.handleClick = _this7.handleClick.bind(_this7);
+	    return _this7;
+	  }
+
+	  _createClass(CommentSection, [{
+	    key: 'handleClick',
+	    value: function handleClick() {}
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return React.createElement(
+	        'div',
+	        { className: 'comment-section' },
+	        React.createElement(
+	          'h4',
+	          null,
+	          'Comment'
+	        ),
+	        React.createElement(CommentList, null),
+	        React.createElement('textarea', { name: 'commentText', rows: '5' }),
+	        React.createElement(
+	          'button',
+	          { id: 'commentBtn', onClick: this.handleClick },
+	          'comment'
+	        )
+	      );
+	    }
+	  }]);
+
+	  return CommentSection;
+	}(React.Component);
+
+	var CommentList = function (_React$Component8) {
+	  _inherits(CommentList, _React$Component8);
 
 	  function CommentList() {
 	    _classCallCheck(this, CommentList);
@@ -22219,38 +22259,10 @@
 	    value: function render() {
 	      return React.createElement(
 	        'div',
-	        null,
-	        React.createElement(
-	          'h4',
-	          null,
-	          'Comment'
-	        ),
-	        React.createElement(CommentSection, null)
-	      );
-	    }
-	  }]);
-
-	  return CommentList;
-	}(React.Component);
-
-	var CommentSection = function (_React$Component8) {
-	  _inherits(CommentSection, _React$Component8);
-
-	  function CommentSection() {
-	    _classCallCheck(this, CommentSection);
-
-	    return _possibleConstructorReturn(this, (CommentSection.__proto__ || Object.getPrototypeOf(CommentSection)).apply(this, arguments));
-	  }
-
-	  _createClass(CommentSection, [{
-	    key: 'render',
-	    value: function render() {
-	      return React.createElement(
-	        'div',
-	        { id: 'article-comment' },
+	        { className: 'article-comment' },
 	        React.createElement(
 	          'div',
-	          { id: 'article-comment-info' },
+	          { className: 'article-comment-info' },
 	          React.createElement(
 	            'span',
 	            null,
@@ -22274,7 +22286,7 @@
 	    }
 	  }]);
 
-	  return CommentSection;
+	  return CommentList;
 	}(React.Component);
 
 	var Article = function (_React$Component9) {
@@ -22304,7 +22316,7 @@
 	        React.createElement('hr', null),
 	        React.createElement(ArticleContent, null),
 	        React.createElement('hr', null),
-	        React.createElement(CommentList, null)
+	        React.createElement(CommentSection, null)
 	      );
 	    }
 	  }]);

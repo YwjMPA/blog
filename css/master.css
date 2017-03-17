@@ -209,17 +209,26 @@ main a{
   padding: 5px;
 }
 
-#article-comment {
+.comment-section textarea{
+  width: 100%;
+}
+.article-comment {
   padding: 5px;
   margin-bottom: 10px;
 }
 
-#article-comment-info{
+.article-comment-info{
   font-size: 12px;
 }
 
-#article-comment-info span:last-child {
+.article-comment-info span:last-child {
   float: right;
+}
+
+#commentBtn {
+  margin: auto;
+  display: block;
+  cursor: pointer;
 }
 
 
