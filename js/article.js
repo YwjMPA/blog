@@ -1,124 +1,113 @@
 const React = require('react');
+const formatDate = require('./articleSection').formatDate;
 
-class ArticleHeader extends React.Component {
-  render(){
-    return (
-      <h1 id='article-header'>Title</h1>
-    );
-  }
+const ArticleHeader = (props) => {
+  return (
+    <h1 id='article-header'>{props.title}</h1>
+  );
 }
 
-class ArticleTag extends React.Component {
-  render(){
-    return (
-      <span>
-        <a href=""><i className="fa fa-tag"></i> JS</a>.{' '}
-      </span>
-    );
-  }
+const ArticleTag = (props) => {
+  const tags = props.dataTag;
+  const tagList = props.tagList.map((val) => {
+    const idVal = val;
+    let tagName;
+    tags.forEach((val) => {
+      if (val.id === idVal) {
+        tagName = val.name;
+      }
+    });
+    return tagName;
+  });
+  return (
+    <span>
+      <a ><i className="fa fa-tag"></i>{tagList.join()}</a>.{' '}
+    </span>
+  );
 }
 
-class ArticleView extends React.Component {
-  render(){
-    return (
-      <span>
-        <i className="fa fa-eye"></i>
-        {' '}({123})
-      </span>
-    );
-  }
+const ArticleView = (props) => {
+  return (
+    <span>
+      <i className="fa fa-eye"></i>
+      {' '}({props.clickCount})
+    </span>
+  );
 }
 
-class ArticleTime extends React.Component {
-  render(){
-    return (
-      <span id='article-time'>
-        <i className="fa fa-clock-o"></i>{' '}01-28,2014
-      </span>
-    );
-  }
+const ArticleTime = (props) => {
+  return (
+    <span id='article-time'>
+      <i className="fa fa-clock-o"></i>{' '}{formatDate(props.datePublish)}
+    </span>
+  );
 }
 
-class ArticleDescription extends React.Component {
-  render(){
-    return (
-      <div id='article-description'>
-        There are numerous frameworks for making websites in Python.
+const ArticleDescription = (props) => {
+  return (
+    <div id='article-description'>
+      {props.description}
+    </div>
+  );
+}
+
+const ArticleContent = (props) => {
+  return (
+    <div id='article-content'>
+      {props.content}
+    </div>
+  );
+}
+
+const CommentSection = (props) => {
+  const handleClick = (e) => {
+    props.onCommentChange(e.target.value);
+  }
+  return (
+    <div className='comment-section'>
+      <h4>Comment</h4>
+      <CommentList />
+      <textarea name="commentText" rows="5"></textarea>
+      <button id='commentBtn' onClick={handleClick}>comment</button>
+    </div>
+  );
+}
+
+const CommentList = (props) => {
+  return (
+    <div className='article-comment'>
+      <div className='article-comment-info'>
+        <span> Joker Yu :</span>
+        <span>
+          <i className="fa fa-clock-o"></i>{' '}01-28,2014
+        </span>
       </div>
-    );
-  }
+      <pre>
+        interesting!
+      </pre>
+      <hr />
+    </div>
+  );
 }
 
-class ArticleContent extends React.Component {
-  render(){
-    return (
-      <div id='article-content'>
-        Content
+const Article = (props) => {
+  const articleData = props.articleData;
+  return (
+    <section className='article-list'>
+      <ArticleHeader title={articleData.title}/>
+      <div id='article-info'>
+        <ArticleTag dataTag={props.dataTag}
+            tagList={articleData.tags}/>
+        <ArticleView clickCount={articleData.click_count}/>
+        <ArticleTime datePublish={articleData.date_publish}/>
       </div>
-    );
-  }
-}
-
-class CommentSection extends React.Component {
-  constructor (props) {
-    super(props);
-    this.handleClick = this.handleClick.bind(this);
-  }
-  handleClick() {
-
-  }
-  render(){
-    return (
-      <div className='comment-section'>
-        <h4>Comment</h4>
-        <CommentList />
-        <textarea name="commentText" rows="5"></textarea>
-        <button id='commentBtn' onClick={this.handleClick}>comment</button>
-      </div>
-    );
-  }
-}
-
-class CommentList extends React.Component {
-  render() {
-    return (
-      <div className='article-comment'>
-        <div className='article-comment-info'>
-          <span> Joker Yu :</span>
-          <span>
-            <i className="fa fa-clock-o"></i>{' '}01-28,2014
-          </span>
-        </div>
-        <pre>
-          interesting!
-        </pre>
-        <hr />
-      </div>
-    );
-  }
-}
-
-class Article extends React.Component {
-  constructor(props) {
-    super(props)
-  }
-  render() {
-    return (
-      <section className='article-list'>
-        <ArticleHeader />
-        <div id='article-info'>
-          <ArticleTag />
-          <ArticleView />
-          <ArticleTime />
-        </div>
-        <ArticleDescription />
-        <hr />
-        <ArticleContent />
-        <hr />
-        <CommentSection />
-      </section>
-    );
-  }
+      <ArticleDescription description={articleData.description} />
+      <hr />
+      <ArticleContent content={articleData.content}/>
+      <hr />
+      <CommentSection onCommentChange={props.onCommentChange}/>
+    </section>
+  );
 }
 
 module.exports = {

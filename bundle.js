@@ -88,116 +88,129 @@
 	  "title": "HTML",
 	  "content": "HyperText Markup Language (HTML) is the standard markup language for creating web pages and web applications. With Cascading Style Sheets (CSS), and JavaScript, it forms a triad of cornerstone technologies for the World Wide Web. Web browsers receive HTML documents from a webserver or from local storage and render them into multimedia web pages. HTML describes the structure of a web page semantically and originally included cues for the appearance of the document.",
 	  "click_count": 201,
-	  "date_publish": "2014-01-28 06:19:59.613412",
-	  "description": "HTML is a markup language for describing web documents (web pages)."
+	  "date_publish": "2016-09-28 06:19:59.123412",
+	  "description": "HTML is a markup language for describing web documents (web pages).",
+	  "tags": [1]
 	}, {
 	  "id": 2,
 	  "title": "CSS",
 	  "content": "HyperText Markup Language (HTML) is the standard markup language for creating web pages and web applications. With Cascading Style Sheets (CSS), and JavaScript, it forms a triad of cornerstone technologies for the World Wide Web. Web browsers receive HTML documents from a webserver or from local storage and render them into multimedia web pages. HTML describes the structure of a web page semantically and originally included cues for the appearance of the document.",
 	  "click_count": 201,
-	  "date_publish": "2015-02-17 06:19:59.613412",
-	  "description": "Cascading Style Sheets (CSS) is a style sheet language used for describing the presentation of a document written in a markup language."
+	  "date_publish": "2016-10-17 08:29:33.433422",
+	  "description": "Cascading Style Sheets (CSS) is a style sheet language used for describing the presentation of a document written in a markup language.",
+	  "tags": [2]
 	}, {
 	  "id": 3,
 	  "title": "JavaScript",
 	  "content": "HyperText Markup Language (HTML) is the standard markup language for creating web pages and web applications. With Cascading Style Sheets (CSS), and JavaScript, it forms a triad of cornerstone technologies for the World Wide Web. Web browsers receive HTML documents from a webserver or from local storage and render them into multimedia web pages. HTML describes the structure of a web page semantically and originally included cues for the appearance of the document.",
 	  "click_count": 201,
-	  "date_publish": "2016-12-02 06:19:59.613412",
-	  "description": "JavaScript is a high-level, dynamic, untyped, and interpreted programming language."
+	  "date_publish": "2016-11-02 16:39:19.987321",
+	  "description": "JavaScript is a high-level, dynamic, untyped, and interpreted programming language.",
+	  "tags": [3]
+	}, {
+	  "id": 4,
+	  "title": "React",
+	  "content": "HyperText Markup Language (HTML) is the standard markup language for creating web pages and web applications. With Cascading Style Sheets (CSS), and JavaScript, it forms a triad of cornerstone technologies for the World Wide Web. Web browsers receive HTML documents from a webserver or from local storage and render them into multimedia web pages. HTML describes the structure of a web page semantically and originally included cues for the appearance of the document.",
+	  "click_count": 201,
+	  "date_publish": "2016-12-15 19:39:19.987321",
+	  "description": "JavaScript is a high-level, dynamic, untyped, and interpreted programming language.",
+	  "tags": [1, 3, 4]
+	}, {
+	  "id": 5,
+	  "title": "Nodejs",
+	  "content": "HyperText Markup Language (HTML) is the standard markup language for creating web pages and web applications. With Cascading Style Sheets (CSS), and JavaScript, it forms a triad of cornerstone technologies for the World Wide Web. Web browsers receive HTML documents from a webserver or from local storage and render them into multimedia web pages. HTML describes the structure of a web page semantically and originally included cues for the appearance of the document.",
+	  "click_count": 201,
+	  "date_publish": "2016-12-31 05:39:19.987321",
+	  "description": "JavaScript is a high-level, dynamic, untyped, and interpreted programming language.",
+	  "tags": [3, 6]
 	}];
 
 	// header
-
-	var Header = function (_React$Component) {
-	  _inherits(Header, _React$Component);
-
-	  function Header() {
-	    _classCallCheck(this, Header);
-
-	    return _possibleConstructorReturn(this, (Header.__proto__ || Object.getPrototypeOf(Header)).apply(this, arguments));
-	  }
-
-	  _createClass(Header, [{
-	    key: 'render',
-	    value: function render() {
-	      var contactUrl = location.href + 'html/contact.html';
-	      return React.createElement(
-	        'header',
-	        null,
+	var Nav = function Nav(props) {
+	  var handleHomeClick = function handleHomeClick() {
+	    props.handleHomeClick();
+	  };
+	  var handleContactClick = function handleContactClick() {
+	    props.handleContactClick();
+	  };
+	  return React.createElement(
+	    'nav',
+	    null,
+	    React.createElement(
+	      'ul',
+	      { className: 'nav-list' },
+	      React.createElement(
+	        'li',
+	        { className: 'nav-item' },
+	        React.createElement(
+	          'a',
+	          { onClick: handleHomeClick },
+	          'Home'
+	        )
+	      ),
+	      React.createElement(
+	        'li',
+	        { className: 'nav-item' },
+	        React.createElement(
+	          'a',
+	          { href: 'https://ywjmpa.github.io/protfolio' },
+	          'Protfolio'
+	        )
+	      ),
+	      React.createElement(
+	        'li',
+	        { className: 'nav-item' },
+	        React.createElement(
+	          'a',
+	          { onClick: handleContactClick },
+	          'Contact'
+	        )
+	      )
+	    ),
+	    React.createElement(
+	      'div',
+	      { className: 'nav-user', id: 'logIn' },
+	      React.createElement('i', { className: 'fa fa-user-circle-o' }),
+	      ' Log in'
+	    )
+	  );
+	};
+	var Header = function Header(props) {
+	  var handleBrandClick = function handleBrandClick() {
+	    props.handleBrandClick();
+	  };
+	  return React.createElement(
+	    'header',
+	    null,
+	    React.createElement(
+	      'div',
+	      { className: 'row' },
+	      React.createElement(
+	        'div',
+	        { className: 'nav-brand', onClick: handleBrandClick },
+	        'Ywj',
+	        '\'',
+	        's Blog'
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'navbar-toggle' },
 	        React.createElement(
 	          'div',
-	          { className: 'row' },
-	          React.createElement(
-	            'div',
-	            { className: 'nav-brand' },
-	            'Ywj',
-	            '\'',
-	            's Blog'
-	          ),
-	          React.createElement(
-	            'div',
-	            { className: 'navbar-toggle' },
-	            React.createElement(
-	              'div',
-	              null,
-	              React.createElement('span', { className: 'icon-bar' }),
-	              React.createElement('span', { className: 'icon-bar' }),
-	              React.createElement('span', { className: 'icon-bar' })
-	            )
-	          )
-	        ),
-	        React.createElement(
-	          'nav',
 	          null,
-	          React.createElement(
-	            'ul',
-	            { className: 'nav-list' },
-	            React.createElement(
-	              'li',
-	              { className: 'nav-item' },
-	              React.createElement(
-	                'a',
-	                { href: 'https://ywjmpa.github.io/blog' },
-	                'Home'
-	              )
-	            ),
-	            React.createElement(
-	              'li',
-	              { className: 'nav-item' },
-	              React.createElement(
-	                'a',
-	                { href: 'https://ywjmpa.github.io/protfolio' },
-	                'Protfolio'
-	              )
-	            ),
-	            React.createElement(
-	              'li',
-	              { className: 'nav-item' },
-	              React.createElement(
-	                'a',
-	                { href: contactUrl },
-	                'Contact'
-	              )
-	            )
-	          ),
-	          React.createElement(
-	            'div',
-	            { className: 'nav-user', id: 'logIn' },
-	            React.createElement('i', { className: 'fa fa-user-circle-o' }),
-	            ' Log in'
-	          )
-	        ),
-	        React.createElement(Modal, null)
-	      );
-	    }
-	  }]);
-
-	  return Header;
-	}(React.Component);
+	          React.createElement('span', { className: 'icon-bar' }),
+	          React.createElement('span', { className: 'icon-bar' }),
+	          React.createElement('span', { className: 'icon-bar' })
+	        )
+	      )
+	    ),
+	    React.createElement(Nav, { handleHomeClick: props.handleHomeClick,
+	      handleContactClick: props.handleContactClick }),
+	    React.createElement(Modal, null)
+	  );
+	};
 
 	// footer
-
-
 	var Footer = function Footer() {
 	  return React.createElement(
 	    'footer',
@@ -218,26 +231,75 @@
 
 	// homepage
 
-	var Homepage = function (_React$Component2) {
-	  _inherits(Homepage, _React$Component2);
+	var Homepage = function (_React$Component) {
+	  _inherits(Homepage, _React$Component);
 
 	  function Homepage(props) {
 	    _classCallCheck(this, Homepage);
 
-	    return _possibleConstructorReturn(this, (Homepage.__proto__ || Object.getPrototypeOf(Homepage)).call(this, props));
-	  }
-	  // Main Component come from ./js/main.js
+	    var _this = _possibleConstructorReturn(this, (Homepage.__proto__ || Object.getPrototypeOf(Homepage)).call(this, props));
 
+	    _this.state = {
+	      mainPage: 'home',
+	      articleId: null,
+	      tagfilter: null,
+	      username: null,
+	      password: null,
+	      commentText: null
+	    };
+	    _this.handleCommentChange = _this.handleCommentChange.bind(_this);
+	    _this.handleArticleClick = _this.handleArticleClick.bind(_this);
+	    _this.handleBrandClick = _this.handleBrandClick.bind(_this);
+	    _this.handleContactClick = _this.handleContactClick.bind(_this);
+	    return _this;
+	  }
 
 	  _createClass(Homepage, [{
+	    key: 'handleCommentChange',
+	    value: function handleCommentChange(value) {
+	      this.setState({
+	        commentText: value
+	      });
+	    }
+	  }, {
+	    key: 'handleBrandClick',
+	    value: function handleBrandClick() {
+	      this.setState({
+	        mainPage: 'home'
+	      });
+	    }
+	  }, {
+	    key: 'handleContactClick',
+	    value: function handleContactClick() {
+	      this.setState({
+	        mainPage: 'contact'
+	      });
+	    }
+	  }, {
+	    key: 'handleArticleClick',
+	    value: function handleArticleClick(id) {
+	      this.setState({
+	        mainPage: 'article',
+	        articleId: id
+	      });
+	    }
+	    // Main Component come from ./js/main.js
+
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return React.createElement(
 	        'div',
 	        null,
-	        React.createElement(Header, null),
+	        React.createElement(Header, { handleBrandClick: this.handleBrandClick,
+	          handleHomeClick: this.handleBrandClick,
+	          handleContactClick: this.handleContactClick }),
 	        React.createElement(Main, { dataArticle: this.props.dataArticle,
-	          dataTag: this.props.dataTag }),
+	          dataTag: this.props.dataTag,
+	          onCommentChange: this.handleCommentChange,
+	          mainPage: this.state.mainPage,
+	          handleArticleClick: this.handleArticleClick,
+	          articleId: this.state.articleId }),
 	        React.createElement(Footer, null)
 	      );
 	    }
@@ -21681,14 +21743,6 @@
 
 	'use strict';
 
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
 	var React = __webpack_require__(1);
 	var ArticleSection = __webpack_require__(179).article;
 	var Article = __webpack_require__(180).article;
@@ -21700,106 +21754,71 @@
 	    null,
 	    React.createElement(
 	      'a',
-	      { href: '' },
+	      null,
 	      props.name
 	    )
 	  );
 	};
 
-	var Tags = function (_React$Component) {
-	  _inherits(Tags, _React$Component);
+	var Tags = function Tags(props) {
+	  var tagList = props.dataTag.map(function (val) {
+	    return React.createElement(Tag, { key: val.id, name: val.name });
+	  });
+	  return React.createElement(
+	    'section',
+	    { className: 'tag-section' },
+	    React.createElement('i', { className: 'fa fa-tags' }),
+	    'Tags',
+	    React.createElement('br', null),
+	    React.createElement(
+	      'div',
+	      { className: 'tags' },
+	      tagList
+	    )
+	  );
+	};
 
-	  function Tags(props) {
-	    _classCallCheck(this, Tags);
-
-	    return _possibleConstructorReturn(this, (Tags.__proto__ || Object.getPrototypeOf(Tags)).call(this, props));
-	  }
-
-	  _createClass(Tags, [{
-	    key: 'render',
-	    value: function render() {
-	      var tagList = this.props.dataTag.map(function (val) {
-	        return React.createElement(Tag, { key: val.id, name: val.name });
-	      });
-	      return React.createElement(
-	        'section',
-	        { className: 'tag-section' },
-	        React.createElement('i', { className: 'fa fa-tags' }),
-	        'Tags',
-	        React.createElement('br', null),
-	        React.createElement(
-	          'div',
-	          { className: 'tags' },
-	          tagList
-	        )
-	      );
-	    }
-	  }]);
-
-	  return Tags;
-	}(React.Component);
-
-	var HomeMain = function (_React$Component2) {
-	  _inherits(HomeMain, _React$Component2);
-
-	  function HomeMain() {
-	    _classCallCheck(this, HomeMain);
-
-	    return _possibleConstructorReturn(this, (HomeMain.__proto__ || Object.getPrototypeOf(HomeMain)).apply(this, arguments));
-	  }
-
-	  _createClass(HomeMain, [{
-	    key: 'render',
-	    value: function render() {
-	      return React.createElement(
-	        'div',
-	        null,
-	        React.createElement(ArticleSection, { dataArticle: this.props.dataArticle }),
-	        React.createElement('hr', null),
-	        React.createElement(Tags, { dataTag: this.props.dataTag })
-	      );
-	    }
-	  }]);
-
-	  return HomeMain;
-	}(React.Component);
+	var HomeMain = function HomeMain(props) {
+	  // ArticleSection Component is from ./articleSection.js
+	  return React.createElement(
+	    'div',
+	    null,
+	    React.createElement(ArticleSection, { dataArticle: props.dataArticle,
+	      dataTag: props.dataTag,
+	      handleArticleClick: props.handleArticleClick }),
+	    React.createElement('hr', null),
+	    React.createElement(Tags, { dataTag: props.dataTag })
+	  );
+	};
 
 	// main body
-
-
-	var Main = function (_React$Component3) {
-	  _inherits(Main, _React$Component3);
-
-	  function Main() {
-	    _classCallCheck(this, Main);
-
-	    return _possibleConstructorReturn(this, (Main.__proto__ || Object.getPrototypeOf(Main)).apply(this, arguments));
-	  }
-
-	  _createClass(Main, [{
-	    key: 'render',
-	    value: function render() {
-	      var mainSection = null;
-	      // router logic code
-	      if (location.href.indexOf('article.html') > 0) {
-	        mainSection = React.createElement(Article, null);
-	      } else if (location.href.indexOf('contact.html') > 0) {
-	        mainSection = React.createElement(ContactCard, null);
-	      } else {
-	        mainSection = React.createElement(HomeMain, { dataArticle: this.props.dataArticle,
-	          dataTag: this.props.dataTag });
+	var Main = function Main(props) {
+	  var mainSection = null;
+	  // router logic code
+	  if (props.mainPage === 'article') {
+	    // find the articleId's
+	    var theArticle = void 0;
+	    props.dataArticle.forEach(function (val) {
+	      if (val.id === props.articleId) {
+	        theArticle = val;
 	      }
-	      // ArticleSection Component is from ./articleSection.js
-	      return React.createElement(
-	        'main',
-	        { className: 'container' },
-	        mainSection
-	      );
-	    }
-	  }]);
-
-	  return Main;
-	}(React.Component);
+	    });
+	    mainSection = React.createElement(Article, { onCommentChange: props.onCommentChange,
+	      dataTag: props.dataTag,
+	      articleData: theArticle });
+	  } else if (props.mainPage === 'contact') {
+	    mainSection = React.createElement(ContactCard, null);
+	  } else if (props.mainPage === 'home') {
+	    mainSection = React.createElement(HomeMain, { dataArticle: props.dataArticle,
+	      dataTag: props.dataTag,
+	      handleArticleClick: props.handleArticleClick });
+	  }
+	  return React.createElement(
+	    'main',
+	    { className: 'container' },
+	    mainSection
+	  );
+	};
 
 	module.exports = {
 	  main: Main
@@ -21811,231 +21830,133 @@
 
 	'use strict';
 
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
 	var React = __webpack_require__(1);
-	var articleUrl = location.href + 'html/article.html';
 
-	function formatDate(date) {
+	var formatDate = function formatDate(date) {
 	  var shortDate = date.slice(0, 10).split("-");
 	  return shortDate[1] + '-' + shortDate[2] + ',' + shortDate[0];
-	}
+	};
 
-	var ArticleHeader = function (_React$Component) {
-	  _inherits(ArticleHeader, _React$Component);
+	var ArticleHeader = function ArticleHeader(props) {
+	  var handleClick = function handleClick() {
+	    props.handleArticleClick(props.id);
+	  };
+	  return React.createElement(
+	    'h3',
+	    { className: 'article-header' },
+	    React.createElement(
+	      'a',
+	      { onClick: handleClick },
+	      props.title
+	    )
+	  );
+	};
 
-	  function ArticleHeader() {
-	    _classCallCheck(this, ArticleHeader);
+	var ArticleDescription = function ArticleDescription(props) {
+	  return React.createElement(
+	    'div',
+	    { className: 'article-description' },
+	    props.description
+	  );
+	};
 
-	    return _possibleConstructorReturn(this, (ArticleHeader.__proto__ || Object.getPrototypeOf(ArticleHeader)).apply(this, arguments));
-	  }
+	var ArticleTag = function ArticleTag(props) {
+	  var tags = props.dataTag;
+	  var tagList = props.tagList.map(function (val) {
+	    var idVal = val;
+	    var tagName = void 0;
+	    tags.forEach(function (val) {
+	      if (val.id === idVal) {
+	        tagName = val.name;
+	      }
+	    });
+	    return tagName;
+	  });
+	  return React.createElement(
+	    'span',
+	    null,
+	    React.createElement('i', { className: 'fa fa-tag' }),
+	    React.createElement(
+	      'a',
+	      { href: '' },
+	      tagList.join()
+	    ),
+	    ','
+	  );
+	};
 
-	  _createClass(ArticleHeader, [{
-	    key: 'render',
-	    value: function render() {
-	      return React.createElement(
-	        'h3',
-	        { className: 'article-header' },
-	        React.createElement(
-	          'a',
-	          { href: articleUrl },
-	          this.props.title
-	        )
-	      );
-	    }
-	  }]);
+	var ArticleTime = function ArticleTime(props) {
+	  return React.createElement(
+	    'span',
+	    null,
+	    React.createElement('i', { className: 'fa fa-clock-o' }),
+	    formatDate(props.datePublished)
+	  );
+	};
 
-	  return ArticleHeader;
-	}(React.Component);
+	var ArticleComment = function ArticleComment(props) {
+	  return React.createElement(
+	    'span',
+	    null,
+	    React.createElement('i', { className: 'fa fa-comment-o' }),
+	    '(',
+	    React.createElement(
+	      'a',
+	      { href: '' },
+	      '1'
+	    ),
+	    ')'
+	  );
+	};
 
-	var ArticleDescription = function (_React$Component2) {
-	  _inherits(ArticleDescription, _React$Component2);
+	var ArticleView = function ArticleView(props) {
+	  return React.createElement(
+	    'span',
+	    null,
+	    React.createElement('i', { className: 'fa fa-eye' }),
+	    '(',
+	    React.createElement(
+	      'a',
+	      { href: '' },
+	      props.clickCount
+	    ),
+	    ')'
+	  );
+	};
 
-	  function ArticleDescription() {
-	    _classCallCheck(this, ArticleDescription);
-
-	    return _possibleConstructorReturn(this, (ArticleDescription.__proto__ || Object.getPrototypeOf(ArticleDescription)).apply(this, arguments));
-	  }
-
-	  _createClass(ArticleDescription, [{
-	    key: 'render',
-	    value: function render() {
-	      return React.createElement(
+	var ArticleSection = function ArticleSection(props) {
+	  var articleList = props.dataArticle.map(function (val) {
+	    return React.createElement(
+	      'div',
+	      { key: val.id, className: 'article-list' },
+	      React.createElement(ArticleHeader, { handleArticleClick: props.handleArticleClick,
+	        title: val.title, id: val.id }),
+	      React.createElement(ArticleDescription, { description: val.description }),
+	      React.createElement(
 	        'div',
-	        { className: 'article-description' },
-	        this.props.description
-	      );
-	    }
-	  }]);
-
-	  return ArticleDescription;
-	}(React.Component);
-
-	var ArticleTag = function (_React$Component3) {
-	  _inherits(ArticleTag, _React$Component3);
-
-	  function ArticleTag() {
-	    _classCallCheck(this, ArticleTag);
-
-	    return _possibleConstructorReturn(this, (ArticleTag.__proto__ || Object.getPrototypeOf(ArticleTag)).apply(this, arguments));
-	  }
-
-	  _createClass(ArticleTag, [{
-	    key: 'render',
-	    value: function render() {
-	      return React.createElement(
-	        'span',
-	        null,
-	        React.createElement('i', { className: 'fa fa-tag' }),
-	        React.createElement(
-	          'a',
-	          { href: '' },
-	          'JS'
-	        ),
-	        ','
-	      );
-	    }
-	  }]);
-
-	  return ArticleTag;
-	}(React.Component);
-
-	var ArticleTime = function (_React$Component4) {
-	  _inherits(ArticleTime, _React$Component4);
-
-	  function ArticleTime() {
-	    _classCallCheck(this, ArticleTime);
-
-	    return _possibleConstructorReturn(this, (ArticleTime.__proto__ || Object.getPrototypeOf(ArticleTime)).apply(this, arguments));
-	  }
-
-	  _createClass(ArticleTime, [{
-	    key: 'render',
-	    value: function render() {
-	      return React.createElement(
-	        'span',
-	        null,
-	        React.createElement('i', { className: 'fa fa-clock-o' }),
-	        formatDate(this.props.datePublished)
-	      );
-	    }
-	  }]);
-
-	  return ArticleTime;
-	}(React.Component);
-
-	var ArticleComment = function (_React$Component5) {
-	  _inherits(ArticleComment, _React$Component5);
-
-	  function ArticleComment() {
-	    _classCallCheck(this, ArticleComment);
-
-	    return _possibleConstructorReturn(this, (ArticleComment.__proto__ || Object.getPrototypeOf(ArticleComment)).apply(this, arguments));
-	  }
-
-	  _createClass(ArticleComment, [{
-	    key: 'render',
-	    value: function render() {
-	      return React.createElement(
-	        'span',
-	        null,
-	        React.createElement('i', { className: 'fa fa-comment-o' }),
-	        '(',
-	        React.createElement(
-	          'a',
-	          { href: '' },
-	          '1'
-	        ),
-	        ')'
-	      );
-	    }
-	  }]);
-
-	  return ArticleComment;
-	}(React.Component);
-
-	var ArticleView = function (_React$Component6) {
-	  _inherits(ArticleView, _React$Component6);
-
-	  function ArticleView() {
-	    _classCallCheck(this, ArticleView);
-
-	    return _possibleConstructorReturn(this, (ArticleView.__proto__ || Object.getPrototypeOf(ArticleView)).apply(this, arguments));
-	  }
-
-	  _createClass(ArticleView, [{
-	    key: 'render',
-	    value: function render() {
-	      return React.createElement(
-	        'span',
-	        null,
-	        React.createElement('i', { className: 'fa fa-eye' }),
-	        '(',
-	        React.createElement(
-	          'a',
-	          { href: '' },
-	          this.props.clickCount
-	        ),
-	        ')'
-	      );
-	    }
-	  }]);
-
-	  return ArticleView;
-	}(React.Component);
-
-	var ArticleSection = function (_React$Component7) {
-	  _inherits(ArticleSection, _React$Component7);
-
-	  function ArticleSection() {
-	    _classCallCheck(this, ArticleSection);
-
-	    return _possibleConstructorReturn(this, (ArticleSection.__proto__ || Object.getPrototypeOf(ArticleSection)).apply(this, arguments));
-	  }
-
-	  _createClass(ArticleSection, [{
-	    key: 'render',
-	    value: function render() {
-	      var articleList = this.props.dataArticle.map(function (val) {
-	        return React.createElement(
-	          'div',
-	          { key: val.id, className: 'article-list' },
-	          React.createElement(ArticleHeader, { title: val.title }),
-	          React.createElement(ArticleDescription, { description: val.description }),
-	          React.createElement(
-	            'div',
-	            { className: 'article-info' },
-	            React.createElement(ArticleTag, null),
-	            ' ',
-	            ' ',
-	            React.createElement(ArticleTime, { datePublished: val.date_publish }),
-	            ' ',
-	            React.createElement(ArticleComment, null),
-	            ' ',
-	            ' ',
-	            React.createElement(ArticleView, { clickCount: val.click_count })
-	          )
-	        );
-	      });
-	      return React.createElement(
-	        'section',
-	        null,
-	        articleList
-	      );
-	    }
-	  }]);
-
-	  return ArticleSection;
-	}(React.Component);
+	        { className: 'article-info' },
+	        React.createElement(ArticleTag, { tagList: val.tags, dataTag: props.dataTag }),
+	        ' ',
+	        ' ',
+	        React.createElement(ArticleTime, { datePublished: val.date_publish }),
+	        ' ',
+	        React.createElement(ArticleComment, null),
+	        ' ',
+	        ' ',
+	        React.createElement(ArticleView, { clickCount: val.click_count })
+	      )
+	    );
+	  });
+	  return React.createElement(
+	    'section',
+	    null,
+	    articleList
+	  );
+	};
 
 	module.exports = {
-	  article: ArticleSection
+	  article: ArticleSection,
+	  formatDate: formatDate
 	};
 
 /***/ },
@@ -22044,285 +21965,153 @@
 
 	'use strict';
 
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
 	var React = __webpack_require__(1);
+	var formatDate = __webpack_require__(179).formatDate;
 
-	var ArticleHeader = function (_React$Component) {
-	  _inherits(ArticleHeader, _React$Component);
+	var ArticleHeader = function ArticleHeader(props) {
+	  return React.createElement(
+	    'h1',
+	    { id: 'article-header' },
+	    props.title
+	  );
+	};
 
-	  function ArticleHeader() {
-	    _classCallCheck(this, ArticleHeader);
+	var ArticleTag = function ArticleTag(props) {
+	  var tags = props.dataTag;
+	  var tagList = props.tagList.map(function (val) {
+	    var idVal = val;
+	    var tagName = void 0;
+	    tags.forEach(function (val) {
+	      if (val.id === idVal) {
+	        tagName = val.name;
+	      }
+	    });
+	    return tagName;
+	  });
+	  return React.createElement(
+	    'span',
+	    null,
+	    React.createElement(
+	      'a',
+	      null,
+	      React.createElement('i', { className: 'fa fa-tag' }),
+	      tagList.join()
+	    ),
+	    '.',
+	    ' '
+	  );
+	};
 
-	    return _possibleConstructorReturn(this, (ArticleHeader.__proto__ || Object.getPrototypeOf(ArticleHeader)).apply(this, arguments));
-	  }
+	var ArticleView = function ArticleView(props) {
+	  return React.createElement(
+	    'span',
+	    null,
+	    React.createElement('i', { className: 'fa fa-eye' }),
+	    ' ',
+	    '(',
+	    props.clickCount,
+	    ')'
+	  );
+	};
 
-	  _createClass(ArticleHeader, [{
-	    key: 'render',
-	    value: function render() {
-	      return React.createElement(
-	        'h1',
-	        { id: 'article-header' },
-	        'Title'
-	      );
-	    }
-	  }]);
+	var ArticleTime = function ArticleTime(props) {
+	  return React.createElement(
+	    'span',
+	    { id: 'article-time' },
+	    React.createElement('i', { className: 'fa fa-clock-o' }),
+	    ' ',
+	    formatDate(props.datePublish)
+	  );
+	};
 
-	  return ArticleHeader;
-	}(React.Component);
+	var ArticleDescription = function ArticleDescription(props) {
+	  return React.createElement(
+	    'div',
+	    { id: 'article-description' },
+	    props.description
+	  );
+	};
 
-	var ArticleTag = function (_React$Component2) {
-	  _inherits(ArticleTag, _React$Component2);
+	var ArticleContent = function ArticleContent(props) {
+	  return React.createElement(
+	    'div',
+	    { id: 'article-content' },
+	    props.content
+	  );
+	};
 
-	  function ArticleTag() {
-	    _classCallCheck(this, ArticleTag);
+	var CommentSection = function CommentSection(props) {
+	  var handleClick = function handleClick(e) {
+	    props.onCommentChange(e.target.value);
+	  };
+	  return React.createElement(
+	    'div',
+	    { className: 'comment-section' },
+	    React.createElement(
+	      'h4',
+	      null,
+	      'Comment'
+	    ),
+	    React.createElement(CommentList, null),
+	    React.createElement('textarea', { name: 'commentText', rows: '5' }),
+	    React.createElement(
+	      'button',
+	      { id: 'commentBtn', onClick: handleClick },
+	      'comment'
+	    )
+	  );
+	};
 
-	    return _possibleConstructorReturn(this, (ArticleTag.__proto__ || Object.getPrototypeOf(ArticleTag)).apply(this, arguments));
-	  }
-
-	  _createClass(ArticleTag, [{
-	    key: 'render',
-	    value: function render() {
-	      return React.createElement(
+	var CommentList = function CommentList(props) {
+	  return React.createElement(
+	    'div',
+	    { className: 'article-comment' },
+	    React.createElement(
+	      'div',
+	      { className: 'article-comment-info' },
+	      React.createElement(
 	        'span',
 	        null,
-	        React.createElement(
-	          'a',
-	          { href: '' },
-	          React.createElement('i', { className: 'fa fa-tag' }),
-	          ' JS'
-	        ),
-	        '.',
-	        ' '
-	      );
-	    }
-	  }]);
-
-	  return ArticleTag;
-	}(React.Component);
-
-	var ArticleView = function (_React$Component3) {
-	  _inherits(ArticleView, _React$Component3);
-
-	  function ArticleView() {
-	    _classCallCheck(this, ArticleView);
-
-	    return _possibleConstructorReturn(this, (ArticleView.__proto__ || Object.getPrototypeOf(ArticleView)).apply(this, arguments));
-	  }
-
-	  _createClass(ArticleView, [{
-	    key: 'render',
-	    value: function render() {
-	      return React.createElement(
+	        ' Joker Yu :'
+	      ),
+	      React.createElement(
 	        'span',
 	        null,
-	        React.createElement('i', { className: 'fa fa-eye' }),
-	        ' ',
-	        '(',
-	        123,
-	        ')'
-	      );
-	    }
-	  }]);
-
-	  return ArticleView;
-	}(React.Component);
-
-	var ArticleTime = function (_React$Component4) {
-	  _inherits(ArticleTime, _React$Component4);
-
-	  function ArticleTime() {
-	    _classCallCheck(this, ArticleTime);
-
-	    return _possibleConstructorReturn(this, (ArticleTime.__proto__ || Object.getPrototypeOf(ArticleTime)).apply(this, arguments));
-	  }
-
-	  _createClass(ArticleTime, [{
-	    key: 'render',
-	    value: function render() {
-	      return React.createElement(
-	        'span',
-	        { id: 'article-time' },
 	        React.createElement('i', { className: 'fa fa-clock-o' }),
 	        ' ',
 	        '01-28,2014'
-	      );
-	    }
-	  }]);
+	      )
+	    ),
+	    React.createElement(
+	      'pre',
+	      null,
+	      'interesting!'
+	    ),
+	    React.createElement('hr', null)
+	  );
+	};
 
-	  return ArticleTime;
-	}(React.Component);
-
-	var ArticleDescription = function (_React$Component5) {
-	  _inherits(ArticleDescription, _React$Component5);
-
-	  function ArticleDescription() {
-	    _classCallCheck(this, ArticleDescription);
-
-	    return _possibleConstructorReturn(this, (ArticleDescription.__proto__ || Object.getPrototypeOf(ArticleDescription)).apply(this, arguments));
-	  }
-
-	  _createClass(ArticleDescription, [{
-	    key: 'render',
-	    value: function render() {
-	      return React.createElement(
-	        'div',
-	        { id: 'article-description' },
-	        'There are numerous frameworks for making websites in Python.'
-	      );
-	    }
-	  }]);
-
-	  return ArticleDescription;
-	}(React.Component);
-
-	var ArticleContent = function (_React$Component6) {
-	  _inherits(ArticleContent, _React$Component6);
-
-	  function ArticleContent() {
-	    _classCallCheck(this, ArticleContent);
-
-	    return _possibleConstructorReturn(this, (ArticleContent.__proto__ || Object.getPrototypeOf(ArticleContent)).apply(this, arguments));
-	  }
-
-	  _createClass(ArticleContent, [{
-	    key: 'render',
-	    value: function render() {
-	      return React.createElement(
-	        'div',
-	        { id: 'article-content' },
-	        'Content'
-	      );
-	    }
-	  }]);
-
-	  return ArticleContent;
-	}(React.Component);
-
-	var CommentSection = function (_React$Component7) {
-	  _inherits(CommentSection, _React$Component7);
-
-	  function CommentSection(props) {
-	    _classCallCheck(this, CommentSection);
-
-	    var _this7 = _possibleConstructorReturn(this, (CommentSection.__proto__ || Object.getPrototypeOf(CommentSection)).call(this, props));
-
-	    _this7.handleClick = _this7.handleClick.bind(_this7);
-	    return _this7;
-	  }
-
-	  _createClass(CommentSection, [{
-	    key: 'handleClick',
-	    value: function handleClick() {}
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      return React.createElement(
-	        'div',
-	        { className: 'comment-section' },
-	        React.createElement(
-	          'h4',
-	          null,
-	          'Comment'
-	        ),
-	        React.createElement(CommentList, null),
-	        React.createElement('textarea', { name: 'commentText', rows: '5' }),
-	        React.createElement(
-	          'button',
-	          { id: 'commentBtn', onClick: this.handleClick },
-	          'comment'
-	        )
-	      );
-	    }
-	  }]);
-
-	  return CommentSection;
-	}(React.Component);
-
-	var CommentList = function (_React$Component8) {
-	  _inherits(CommentList, _React$Component8);
-
-	  function CommentList() {
-	    _classCallCheck(this, CommentList);
-
-	    return _possibleConstructorReturn(this, (CommentList.__proto__ || Object.getPrototypeOf(CommentList)).apply(this, arguments));
-	  }
-
-	  _createClass(CommentList, [{
-	    key: 'render',
-	    value: function render() {
-	      return React.createElement(
-	        'div',
-	        { className: 'article-comment' },
-	        React.createElement(
-	          'div',
-	          { className: 'article-comment-info' },
-	          React.createElement(
-	            'span',
-	            null,
-	            ' Joker Yu :'
-	          ),
-	          React.createElement(
-	            'span',
-	            null,
-	            React.createElement('i', { className: 'fa fa-clock-o' }),
-	            ' ',
-	            '01-28,2014'
-	          )
-	        ),
-	        React.createElement(
-	          'pre',
-	          null,
-	          'interesting!'
-	        ),
-	        React.createElement('hr', null)
-	      );
-	    }
-	  }]);
-
-	  return CommentList;
-	}(React.Component);
-
-	var Article = function (_React$Component9) {
-	  _inherits(Article, _React$Component9);
-
-	  function Article(props) {
-	    _classCallCheck(this, Article);
-
-	    return _possibleConstructorReturn(this, (Article.__proto__ || Object.getPrototypeOf(Article)).call(this, props));
-	  }
-
-	  _createClass(Article, [{
-	    key: 'render',
-	    value: function render() {
-	      return React.createElement(
-	        'section',
-	        { className: 'article-list' },
-	        React.createElement(ArticleHeader, null),
-	        React.createElement(
-	          'div',
-	          { id: 'article-info' },
-	          React.createElement(ArticleTag, null),
-	          React.createElement(ArticleView, null),
-	          React.createElement(ArticleTime, null)
-	        ),
-	        React.createElement(ArticleDescription, null),
-	        React.createElement('hr', null),
-	        React.createElement(ArticleContent, null),
-	        React.createElement('hr', null),
-	        React.createElement(CommentSection, null)
-	      );
-	    }
-	  }]);
-
-	  return Article;
-	}(React.Component);
+	var Article = function Article(props) {
+	  var articleData = props.articleData;
+	  return React.createElement(
+	    'section',
+	    { className: 'article-list' },
+	    React.createElement(ArticleHeader, { title: articleData.title }),
+	    React.createElement(
+	      'div',
+	      { id: 'article-info' },
+	      React.createElement(ArticleTag, { dataTag: props.dataTag,
+	        tagList: articleData.tags }),
+	      React.createElement(ArticleView, { clickCount: articleData.click_count }),
+	      React.createElement(ArticleTime, { datePublish: articleData.date_publish })
+	    ),
+	    React.createElement(ArticleDescription, { description: articleData.description }),
+	    React.createElement('hr', null),
+	    React.createElement(ArticleContent, { content: articleData.content }),
+	    React.createElement('hr', null),
+	    React.createElement(CommentSection, { onCommentChange: props.onCommentChange })
+	  );
+	};
 
 	module.exports = {
 	  article: Article
@@ -22576,7 +22365,7 @@
 	              { htmlFor: "password" },
 	              "Password:"
 	            ),
-	            React.createElement("input", { type: "text", placeholder: "Password", id: "password" })
+	            React.createElement("input", { type: "password", placeholder: "Password", id: "password" })
 	          ),
 	          React.createElement("input", { type: "submit", value: "Log in", id: "logSubmit" })
 	        )

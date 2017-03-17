@@ -22,7 +22,7 @@ class ModalBody extends React.Component {
           </div>
           <div className="form-group">
             <label htmlFor="password">Password:</label>
-            <input type="text" placeholder="Password" id="password"/>
+            <input type="password" placeholder="Password" id="password"/>
           </div>
           <input type="submit" value="Log in" id="logSubmit"/>
         </form>
