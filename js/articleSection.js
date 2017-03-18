@@ -38,7 +38,7 @@ const ArticleTag = (props) => {
   });
   return (
     <span>
-      <i className="fa fa-tag"></i><a href="">{tagList.join()}</a>,
+      <i className="fa fa-tag"></i><a href="">{tagList.join()}</a>.
     </span>
   );
 };

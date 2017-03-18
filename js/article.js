@@ -68,40 +68,46 @@ const CommentSection = (props) => {
   }
   return (
     <div className='comment-section'>
-      <h4>Comment</h4>
+      <h5>Comments:</h5>
       <CommentList articleId={props.articleId}
-        dataComment={props.dataComment}/>
-      <textarea name="commentText" onChange={onCommentChange} rows="5"></textarea>
+        commentData={props.commentData}/>
+      <textarea name="commentText" onChange={onCommentChange}
+        placeholder='Write your comment here.' rows="5"  value={props.commentText}></textarea>
       <button id='commentBtn' onClick={handleClick}>comment</button>
     </div>
   );
 };
 
 const CommentList = (props) => {
-  const dataComment = [];
-  // console.log(props.dataComment);
-  props.dataComment.forEach((val) => {
+  const commentData = [];
+  // console.log(props.commentData);
+  props.commentData.forEach((val) => {
     if (val.articleId == props.articleId) {
-      dataComment.push(val);
+      commentData.push(val);
     }
   });
-  const commentList = dataComment.map((val) => {
-    return (
-      <div key={val.content}>
-        <div className='article-comment-info'>
-          <span> {val.user}:</span>
-          <span>
-            <i className="fa fa-clock-o"></i>{' '}
-            {val.time.slice(0, val.time.indexOf('M')+1)}
-          </span>
+  let commentList;
+  if (commentData.length === 0) {
+    commentList = <div className='nocomment'>No comment yet! {'\n'} Do you want to say something?</div>;
+  }else{
+    commentList = commentData.map((val) => {
+      return (
+        <div key={val.time}>
+          <div className='article-comment-info'>
+            <span> {val.user}:</span>
+            <span>
+              <i className="fa fa-clock-o"></i>{' '}
+              {val.time.slice(0, val.time.indexOf('M')+1)}
+            </span>
+          </div>
+          <pre>
+            {val.content}
+          </pre>
+          <hr />
         </div>
-        <pre>
-          {val.content}
-        </pre>
-        <hr />
-      </div>
-    );
-  });
+      );
+    });
+  }
   return (
     <div className='article-comment'>
       {commentList}
@@ -126,7 +132,7 @@ const Article = (props) => {
       <hr />
       <CommentSection articleId={articleData.id}
         commentText={props.commentText}
-        dataComment={props.dataComment}
+        commentData={props.commentData}
         onCommentChange={props.onCommentChange}
         handleCommentClick={props.handleCommentClick}/>
     </section>

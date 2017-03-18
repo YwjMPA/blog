@@ -131,7 +131,7 @@ const Header = (props) => {
       </div>
       <Nav handleHomeClick={props.handleHomeClick}
           handleContactClick={props.handleContactClick}/>
-      <Modal />
+      <Modal handleSignUp={props.handleSignUp}/>
     </header>
   )
 };
@@ -159,9 +159,9 @@ class Homepage extends React.Component{
       tagFilter: null,
       username: null,
       password: null,
-      commentText: null,
+      commentText: '',
       // fake comment data
-      dataComment: [
+      commentData: [
         {
           "articleId":1,
           "user": "Joker Yu",
@@ -192,6 +192,25 @@ class Homepage extends React.Component{
           "time": "3/18/2017, 9:39:41 AM",
           "content": "interesting!!!!!"
         }
+      ],
+      // fake user data
+      userData: [
+        {
+          'id':1,
+          'firstname':'Wenjia',
+          'lastname':'Yu',
+          'username':'ywj',
+          'password':'yuwenjia',
+          'email':'somnus.yuwenjia@foxmail.com'
+        },
+        {
+          'id':2,
+          'firstname':'Joker',
+          'lastname':'Yu',
+          'username':'joker',
+          'password':'joker',
+          'email':'joker@yu.cn'
+        }
       ]
     };
     this.handleCommentClick = this.handleCommentClick.bind(this);
@@ -200,12 +219,17 @@ class Homepage extends React.Component{
     this.handleBrandClick = this.handleBrandClick.bind(this);
     this.handleContactClick = this.handleContactClick.bind(this);
     this.handleTagClick = this.handleTagClick.bind(this);
+    this.handleSignUp = this.handleSignUp.bind(this);
   }
   // handleCommentClick modify fake data*****
   handleCommentClick(articleId, user, content) {
+    if (content === '') {
+      return ;
+    }
     const timeNow = new Date().toLocaleString() + new Date().getMilliseconds();
     this.setState((preState) => ({
-      dataComment: preState.dataComment.concat([{
+      commentText: '',
+      commentData: preState.commentData.concat([{
         "articleId":articleId,
         "user": user,
         "time": timeNow,
@@ -213,7 +237,11 @@ class Homepage extends React.Component{
       }])
     }));
   }
-
+  handleSignUp() {
+    this.setState({
+      mainPage:'signUp'
+    })
+  }
   handleCommentChange(value) {
     this.setState({
       commentText: value
@@ -248,10 +276,11 @@ class Homepage extends React.Component{
       <div>
         <Header handleBrandClick={this.handleBrandClick}
                 handleHomeClick={this.handleBrandClick}
-                handleContactClick={this.handleContactClick}/>
+                handleContactClick={this.handleContactClick}
+                handleSignUp={props.handleSignUp}/>
         <Main dataArticle={this.props.dataArticle}
               dataTag={this.props.dataTag}
-              dataComment={this.state.dataComment}
+              commentData={this.state.commentData}
               onCommentChange={this.handleCommentChange}
               commentText={this.state.commentText}
               handleCommentClick={this.handleCommentClick}

@@ -21,17 +21,20 @@ const ModalBody = (props) => {
           <label htmlFor="password">Password:</label>
           <input type="password" placeholder="Password" id="password"/>
         </div>
-        <input type="submit" value="Log in" id="logSubmit"/>
+        <input type="submit" value="Log in"  id="logSubmit"/>
       </form>
     </div>
   );
 };
 
 const ModalFooter = (props) => {
+  const handleSignUp = () => {
+    props.handleSignUp();
+  };
   return (
     <div className="modal-footer">
       Don{'\''}t have an account? {' '}
-      <a href=''>Sign up</a>
+      <a onClick={handleSignUp}>Sign up</a>
     </div>
   );
 };
@@ -42,7 +45,7 @@ const ModalContent = (props) => {
       <ModalHeader />
       <hr />
       <ModalBody />
-      <ModalFooter />
+      <ModalFooter handleSignUp={props.handleSignUp}/>
     </div>
   );
 };
@@ -50,7 +53,7 @@ const ModalContent = (props) => {
 const MyModal = (props) => {
   return (
     <div id='modal' className='modal'>
-      <ModalContent />
+      <ModalContent handleSignUp={props.handleSignUp}/>
     </div>
   );
 };

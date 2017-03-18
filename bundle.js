@@ -207,7 +207,7 @@
 	    ),
 	    React.createElement(Nav, { handleHomeClick: props.handleHomeClick,
 	      handleContactClick: props.handleContactClick }),
-	    React.createElement(Modal, null)
+	    React.createElement(Modal, { handleSignUp: props.handleSignUp })
 	  );
 	};
 
@@ -246,9 +246,9 @@
 	      tagFilter: null,
 	      username: null,
 	      password: null,
-	      commentText: null,
+	      commentText: '',
 	      // fake comment data
-	      dataComment: [{
+	      commentData: [{
 	        "articleId": 1,
 	        "user": "Joker Yu",
 	        "time": "3/18/2017, 9:39:42 AM",
@@ -273,6 +273,22 @@
 	        "user": "Joker Yu",
 	        "time": "3/18/2017, 9:39:41 AM",
 	        "content": "interesting!!!!!"
+	      }],
+	      // fake user data
+	      userData: [{
+	        'id': 1,
+	        'firstname': 'Wenjia',
+	        'lastname': 'Yu',
+	        'username': 'ywj',
+	        'password': 'yuwenjia',
+	        'email': 'somnus.yuwenjia@foxmail.com'
+	      }, {
+	        'id': 2,
+	        'firstname': 'Joker',
+	        'lastname': 'Yu',
+	        'username': 'joker',
+	        'password': 'joker',
+	        'email': 'joker@yu.cn'
 	      }]
 	    };
 	    _this.handleCommentClick = _this.handleCommentClick.bind(_this);
@@ -281,6 +297,7 @@
 	    _this.handleBrandClick = _this.handleBrandClick.bind(_this);
 	    _this.handleContactClick = _this.handleContactClick.bind(_this);
 	    _this.handleTagClick = _this.handleTagClick.bind(_this);
+	    _this.handleSignUp = _this.handleSignUp.bind(_this);
 	    return _this;
 	  }
 	  // handleCommentClick modify fake data*****
@@ -289,16 +306,27 @@
 	  _createClass(Homepage, [{
 	    key: 'handleCommentClick',
 	    value: function handleCommentClick(articleId, user, content) {
+	      if (content === '') {
+	        return;
+	      }
 	      var timeNow = new Date().toLocaleString() + new Date().getMilliseconds();
 	      this.setState(function (preState) {
 	        return {
-	          dataComment: preState.dataComment.concat([{
+	          commentText: '',
+	          commentData: preState.commentData.concat([{
 	            "articleId": articleId,
 	            "user": user,
 	            "time": timeNow,
 	            "content": content
 	          }])
 	        };
+	      });
+	    }
+	  }, {
+	    key: 'handleSignUp',
+	    value: function handleSignUp() {
+	      this.setState({
+	        mainPage: 'signUp'
 	      });
 	    }
 	  }, {
@@ -349,10 +377,11 @@
 	        null,
 	        React.createElement(Header, { handleBrandClick: this.handleBrandClick,
 	          handleHomeClick: this.handleBrandClick,
-	          handleContactClick: this.handleContactClick }),
+	          handleContactClick: this.handleContactClick,
+	          handleSignUp: props.handleSignUp }),
 	        React.createElement(Main, { dataArticle: this.props.dataArticle,
 	          dataTag: this.props.dataTag,
-	          dataComment: this.state.dataComment,
+	          commentData: this.state.commentData,
 	          onCommentChange: this.handleCommentChange,
 	          commentText: this.state.commentText,
 	          handleCommentClick: this.handleCommentClick,
@@ -21884,7 +21913,7 @@
 	      commentText: props.commentText,
 	      dataTag: props.dataTag,
 	      articleData: theArticle,
-	      dataComment: props.dataComment });
+	      commentData: props.commentData });
 	  } else if (props.mainPage === 'contact') {
 	    mainSection = React.createElement(ContactCard, null);
 	  } else if (props.mainPage === 'home') {
@@ -21893,6 +21922,8 @@
 	      dataTag: props.dataTag,
 	      handleArticleClick: props.handleArticleClick,
 	      handleTagClick: props.handleTagClick });
+	  } else if (props.mainPage === 'signUp') {
+	    mainSection = React.createElement(SignUp, null);
 	  }
 	  return React.createElement(
 	    'main',
@@ -21962,7 +21993,7 @@
 	      { href: '' },
 	      tagList.join()
 	    ),
-	    ','
+	    '.'
 	  );
 	};
 
@@ -22132,13 +22163,14 @@
 	    'div',
 	    { className: 'comment-section' },
 	    React.createElement(
-	      'h4',
+	      'h5',
 	      null,
-	      'Comment'
+	      'Comments:'
 	    ),
 	    React.createElement(CommentList, { articleId: props.articleId,
-	      dataComment: props.dataComment }),
-	    React.createElement('textarea', { name: 'commentText', onChange: onCommentChange, rows: '5' }),
+	      commentData: props.commentData }),
+	    React.createElement('textarea', { name: 'commentText', onChange: onCommentChange,
+	      placeholder: 'Write your comment here.', rows: '5', value: props.commentText }),
 	    React.createElement(
 	      'button',
 	      { id: 'commentBtn', onClick: handleClick },
@@ -22148,43 +22180,54 @@
 	};
 
 	var CommentList = function CommentList(props) {
-	  var dataComment = [];
-	  // console.log(props.dataComment);
-	  props.dataComment.forEach(function (val) {
+	  var commentData = [];
+	  // console.log(props.commentData);
+	  props.commentData.forEach(function (val) {
 	    if (val.articleId == props.articleId) {
-	      dataComment.push(val);
+	      commentData.push(val);
 	    }
 	  });
-	  var commentList = dataComment.map(function (val) {
-	    return React.createElement(
+	  var commentList = void 0;
+	  if (commentData.length === 0) {
+	    commentList = React.createElement(
 	      'div',
-	      { key: val.content },
-	      React.createElement(
+	      { className: 'nocomment' },
+	      'No comment yet! ',
+	      '\n',
+	      ' Do you want to say something?'
+	    );
+	  } else {
+	    commentList = commentData.map(function (val) {
+	      return React.createElement(
 	        'div',
-	        { className: 'article-comment-info' },
+	        { key: val.time },
 	        React.createElement(
-	          'span',
-	          null,
-	          ' ',
-	          val.user,
-	          ':'
+	          'div',
+	          { className: 'article-comment-info' },
+	          React.createElement(
+	            'span',
+	            null,
+	            ' ',
+	            val.user,
+	            ':'
+	          ),
+	          React.createElement(
+	            'span',
+	            null,
+	            React.createElement('i', { className: 'fa fa-clock-o' }),
+	            ' ',
+	            val.time.slice(0, val.time.indexOf('M') + 1)
+	          )
 	        ),
 	        React.createElement(
-	          'span',
+	          'pre',
 	          null,
-	          React.createElement('i', { className: 'fa fa-clock-o' }),
-	          ' ',
-	          val.time.slice(0, val.time.indexOf('M') + 1)
-	        )
-	      ),
-	      React.createElement(
-	        'pre',
-	        null,
-	        val.content
-	      ),
-	      React.createElement('hr', null)
-	    );
-	  });
+	          val.content
+	        ),
+	        React.createElement('hr', null)
+	      );
+	    });
+	  }
 	  return React.createElement(
 	    'div',
 	    { className: 'article-comment' },
@@ -22212,7 +22255,7 @@
 	    React.createElement('hr', null),
 	    React.createElement(CommentSection, { articleId: articleData.id,
 	      commentText: props.commentText,
-	      dataComment: props.dataComment,
+	      commentData: props.commentData,
 	      onCommentChange: props.onCommentChange,
 	      handleCommentClick: props.handleCommentClick })
 	  );
@@ -22361,6 +22404,9 @@
 	};
 
 	var ModalFooter = function ModalFooter(props) {
+	  var handleSignUp = function handleSignUp() {
+	    props.handleSignUp();
+	  };
 	  return React.createElement(
 	    "div",
 	    { className: "modal-footer" },
@@ -22370,7 +22416,7 @@
 	    ' ',
 	    React.createElement(
 	      "a",
-	      { href: "" },
+	      { onClick: handleSignUp },
 	      "Sign up"
 	    )
 	  );
@@ -22383,7 +22429,7 @@
 	    React.createElement(ModalHeader, null),
 	    React.createElement("hr", null),
 	    React.createElement(ModalBody, null),
-	    React.createElement(ModalFooter, null)
+	    React.createElement(ModalFooter, { handleSignUp: props.handleSignUp })
 	  );
 	};
 
@@ -22391,7 +22437,7 @@
 	  return React.createElement(
 	    "div",
 	    { id: "modal", className: "modal" },
-	    React.createElement(ModalContent, null)
+	    React.createElement(ModalContent, { handleSignUp: props.handleSignUp })
 	  );
 	};
 

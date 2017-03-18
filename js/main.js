@@ -67,15 +67,17 @@ const Main = (props) => {
                      commentText={props.commentText}
                      dataTag={props.dataTag}
                      articleData={theArticle}
-                     dataComment={props.dataComment}/>
+                     commentData={props.commentData}/>
   }else if (props.mainPage === 'contact') {
     mainSection = <ContactCard />
-  }else if (props.mainPage === 'home'){
+  }else if (props.mainPage === 'home') {
     mainSection = <HomeMain
               dataArticle={tagFilter(props.dataArticle, props.tagFilter)}
               dataTag={props.dataTag}
               handleArticleClick={props.handleArticleClick}
               handleTagClick={props.handleTagClick}/>
+  }else if (props.mainPage === 'signUp') {
+    mainSection = <SignUp />
   }
   return (
     <main className="container" >

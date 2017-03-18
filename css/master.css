@@ -220,6 +220,7 @@ main a{
 .comment-section textarea{
   width: 100%;
 }
+
 .article-comment {
   padding: 5px;
   margin-bottom: 10px;
@@ -231,6 +232,11 @@ main a{
 
 .article-comment-info span:last-child {
   float: right;
+}
+
+.nocomment {
+  font-size: 12px;
+  text-align: center;
 }
 
 #commentBtn {
