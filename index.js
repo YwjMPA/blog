@@ -87,9 +87,15 @@ const dataArticle = [
 const Nav = (props) => {
   const handleHomeClick = () => {
     props.handleHomeClick();
+    props.handleNavToggle();
   }
   const handleContactClick = () => {
     props.handleContactClick();
+    props.handleNavToggle();
+  }
+  const handleLogInModal = () => {
+    props.handleLogInModal();
+    props.handleNavToggle();
   }
   return (
     <nav>
@@ -104,7 +110,7 @@ const Nav = (props) => {
           <a onClick={handleContactClick}>Contact</a>
         </li>
       </ul>
-      <div className="nav-user" id='logIn'>
+      <div className="nav-user" id='logIn' onClick={handleLogInModal}>
         <i className="fa fa-user-circle-o"></i> Log in
       </div>
     </nav>
@@ -112,26 +118,31 @@ const Nav = (props) => {
 };
 
 const Header = (props) => {
+  const toggle = null;
   const handleBrandClick = () => {
     props.handleBrandClick();
   }
+  const handleNavToggle = (e) => {
+    props.handleNavToggle();
+  }
   return (
-    <header>
+    <header className={!props.navToggle? 'navbar-close':'navbar-open'}>
       <div className="row">
         <div className="nav-brand" onClick={handleBrandClick}>
           Ywj{'\''}s Blog
         </div>
-        <div className="navbar-toggle">
-          <div>
-            <span className="icon-bar"></span>
-            <span className="icon-bar"></span>
-            <span className="icon-bar"></span>
-          </div>
+        <div className={!props.navToggle? 'navbar-toggle':'navbar-toggle open'}  onClick={handleNavToggle}>
+          <span className="icon-bar"></span>
+          <span className="icon-bar"></span>
+          <span className="icon-bar"></span>
         </div>
       </div>
       <Nav handleHomeClick={props.handleHomeClick}
-          handleContactClick={props.handleContactClick}/>
-      <Modal handleSignUp={props.handleSignUp}/>
+          handleContactClick={props.handleContactClick}
+          handleLogInModal={props.handleLogInModal}
+          handleNavToggle={props.handleNavToggle}/>
+      <Modal handleSignUp={props.handleSignUp} modalToggle={props.modalToggle}
+          handleModalCloseClick={props.handleModalCloseClick}/>
     </header>
   )
 };
@@ -157,9 +168,9 @@ class Homepage extends React.Component{
       mainPage:'home',
       articleId: null,
       tagFilter: null,
-      username: null,
-      password: null,
       commentText: '',
+      navToggle: false,
+      modalToggle: false,
       // fake comment data
       commentData: [
         {
@@ -220,6 +231,8 @@ class Homepage extends React.Component{
     this.handleContactClick = this.handleContactClick.bind(this);
     this.handleTagClick = this.handleTagClick.bind(this);
     this.handleSignUp = this.handleSignUp.bind(this);
+    this.handleNavToggle = this.handleNavToggle.bind(this);
+    this.handleLogInModal = this.handleLogInModal.bind(this);
   }
   // handleCommentClick modify fake data*****
   handleCommentClick(articleId, user, content) {
@@ -237,10 +250,20 @@ class Homepage extends React.Component{
       }])
     }));
   }
+  handleLogInModal() {
+    this.setState((preState) => ({
+      modalToggle:!preState.modalToggle
+    }));
+  }
+  handleNavToggle() {
+    this.setState((preState) => ({
+      navToggle:!preState.navToggle
+    }));
+  }
   handleSignUp() {
     this.setState({
       mainPage:'signUp'
-    })
+    });
   }
   handleCommentChange(value) {
     this.setState({
@@ -277,7 +300,12 @@ class Homepage extends React.Component{
         <Header handleBrandClick={this.handleBrandClick}
                 handleHomeClick={this.handleBrandClick}
                 handleContactClick={this.handleContactClick}
-                handleSignUp={props.handleSignUp}/>
+                handleSignUp={this.handleSignUp}
+                handleNavToggle={this.handleNavToggle}
+                handleLogInModal={this.handleLogInModal}
+                navToggle={this.state.navToggle}
+                modalToggle={this.state.modalToggle}
+                handleModalCloseClick={this.handleLogInModal}/>
         <Main dataArticle={this.props.dataArticle}
               dataTag={this.props.dataTag}
               commentData={this.state.commentData}

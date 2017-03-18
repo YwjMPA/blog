@@ -57,7 +57,7 @@
 	var React = __webpack_require__(1);
 	var ReactDOM = __webpack_require__(32);
 	var Main = __webpack_require__(178).main;
-	var Modal = __webpack_require__(182).modal;
+	var Modal = __webpack_require__(183).modal;
 
 	// fake data
 	var dataTag = [{
@@ -129,9 +129,15 @@
 	var Nav = function Nav(props) {
 	  var handleHomeClick = function handleHomeClick() {
 	    props.handleHomeClick();
+	    props.handleNavToggle();
 	  };
 	  var handleContactClick = function handleContactClick() {
 	    props.handleContactClick();
+	    props.handleNavToggle();
+	  };
+	  var handleLogInModal = function handleLogInModal() {
+	    props.handleLogInModal();
+	    props.handleNavToggle();
 	  };
 	  return React.createElement(
 	    'nav',
@@ -169,7 +175,7 @@
 	    ),
 	    React.createElement(
 	      'div',
-	      { className: 'nav-user', id: 'logIn' },
+	      { className: 'nav-user', id: 'logIn', onClick: handleLogInModal },
 	      React.createElement('i', { className: 'fa fa-user-circle-o' }),
 	      ' Log in'
 	    )
@@ -177,12 +183,16 @@
 	};
 
 	var Header = function Header(props) {
+	  var toggle = null;
 	  var handleBrandClick = function handleBrandClick() {
 	    props.handleBrandClick();
 	  };
+	  var handleNavToggle = function handleNavToggle(e) {
+	    props.handleNavToggle();
+	  };
 	  return React.createElement(
 	    'header',
-	    null,
+	    { className: !props.navToggle ? 'navbar-close' : 'navbar-open' },
 	    React.createElement(
 	      'div',
 	      { className: 'row' },
@@ -195,19 +205,18 @@
 	      ),
 	      React.createElement(
 	        'div',
-	        { className: 'navbar-toggle' },
-	        React.createElement(
-	          'div',
-	          null,
-	          React.createElement('span', { className: 'icon-bar' }),
-	          React.createElement('span', { className: 'icon-bar' }),
-	          React.createElement('span', { className: 'icon-bar' })
-	        )
+	        { className: !props.navToggle ? 'navbar-toggle' : 'navbar-toggle open', onClick: handleNavToggle },
+	        React.createElement('span', { className: 'icon-bar' }),
+	        React.createElement('span', { className: 'icon-bar' }),
+	        React.createElement('span', { className: 'icon-bar' })
 	      )
 	    ),
 	    React.createElement(Nav, { handleHomeClick: props.handleHomeClick,
-	      handleContactClick: props.handleContactClick }),
-	    React.createElement(Modal, { handleSignUp: props.handleSignUp })
+	      handleContactClick: props.handleContactClick,
+	      handleLogInModal: props.handleLogInModal,
+	      handleNavToggle: props.handleNavToggle }),
+	    React.createElement(Modal, { handleSignUp: props.handleSignUp, modalToggle: props.modalToggle,
+	      handleModalCloseClick: props.handleModalCloseClick })
 	  );
 	};
 
@@ -244,9 +253,9 @@
 	      mainPage: 'home',
 	      articleId: null,
 	      tagFilter: null,
-	      username: null,
-	      password: null,
 	      commentText: '',
+	      navToggle: false,
+	      modalToggle: false,
 	      // fake comment data
 	      commentData: [{
 	        "articleId": 1,
@@ -298,6 +307,8 @@
 	    _this.handleContactClick = _this.handleContactClick.bind(_this);
 	    _this.handleTagClick = _this.handleTagClick.bind(_this);
 	    _this.handleSignUp = _this.handleSignUp.bind(_this);
+	    _this.handleNavToggle = _this.handleNavToggle.bind(_this);
+	    _this.handleLogInModal = _this.handleLogInModal.bind(_this);
 	    return _this;
 	  }
 	  // handleCommentClick modify fake data*****
@@ -319,6 +330,24 @@
 	            "time": timeNow,
 	            "content": content
 	          }])
+	        };
+	      });
+	    }
+	  }, {
+	    key: 'handleLogInModal',
+	    value: function handleLogInModal() {
+	      this.setState(function (preState) {
+	        return {
+	          modalToggle: !preState.modalToggle
+	        };
+	      });
+	    }
+	  }, {
+	    key: 'handleNavToggle',
+	    value: function handleNavToggle() {
+	      this.setState(function (preState) {
+	        return {
+	          navToggle: !preState.navToggle
 	        };
 	      });
 	    }
@@ -378,7 +407,12 @@
 	        React.createElement(Header, { handleBrandClick: this.handleBrandClick,
 	          handleHomeClick: this.handleBrandClick,
 	          handleContactClick: this.handleContactClick,
-	          handleSignUp: props.handleSignUp }),
+	          handleSignUp: this.handleSignUp,
+	          handleNavToggle: this.handleNavToggle,
+	          handleLogInModal: this.handleLogInModal,
+	          navToggle: this.state.navToggle,
+	          modalToggle: this.state.modalToggle,
+	          handleModalCloseClick: this.handleLogInModal }),
 	        React.createElement(Main, { dataArticle: this.props.dataArticle,
 	          dataTag: this.props.dataTag,
 	          commentData: this.state.commentData,
@@ -21837,6 +21871,7 @@
 	var ArticleSection = __webpack_require__(179).article;
 	var Article = __webpack_require__(180).article;
 	var ContactCard = __webpack_require__(181).contactCard;
+	var SignUp = __webpack_require__(182).signUp;
 
 	var tagFilter = function tagFilter(dataArticle, id) {
 	  if (id === null) return dataArticle;
@@ -22350,15 +22385,118 @@
 
 	"use strict";
 
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var SignUpUsername = function SignUpUsername(props) {
+	  return _react2.default.createElement(
+	    "div",
+	    { className: "form-group" },
+	    _react2.default.createElement(
+	      "label",
+	      { htmlFor: "username" },
+	      "Username:"
+	    ),
+	    _react2.default.createElement("input", { type: "text", placeholder: "Username", id: "username" })
+	  );
+	};
+	var SignUpPassword = function SignUpPassword(props) {
+	  return _react2.default.createElement(
+	    "div",
+	    { className: "form-group" },
+	    _react2.default.createElement(
+	      "label",
+	      { htmlFor: "password" },
+	      "Password:"
+	    ),
+	    _react2.default.createElement("input", { type: "password", placeholder: "Password", id: "password" })
+	  );
+	};
+	var SignUpName = function SignUpName(props) {
+	  return _react2.default.createElement(
+	    "div",
+	    { className: "form-group" },
+	    _react2.default.createElement(
+	      "label",
+	      { htmlFor: "firstName" },
+	      "First name:"
+	    ),
+	    _react2.default.createElement("input", { type: "text", placeholder: "First name", id: "firstName" }),
+	    _react2.default.createElement(
+	      "label",
+	      { htmlFor: "lastName" },
+	      "Last name:"
+	    ),
+	    _react2.default.createElement("input", { type: "text", placeholder: "Last name", id: "lastName" })
+	  );
+	};
+	var SignUpEmail = function SignUpEmail(props) {
+	  return _react2.default.createElement(
+	    "div",
+	    { className: "form-group" },
+	    _react2.default.createElement(
+	      "label",
+	      { htmlFor: "Email" },
+	      "Email:"
+	    ),
+	    _react2.default.createElement("input", { type: "email", placeholder: "Email", id: "Email" })
+	  );
+	};
+
+	var SignUp = function SignUp(props) {
+	  return _react2.default.createElement(
+	    "section",
+	    { className: "sign-up-section" },
+	    _react2.default.createElement(
+	      "h1",
+	      null,
+	      "Sign Up"
+	    ),
+	    _react2.default.createElement(
+	      "form",
+	      null,
+	      _react2.default.createElement(SignUpUsername, null),
+	      _react2.default.createElement(SignUpPassword, null),
+	      _react2.default.createElement(SignUpName, null),
+	      _react2.default.createElement(SignUpEmail, null),
+	      _react2.default.createElement("input", { type: "submit", value: "confirm", id: "signUpSubmit" })
+	    )
+	  );
+	};
+
+	module.exports = {
+	  signUp: SignUp
+	};
+
+/***/ },
+/* 183 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 	var React = __webpack_require__(1);
 
 	var ModalHeader = function ModalHeader(props) {
+	  var handleModalCloseClick = function handleModalCloseClick() {
+	    props.handleModalCloseClick();
+	  };
 	  return React.createElement(
 	    "div",
 	    { className: "modal-header" },
 	    React.createElement(
 	      "span",
-	      { className: "close" },
+	      { className: "close", onClick: handleModalCloseClick },
 	      "\xD7"
 	    ),
 	    React.createElement(
@@ -22416,7 +22554,7 @@
 	    ' ',
 	    React.createElement(
 	      "a",
-	      { onClick: handleSignUp },
+	      { id: "signUp", onClick: handleSignUp },
 	      "Sign up"
 	    )
 	  );
@@ -22426,20 +22564,59 @@
 	  return React.createElement(
 	    "div",
 	    { className: "modal-content" },
-	    React.createElement(ModalHeader, null),
+	    React.createElement(ModalHeader, { handleModalCloseClick: props.handleModalCloseClick }),
 	    React.createElement("hr", null),
 	    React.createElement(ModalBody, null),
 	    React.createElement(ModalFooter, { handleSignUp: props.handleSignUp })
 	  );
 	};
 
-	var MyModal = function MyModal(props) {
-	  return React.createElement(
-	    "div",
-	    { id: "modal", className: "modal" },
-	    React.createElement(ModalContent, { handleSignUp: props.handleSignUp })
-	  );
-	};
+	var MyModal = function (_React$Component) {
+	  _inherits(MyModal, _React$Component);
+
+	  function MyModal() {
+	    _classCallCheck(this, MyModal);
+
+	    return _possibleConstructorReturn(this, (MyModal.__proto__ || Object.getPrototypeOf(MyModal)).apply(this, arguments));
+	  }
+
+	  _createClass(MyModal, [{
+	    key: "render",
+	    value: function render() {
+	      var _this2 = this;
+
+	      return React.createElement(
+	        "div",
+	        { id: "modal", className: !this.props.modalToggle ? 'modal' : 'modal modal-open',
+	          ref: function ref(modal) {
+	            _this2.modal = modal;
+	          } },
+	        React.createElement(ModalContent, { handleSignUp: this.props.handleSignUp,
+	          handleModalCloseClick: this.props.handleModalCloseClick })
+	      );
+	    }
+	  }, {
+	    key: "componentDidMount",
+	    value: function componentDidMount() {
+	      var _this3 = this;
+
+	      window.onclick = function (e) {
+	        if (e.target == _this3.modal) {
+	          _this3.props.handleModalCloseClick();
+	        }
+	      };
+	    }
+	  }, {
+	    key: "componentWillUnmount",
+	    value: function componentWillUnmount() {
+	      window.onclick = null;
+	    }
+	  }]);
+
+	  return MyModal;
+	}(React.Component);
+
+	;
 
 	module.exports = {
 	  modal: MyModal

@@ -2,6 +2,7 @@ const React = require('react');
 const ArticleSection = require('./articleSection').article;
 const Article = require('./article').article;
 const ContactCard = require('./contact').contactCard;
+const SignUp = require('./signup').signUp;
 
 const tagFilter = (dataArticle, id) => {
   if(id === null) return dataArticle;

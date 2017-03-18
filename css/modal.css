@@ -12,6 +12,10 @@
   text-align: center;
 }
 
+.modal.modal-open {
+  display: block;
+}
+
 .modal-content {
   position: relative;
   background-color: #fff;

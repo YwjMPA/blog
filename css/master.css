@@ -33,10 +33,10 @@ header {
 }
 
 .navbar-toggle {
-  display: flex;
   cursor: pointer;
   width: 14%;
   outline: none;
+  margin: auto;
 }
 .navbar-toggle div {
   margin: auto;
@@ -49,7 +49,7 @@ header {
   display: block;
   border-radius: 1px;
   margin: 5px auto 0;
-  transition: 1.5s ease-in-out;
+  transition: 0.8s ease-in-out;
 }
 
 .icon-bar:first-child {
@@ -57,13 +57,13 @@ header {
 }
 
 .navbar-toggle.open span:nth-child(1){
-  transform: translateY(7px) rotate(495deg);
+  transform: translateY(7px) rotate(315deg);
 }
 .navbar-toggle.open span:nth-child(2){
   transform: translateX(-22px) scale(1,0);
 }
 .navbar-toggle.open span:nth-child(3){
-  transform: translateY(-7px) rotate(-495deg);
+  transform: translateY(-7px) rotate(-315deg);
 }
 
 nav {
@@ -73,10 +73,13 @@ nav {
   height: 40px;
   /* annimation-name zoomIn keyframes in modal.css */
   -webkit-animation-name: zoomIn;
-  -webkit-animation-duration: 1s;
+  -webkit-animation-duration: 0.5s;
   animation-name: zoomIn;
-  animation-duration: 1s;
-  transition: all 1s ease-out;
+  animation-duration: 0.5s;
+  transition: all 0.5s ease-out;
+}
+.navbar-open nav {
+  display: flex;
 }
 
 .navbar-close nav{

@@ -1,9 +1,12 @@
 const React = require('react');
 
 const ModalHeader = (props) => {
+  const handleModalCloseClick = () => {
+    props.handleModalCloseClick();
+  }
   return (
     <div className="modal-header">
-      <span className="close">&times;</span>
+      <span className="close" onClick={handleModalCloseClick}>&times;</span>
       <h3>Ywj{'\''}s Blog</h3>
     </div>
   );
@@ -34,7 +37,7 @@ const ModalFooter = (props) => {
   return (
     <div className="modal-footer">
       Don{'\''}t have an account? {' '}
-      <a onClick={handleSignUp}>Sign up</a>
+      <a id="signUp"  onClick={handleSignUp}>Sign up</a>
     </div>
   );
 };
@@ -42,7 +45,7 @@ const ModalFooter = (props) => {
 const ModalContent = (props) => {
   return (
     <div className="modal-content">
-      <ModalHeader />
+      <ModalHeader handleModalCloseClick={props.handleModalCloseClick}/>
       <hr />
       <ModalBody />
       <ModalFooter handleSignUp={props.handleSignUp}/>
@@ -50,12 +53,27 @@ const ModalContent = (props) => {
   );
 };
 
-const MyModal = (props) => {
-  return (
-    <div id='modal' className='modal'>
-      <ModalContent handleSignUp={props.handleSignUp}/>
-    </div>
-  );
+class MyModal extends React.Component {
+  render() {
+    return (
+      <div id='modal' className={!this.props.modalToggle? 'modal':'modal modal-open'}
+        ref={(modal) => { this.modal = modal; }} >
+        <ModalContent handleSignUp={this.props.handleSignUp}
+            handleModalCloseClick={this.props.handleModalCloseClick}/>
+      </div>
+    );
+  }
+  componentDidMount(){
+    window.onclick = (e) => {
+      if (e.target == this.modal) {
+        this.props.handleModalCloseClick();
+      }
+    };
+  }
+  componentWillUnmount(){
+    window.onclick = null;
+  }
+
 };
 
 module.exports = {
