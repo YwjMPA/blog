@@ -64,6 +64,7 @@ const Main = (props) => {
     });
     mainSection = <Article onCommentChange={props.onCommentChange}
                      handleCommentClick={props.handleCommentClick}
+                     commentText={props.commentText}
                      dataTag={props.dataTag}
                      articleData={theArticle}
                      dataComment={props.dataComment}/>

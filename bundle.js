@@ -125,33 +125,6 @@
 	  "tags": [3, 6]
 	}];
 
-	var dataComment = [{
-	  "articleId": 1,
-	  "user": "Joker Yu",
-	  "time": "2016-12-21 05:39:19.987321",
-	  "content": "interesting!"
-	}, {
-	  "articleId": 2,
-	  "user": "Joker Yu",
-	  "time": "2016-12-11 03:39:19.987321",
-	  "content": "interesting!"
-	}, {
-	  "articleId": 3,
-	  "user": "Joker Yu",
-	  "time": "2016-11-31 05:39:19.987321",
-	  "content": "interesting!"
-	}, {
-	  "articleId": 4,
-	  "user": "Joker Yu",
-	  "time": "2016-12-30 05:39:19.987321",
-	  "content": "interesting!"
-	}, {
-	  "articleId": 1,
-	  "user": "Joker Yu",
-	  "time": "2017-03-14 01:39:19.987321",
-	  "content": "interesting!"
-	}];
-
 	// header
 	var Nav = function Nav(props) {
 	  var handleHomeClick = function handleHomeClick() {
@@ -273,20 +246,61 @@
 	      tagFilter: null,
 	      username: null,
 	      password: null,
-	      commentText: null
+	      commentText: null,
+	      // fake comment data
+	      dataComment: [{
+	        "articleId": 1,
+	        "user": "Joker Yu",
+	        "time": "3/18/2017, 9:39:42 AM",
+	        "content": "interesting!"
+	      }, {
+	        "articleId": 2,
+	        "user": "Joker Yu",
+	        "time": "23/18/2017, 9:39:21 AM",
+	        "content": "interesting!!"
+	      }, {
+	        "articleId": 3,
+	        "user": "Joker Yu",
+	        "time": "3/18/2017, 9:39:40 AM",
+	        "content": "interesting!!!"
+	      }, {
+	        "articleId": 4,
+	        "user": "Joker Yu",
+	        "time": "3/18/2017, 9:39:39 AM",
+	        "content": "interesting!!!!"
+	      }, {
+	        "articleId": 1,
+	        "user": "Joker Yu",
+	        "time": "3/18/2017, 9:39:41 AM",
+	        "content": "interesting!!!!!"
+	      }]
 	    };
-	    _this.handleCommentChange = _this.handleCommentChange.bind(_this);
 	    _this.handleCommentClick = _this.handleCommentClick.bind(_this);
+	    _this.handleCommentChange = _this.handleCommentChange.bind(_this);
 	    _this.handleArticleClick = _this.handleArticleClick.bind(_this);
 	    _this.handleBrandClick = _this.handleBrandClick.bind(_this);
 	    _this.handleContactClick = _this.handleContactClick.bind(_this);
 	    _this.handleTagClick = _this.handleTagClick.bind(_this);
 	    return _this;
 	  }
+	  // handleCommentClick modify fake data*****
+
 
 	  _createClass(Homepage, [{
 	    key: 'handleCommentClick',
-	    value: function handleCommentClick() {}
+	    value: function handleCommentClick(articleId, user, content) {
+	      var timeNow = new Date().toLocaleString() + new Date().getMilliseconds();
+	      this.setState(function (preState) {
+	        return {
+	          dataComment: preState.dataComment.concat([{
+	            "articleId": articleId,
+	            "user": user,
+	            "time": timeNow,
+	            "content": content
+	          }])
+	        };
+	      });
+	    }
 	  }, {
 	    key: 'handleCommentChange',
 	    value: function handleCommentChange(value) {
@@ -338,8 +352,9 @@
 	          handleContactClick: this.handleContactClick }),
 	        React.createElement(Main, { dataArticle: this.props.dataArticle,
 	          dataTag: this.props.dataTag,
-	          dataComment: this.props.dataComment,
+	          dataComment: this.state.dataComment,
 	          onCommentChange: this.handleCommentChange,
+	          commentText: this.state.commentText,
 	          handleCommentClick: this.handleCommentClick,
 	          mainPage: this.state.mainPage,
 	          handleArticleClick: this.handleArticleClick,
@@ -354,8 +369,7 @@
 	  return Homepage;
 	}(React.Component);
 
-	ReactDOM.render(React.createElement(Homepage, { dataArticle: dataArticle, dataTag: dataTag,
-	  dataComment: dataComment }), document.getElementById('root'));
+	ReactDOM.render(React.createElement(Homepage, { dataArticle: dataArticle, dataTag: dataTag }), document.getElementById('root'));
 
 /***/ },
 /* 1 */
@@ -21867,6 +21881,7 @@
 	    });
 	    mainSection = React.createElement(Article, { onCommentChange: props.onCommentChange,
 	      handleCommentClick: props.handleCommentClick,
+	      commentText: props.commentText,
 	      dataTag: props.dataTag,
 	      articleData: theArticle,
 	      dataComment: props.dataComment });
@@ -22111,7 +22126,7 @@
 	    props.onCommentChange(e.target.value);
 	  };
 	  var handleClick = function handleClick() {
-	    props.handleCommentClick();
+	    props.handleCommentClick(props.articleId, 'Anonymous', props.commentText);
 	  };
 	  return React.createElement(
 	    'div',
@@ -22134,6 +22149,7 @@
 
 	var CommentList = function CommentList(props) {
 	  var dataComment = [];
+	  // console.log(props.dataComment);
 	  props.dataComment.forEach(function (val) {
 	    if (val.articleId == props.articleId) {
 	      dataComment.push(val);
@@ -22142,7 +22158,7 @@
 	  var commentList = dataComment.map(function (val) {
 	    return React.createElement(
 	      'div',
-	      { key: val.time },
+	      { key: val.content },
 	      React.createElement(
 	        'div',
 	        { className: 'article-comment-info' },
@@ -22158,8 +22174,7 @@
 	          null,
 	          React.createElement('i', { className: 'fa fa-clock-o' }),
 	          ' ',
-	          ' ',
-	          formatDate(val.time)
+	          val.time.slice(0, val.time.indexOf('M') + 1)
 	        )
 	      ),
 	      React.createElement(
@@ -22196,6 +22211,7 @@
 	    React.createElement(ArticleContent, { content: articleData.content }),
 	    React.createElement('hr', null),
 	    React.createElement(CommentSection, { articleId: articleData.id,
+	      commentText: props.commentText,
 	      dataComment: props.dataComment,
 	      onCommentChange: props.onCommentChange,
 	      handleCommentClick: props.handleCommentClick })

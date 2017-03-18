@@ -83,39 +83,6 @@ const dataArticle = [
   }
 ]
 
-const dataComment = [
-  {
-    "articleId":1,
-    "user": "Joker Yu",
-    "time": "2016-12-21 05:39:19.987321",
-    "content": "interesting!"
-  },
-  {
-    "articleId":2,
-    "user": "Joker Yu",
-    "time": "2016-12-11 03:39:19.987321",
-    "content": "interesting!"
-  },
-  {
-    "articleId":3,
-    "user": "Joker Yu",
-    "time": "2016-11-31 05:39:19.987321",
-    "content": "interesting!"
-  },
-  {
-    "articleId":4,
-    "user": "Joker Yu",
-    "time": "2016-12-30 05:39:19.987321",
-    "content": "interesting!"
-  },
-  {
-    "articleId":1,
-    "user": "Joker Yu",
-    "time": "2017-03-14 01:39:19.987321",
-    "content": "interesting!"
-  }
-]
-
 // header
 const Nav = (props) => {
   const handleHomeClick = () => {
@@ -192,18 +159,61 @@ class Homepage extends React.Component{
       tagFilter: null,
       username: null,
       password: null,
-      commentText: null
+      commentText: null,
+      // fake comment data
+      dataComment: [
+        {
+          "articleId":1,
+          "user": "Joker Yu",
+          "time": "3/18/2017, 9:39:42 AM",
+          "content": "interesting!"
+        },
+        {
+          "articleId":2,
+          "user": "Joker Yu",
+          "time": "23/18/2017, 9:39:21 AM",
+          "content": "interesting!!"
+        },
+        {
+          "articleId":3,
+          "user": "Joker Yu",
+          "time": "3/18/2017, 9:39:40 AM",
+          "content": "interesting!!!"
+        },
+        {
+          "articleId":4,
+          "user": "Joker Yu",
+          "time": "3/18/2017, 9:39:39 AM",
+          "content": "interesting!!!!"
+        },
+        {
+          "articleId":1,
+          "user": "Joker Yu",
+          "time": "3/18/2017, 9:39:41 AM",
+          "content": "interesting!!!!!"
+        }
+      ]
     };
-    this.handleCommentChange = this.handleCommentChange.bind(this);
     this.handleCommentClick = this.handleCommentClick.bind(this);
+    this.handleCommentChange = this.handleCommentChange.bind(this);
     this.handleArticleClick = this.handleArticleClick.bind(this);
     this.handleBrandClick = this.handleBrandClick.bind(this);
     this.handleContactClick = this.handleContactClick.bind(this);
     this.handleTagClick = this.handleTagClick.bind(this);
   }
-  handleCommentClick() {
-
+  // handleCommentClick modify fake data*****
+  handleCommentClick(articleId, user, content) {
+    const timeNow = new Date().toLocaleString() + new Date().getMilliseconds();
+    this.setState((preState) => ({
+      dataComment: preState.dataComment.concat([{
+        "articleId":articleId,
+        "user": user,
+        "time": timeNow,
+        "content": content
+      }])
+    }));
   }
+
   handleCommentChange(value) {
     this.setState({
       commentText: value
@@ -241,8 +251,9 @@ class Homepage extends React.Component{
                 handleContactClick={this.handleContactClick}/>
         <Main dataArticle={this.props.dataArticle}
               dataTag={this.props.dataTag}
-              dataComment={this.props.dataComment}
+              dataComment={this.state.dataComment}
               onCommentChange={this.handleCommentChange}
+              commentText={this.state.commentText}
               handleCommentClick={this.handleCommentClick}
               mainPage={this.state.mainPage}
               handleArticleClick={this.handleArticleClick}
@@ -256,7 +267,6 @@ class Homepage extends React.Component{
 }
 
 ReactDOM.render(
-  <Homepage dataArticle={dataArticle} dataTag={dataTag}
-    dataComment={dataComment} />,
+  <Homepage dataArticle={dataArticle} dataTag={dataTag} />,
 	document.getElementById('root')
 );

@@ -64,7 +64,7 @@ const CommentSection = (props) => {
     props.onCommentChange(e.target.value);
   }
   const handleClick = () => {
-    props.handleCommentClick();
+    props.handleCommentClick(props.articleId, 'Anonymous', props.commentText);
   }
   return (
     <div className='comment-section'>
@@ -79,6 +79,7 @@ const CommentSection = (props) => {
 
 const CommentList = (props) => {
   const dataComment = [];
+  // console.log(props.dataComment);
   props.dataComment.forEach((val) => {
     if (val.articleId == props.articleId) {
       dataComment.push(val);
@@ -86,11 +87,12 @@ const CommentList = (props) => {
   });
   const commentList = dataComment.map((val) => {
     return (
-      <div key={val.time}>
+      <div key={val.content}>
         <div className='article-comment-info'>
           <span> {val.user}:</span>
           <span>
-            <i className="fa fa-clock-o"></i>{' '} {formatDate(val.time)}
+            <i className="fa fa-clock-o"></i>{' '}
+            {val.time.slice(0, val.time.indexOf('M')+1)}
           </span>
         </div>
         <pre>
@@ -123,6 +125,7 @@ const Article = (props) => {
       <ArticleContent content={articleData.content}/>
       <hr />
       <CommentSection articleId={articleData.id}
+        commentText={props.commentText}
         dataComment={props.dataComment}
         onCommentChange={props.onCommentChange}
         handleCommentClick={props.handleCommentClick}/>
