@@ -63,8 +63,10 @@ const Main = (props) => {
       }
     });
     mainSection = <Article onCommentChange={props.onCommentChange}
+                     handleCommentClick={props.handleCommentClick}
                      dataTag={props.dataTag}
-                     articleData={theArticle}/>
+                     articleData={theArticle}
+                     dataComment={props.dataComment}/>
   }else if (props.mainPage === 'contact') {
     mainSection = <ContactCard />
   }else if (props.mainPage === 'home'){

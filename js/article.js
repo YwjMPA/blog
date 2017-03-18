@@ -60,32 +60,49 @@ const ArticleContent = (props) => {
 };
 
 const CommentSection = (props) => {
-  const handleClick = (e) => {
+  const onCommentChange = (e) => {
     props.onCommentChange(e.target.value);
+  }
+  const handleClick = () => {
+    props.handleCommentClick();
   }
   return (
     <div className='comment-section'>
       <h4>Comment</h4>
-      <CommentList />
-      <textarea name="commentText" rows="5"></textarea>
+      <CommentList articleId={props.articleId}
+        dataComment={props.dataComment}/>
+      <textarea name="commentText" onChange={onCommentChange} rows="5"></textarea>
       <button id='commentBtn' onClick={handleClick}>comment</button>
     </div>
   );
 };
 
 const CommentList = (props) => {
+  const dataComment = [];
+  props.dataComment.forEach((val) => {
+    if (val.articleId == props.articleId) {
+      dataComment.push(val);
+    }
+  });
+  const commentList = dataComment.map((val) => {
+    return (
+      <div key={val.time}>
+        <div className='article-comment-info'>
+          <span> {val.user}:</span>
+          <span>
+            <i className="fa fa-clock-o"></i>{' '} {formatDate(val.time)}
+          </span>
+        </div>
+        <pre>
+          {val.content}
+        </pre>
+        <hr />
+      </div>
+    );
+  });
   return (
     <div className='article-comment'>
-      <div className='article-comment-info'>
-        <span> Joker Yu :</span>
-        <span>
-          <i className="fa fa-clock-o"></i>{' '}01-28,2014
-        </span>
-      </div>
-      <pre>
-        interesting!
-      </pre>
-      <hr />
+      {commentList}
     </div>
   );
 };
@@ -93,7 +110,7 @@ const CommentList = (props) => {
 const Article = (props) => {
   const articleData = props.articleData;
   return (
-    <section className='article-list'>
+    <section className='article'>
       <ArticleHeader title={articleData.title}/>
       <div id='article-info'>
         <ArticleTag dataTag={props.dataTag}
@@ -105,7 +122,10 @@ const Article = (props) => {
       <hr />
       <ArticleContent content={articleData.content}/>
       <hr />
-      <CommentSection onCommentChange={props.onCommentChange}/>
+      <CommentSection articleId={articleData.id}
+        dataComment={props.dataComment}
+        onCommentChange={props.onCommentChange}
+        handleCommentClick={props.handleCommentClick}/>
     </section>
   );
 };

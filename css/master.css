@@ -127,7 +127,8 @@ main a{
   0 4px 5px 0 rgba(0, 0, 0, 0.14);
 }
 
-.article-list hr {
+.article-list hr,
+.article hr {
   border-top: 1px solid #f7f5f5;
   border-left: none;
   border-bottom: none;
@@ -184,6 +185,13 @@ main a{
   0 4px 2px -2px rgba(0, 0, 0, 0.2);
 }
   /* article */
+.article {
+  margin: 15px auto 10%;
+  padding: 8px 15px;
+  border: 1px solid #e4e4e4;
+  box-shadow:
+  0 4px 5px 0 rgba(0, 0, 0, 0.14);
+}
 
 #article-header {
   text-align: center;

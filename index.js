@@ -83,6 +83,39 @@ const dataArticle = [
   }
 ]
 
+const dataComment = [
+  {
+    "articleId":1,
+    "user": "Joker Yu",
+    "time": "2016-12-21 05:39:19.987321",
+    "content": "interesting!"
+  },
+  {
+    "articleId":2,
+    "user": "Joker Yu",
+    "time": "2016-12-11 03:39:19.987321",
+    "content": "interesting!"
+  },
+  {
+    "articleId":3,
+    "user": "Joker Yu",
+    "time": "2016-11-31 05:39:19.987321",
+    "content": "interesting!"
+  },
+  {
+    "articleId":4,
+    "user": "Joker Yu",
+    "time": "2016-12-30 05:39:19.987321",
+    "content": "interesting!"
+  },
+  {
+    "articleId":1,
+    "user": "Joker Yu",
+    "time": "2017-03-14 01:39:19.987321",
+    "content": "interesting!"
+  }
+]
+
 // header
 const Nav = (props) => {
   const handleHomeClick = () => {
@@ -162,12 +195,15 @@ class Homepage extends React.Component{
       commentText: null
     };
     this.handleCommentChange = this.handleCommentChange.bind(this);
+    this.handleCommentClick = this.handleCommentClick.bind(this);
     this.handleArticleClick = this.handleArticleClick.bind(this);
     this.handleBrandClick = this.handleBrandClick.bind(this);
     this.handleContactClick = this.handleContactClick.bind(this);
     this.handleTagClick = this.handleTagClick.bind(this);
   }
+  handleCommentClick() {
 
+  }
   handleCommentChange(value) {
     this.setState({
       commentText: value
@@ -205,7 +241,9 @@ class Homepage extends React.Component{
                 handleContactClick={this.handleContactClick}/>
         <Main dataArticle={this.props.dataArticle}
               dataTag={this.props.dataTag}
+              dataComment={this.props.dataComment}
               onCommentChange={this.handleCommentChange}
+              handleCommentClick={this.handleCommentClick}
               mainPage={this.state.mainPage}
               handleArticleClick={this.handleArticleClick}
               articleId={this.state.articleId}
@@ -218,6 +256,7 @@ class Homepage extends React.Component{
 }
 
 ReactDOM.render(
-  <Homepage dataArticle={dataArticle} dataTag={dataTag} />,
+  <Homepage dataArticle={dataArticle} dataTag={dataTag}
+    dataComment={dataComment} />,
 	document.getElementById('root')
 );
