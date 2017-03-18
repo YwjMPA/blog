@@ -5,7 +5,7 @@ const ArticleHeader = (props) => {
   return (
     <h1 id='article-header'>{props.title}</h1>
   );
-}
+};
 
 const ArticleTag = (props) => {
   const tags = props.dataTag;
@@ -21,10 +21,10 @@ const ArticleTag = (props) => {
   });
   return (
     <span>
-      <a ><i className="fa fa-tag"></i>{tagList.join()}</a>.{' '}
+      <a><i className="fa fa-tag"></i>{tagList.join()}</a>.{' '}
     </span>
   );
-}
+};
 
 const ArticleView = (props) => {
   return (
@@ -33,7 +33,7 @@ const ArticleView = (props) => {
       {' '}({props.clickCount})
     </span>
   );
-}
+};
 
 const ArticleTime = (props) => {
   return (
@@ -41,7 +41,7 @@ const ArticleTime = (props) => {
       <i className="fa fa-clock-o"></i>{' '}{formatDate(props.datePublish)}
     </span>
   );
-}
+};
 
 const ArticleDescription = (props) => {
   return (
@@ -49,7 +49,7 @@ const ArticleDescription = (props) => {
       {props.description}
     </div>
   );
-}
+};
 
 const ArticleContent = (props) => {
   return (
@@ -57,7 +57,7 @@ const ArticleContent = (props) => {
       {props.content}
     </div>
   );
-}
+};
 
 const CommentSection = (props) => {
   const handleClick = (e) => {
@@ -71,7 +71,7 @@ const CommentSection = (props) => {
       <button id='commentBtn' onClick={handleClick}>comment</button>
     </div>
   );
-}
+};
 
 const CommentList = (props) => {
   return (
@@ -88,7 +88,7 @@ const CommentList = (props) => {
       <hr />
     </div>
   );
-}
+};
 
 const Article = (props) => {
   const articleData = props.articleData;
@@ -108,7 +108,7 @@ const Article = (props) => {
       <CommentSection onCommentChange={props.onCommentChange}/>
     </section>
   );
-}
+};
 
 module.exports = {
   article:Article

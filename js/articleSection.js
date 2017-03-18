@@ -3,7 +3,7 @@ const React = require('react');
 const formatDate = (date) => {
   let shortDate = date.slice(0, 10).split("-");
   return  shortDate[1] + '-' + shortDate[2]+',' + shortDate[0];
-}
+};
 
 const ArticleHeader = (props) => {
   const handleClick = () => {
@@ -15,14 +15,14 @@ const ArticleHeader = (props) => {
         {props.title}
       </a>
     </h3>
-  )
-}
+  );
+};
 
 const ArticleDescription = (props) => {
   return (
     <div className="article-description">{props.description}</div>
-  )
-}
+  );
+};
 
 const ArticleTag = (props) => {
   const tags = props.dataTag;
@@ -40,8 +40,8 @@ const ArticleTag = (props) => {
     <span>
       <i className="fa fa-tag"></i><a href="">{tagList.join()}</a>,
     </span>
-  )
-}
+  );
+};
 
 const ArticleTime = (props) => {
   return (
@@ -49,14 +49,14 @@ const ArticleTime = (props) => {
         <i className="fa fa-clock-o"></i>
         {formatDate(props.datePublished)}
       </span>
-  )
-}
+  );
+};
 
 const ArticleComment = (props) => {
   return (
     <span><i className="fa fa-comment-o"></i>(<a href="">1</a>)</span>
-  )
-}
+  );
+};
 
 const ArticleView = (props) => {
   return (
@@ -64,8 +64,8 @@ const ArticleView = (props) => {
       <i className="fa fa-eye"></i>
       (<a href="">{props.clickCount}</a>)
     </span>
-  )
-}
+  );
+};
 
 const ArticleSection = (props) => {
   let articleList = props.dataArticle.map((val) => (
@@ -86,7 +86,7 @@ const ArticleSection = (props) => {
       {articleList}
     </section>
   );
-}
+};
 
 module.exports = {
   article: ArticleSection,

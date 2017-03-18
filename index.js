@@ -109,7 +109,8 @@ const Nav = (props) => {
       </div>
     </nav>
   );
-}
+};
+
 const Header = (props) => {
   const handleBrandClick = () => {
     props.handleBrandClick();
@@ -133,9 +134,9 @@ const Header = (props) => {
       <Modal />
     </header>
   )
-}
+};
 
-// footer
+// Footer component
 const Footer = () => {
   return (
     <footer>
@@ -146,16 +147,16 @@ const Footer = () => {
       </span>
     </footer>
   )
-}
+};
 
-// homepage
+// Homepage component
 class Homepage extends React.Component{
   constructor(props) {
     super(props);
     this.state = {
       mainPage:'home',
       articleId: null,
-      tagfilter: null,
+      tagFilter: null,
       username: null,
       password: null,
       commentText: null
@@ -164,6 +165,7 @@ class Homepage extends React.Component{
     this.handleArticleClick = this.handleArticleClick.bind(this);
     this.handleBrandClick = this.handleBrandClick.bind(this);
     this.handleContactClick = this.handleContactClick.bind(this);
+    this.handleTagClick = this.handleTagClick.bind(this);
   }
 
   handleCommentChange(value) {
@@ -173,19 +175,26 @@ class Homepage extends React.Component{
   }
   handleBrandClick() {
     this.setState({
-      mainPage:'home'
-    })
+      mainPage:'home',
+      tagFilter: null
+    });
   }
   handleContactClick() {
     this.setState({
       mainPage:'contact'
-    })
+    });
   }
   handleArticleClick(id) {
     this.setState({
       mainPage:'article',
       articleId: id
-    })
+    });
+  }
+  handleTagClick(id) {
+    this.setState({
+      mainPage:'home',
+      tagFilter:id
+    });
   }
   // Main Component come from ./js/main.js
   render() {
@@ -199,7 +208,9 @@ class Homepage extends React.Component{
               onCommentChange={this.handleCommentChange}
               mainPage={this.state.mainPage}
               handleArticleClick={this.handleArticleClick}
-              articleId={this.state.articleId}/>
+              articleId={this.state.articleId}
+              tagFilter={this.state.tagFilter}
+              handleTagClick={this.handleTagClick}/>
         <Footer />
       </div>
     );

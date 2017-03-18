@@ -3,15 +3,26 @@ const ArticleSection = require('./articleSection').article;
 const Article = require('./article').article;
 const ContactCard = require('./contact').contactCard;
 
-const Tag = (props) => {
-  return (
-    <span><a >{props.name}</a></span>
-  )
-}
+const tagFilter = (dataArticle, id) => {
+  if(id === null) return dataArticle;
+  return dataArticle.filter((val) => val.tags.indexOf(id) >= 0);
+};
 
+// Tag Component
+const Tag = (props) => {
+  const handleTagClick = () => {
+    props.handleTagClick(props.id);
+  };
+  return (
+    <span><a onClick={handleTagClick}>{props.name}</a></span>
+  )
+};
+
+// Tags Component
 const Tags = (props) => {
   let tagList = props.dataTag.map((val) =>
-    <Tag key={val.id} name={val.name}/>
+    <Tag key={val.id} name={val.name} id={val.id}
+        handleTagClick={props.handleTagClick}/>
   );
   return (
     <section className="tag-section">
@@ -22,8 +33,9 @@ const Tags = (props) => {
       </div>
     </section>
   );
-}
+};
 
+// HomeMain Component
 const HomeMain = (props) => {
   // ArticleSection Component is from ./articleSection.js
   return (
@@ -32,12 +44,13 @@ const HomeMain = (props) => {
         dataTag={props.dataTag}
         handleArticleClick={props.handleArticleClick}/>
       <hr />
-      <Tags dataTag={props.dataTag}/>
+      <Tags dataTag={props.dataTag}
+        handleTagClick={props.handleTagClick}/>
     </div>
   );
-}
+};
 
-// main body
+// Main Component
 const Main = (props) => {
   let mainSection = null;
   // router logic code
@@ -48,23 +61,25 @@ const Main = (props) => {
       if (val.id === props.articleId) {
         theArticle = val;
       }
-    })
+    });
     mainSection = <Article onCommentChange={props.onCommentChange}
                      dataTag={props.dataTag}
                      articleData={theArticle}/>
   }else if (props.mainPage === 'contact') {
     mainSection = <ContactCard />
   }else if (props.mainPage === 'home'){
-    mainSection = <HomeMain dataArticle={props.dataArticle}
-    dataTag={props.dataTag}
-    handleArticleClick={props.handleArticleClick}/>
+    mainSection = <HomeMain
+              dataArticle={tagFilter(props.dataArticle, props.tagFilter)}
+              dataTag={props.dataTag}
+              handleArticleClick={props.handleArticleClick}
+              handleTagClick={props.handleTagClick}/>
   }
   return (
     <main className="container" >
       {mainSection}
     </main>
   );
-}
+};
 
 
 

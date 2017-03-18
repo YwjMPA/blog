@@ -175,6 +175,7 @@
 	    )
 	  );
 	};
+
 	var Header = function Header(props) {
 	  var handleBrandClick = function handleBrandClick() {
 	    props.handleBrandClick();
@@ -210,7 +211,7 @@
 	  );
 	};
 
-	// footer
+	// Footer component
 	var Footer = function Footer() {
 	  return React.createElement(
 	    'footer',
@@ -229,7 +230,7 @@
 	  );
 	};
 
-	// homepage
+	// Homepage component
 
 	var Homepage = function (_React$Component) {
 	  _inherits(Homepage, _React$Component);
@@ -242,7 +243,7 @@
 	    _this.state = {
 	      mainPage: 'home',
 	      articleId: null,
-	      tagfilter: null,
+	      tagFilter: null,
 	      username: null,
 	      password: null,
 	      commentText: null
@@ -251,6 +252,7 @@
 	    _this.handleArticleClick = _this.handleArticleClick.bind(_this);
 	    _this.handleBrandClick = _this.handleBrandClick.bind(_this);
 	    _this.handleContactClick = _this.handleContactClick.bind(_this);
+	    _this.handleTagClick = _this.handleTagClick.bind(_this);
 	    return _this;
 	  }
 
@@ -265,7 +267,8 @@
 	    key: 'handleBrandClick',
 	    value: function handleBrandClick() {
 	      this.setState({
-	        mainPage: 'home'
+	        mainPage: 'home',
+	        tagFilter: null
 	      });
 	    }
 	  }, {
@@ -281,6 +284,14 @@
 	      this.setState({
 	        mainPage: 'article',
 	        articleId: id
+	      });
+	    }
+	  }, {
+	    key: 'handleTagClick',
+	    value: function handleTagClick(id) {
+	      this.setState({
+	        mainPage: 'home',
+	        tagFilter: id
 	      });
 	    }
 	    // Main Component come from ./js/main.js
@@ -299,7 +310,9 @@
 	          onCommentChange: this.handleCommentChange,
 	          mainPage: this.state.mainPage,
 	          handleArticleClick: this.handleArticleClick,
-	          articleId: this.state.articleId }),
+	          articleId: this.state.articleId,
+	          tagFilter: this.state.tagFilter,
+	          handleTagClick: this.handleTagClick }),
 	        React.createElement(Footer, null)
 	      );
 	    }
@@ -21748,21 +21761,34 @@
 	var Article = __webpack_require__(180).article;
 	var ContactCard = __webpack_require__(181).contactCard;
 
+	var tagFilter = function tagFilter(dataArticle, id) {
+	  if (id === null) return dataArticle;
+	  return dataArticle.filter(function (val) {
+	    return val.tags.indexOf(id) >= 0;
+	  });
+	};
+
+	// Tag Component
 	var Tag = function Tag(props) {
+	  var handleTagClick = function handleTagClick() {
+	    props.handleTagClick(props.id);
+	  };
 	  return React.createElement(
 	    'span',
 	    null,
 	    React.createElement(
 	      'a',
-	      null,
+	      { onClick: handleTagClick },
 	      props.name
 	    )
 	  );
 	};
 
+	// Tags Component
 	var Tags = function Tags(props) {
 	  var tagList = props.dataTag.map(function (val) {
-	    return React.createElement(Tag, { key: val.id, name: val.name });
+	    return React.createElement(Tag, { key: val.id, name: val.name, id: val.id,
+	      handleTagClick: props.handleTagClick });
 	  });
 	  return React.createElement(
 	    'section',
@@ -21778,6 +21804,7 @@
 	  );
 	};
 
+	// HomeMain Component
 	var HomeMain = function HomeMain(props) {
 	  // ArticleSection Component is from ./articleSection.js
 	  return React.createElement(
@@ -21787,11 +21814,12 @@
 	      dataTag: props.dataTag,
 	      handleArticleClick: props.handleArticleClick }),
 	    React.createElement('hr', null),
-	    React.createElement(Tags, { dataTag: props.dataTag })
+	    React.createElement(Tags, { dataTag: props.dataTag,
+	      handleTagClick: props.handleTagClick })
 	  );
 	};
 
-	// main body
+	// Main Component
 	var Main = function Main(props) {
 	  var mainSection = null;
 	  // router logic code
@@ -21809,9 +21837,11 @@
 	  } else if (props.mainPage === 'contact') {
 	    mainSection = React.createElement(ContactCard, null);
 	  } else if (props.mainPage === 'home') {
-	    mainSection = React.createElement(HomeMain, { dataArticle: props.dataArticle,
+	    mainSection = React.createElement(HomeMain, {
+	      dataArticle: tagFilter(props.dataArticle, props.tagFilter),
 	      dataTag: props.dataTag,
-	      handleArticleClick: props.handleArticleClick });
+	      handleArticleClick: props.handleArticleClick,
+	      handleTagClick: props.handleTagClick });
 	  }
 	  return React.createElement(
 	    'main',
@@ -22123,157 +22153,74 @@
 
 	"use strict";
 
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
 	var React = __webpack_require__(1);
 
-	var CardName = function (_React$Component) {
-	  _inherits(CardName, _React$Component);
+	var CardName = function CardName(props) {
+	  return React.createElement(
+	    "h1",
+	    null,
+	    "Wenjia Yu"
+	  );
+	};
 
-	  function CardName() {
-	    _classCallCheck(this, CardName);
+	var CardAddress = function CardAddress(props) {
+	  return React.createElement(
+	    "p",
+	    null,
+	    React.createElement("i", { className: "fa fa-map-marker" }),
+	    " Beijing, China"
+	  );
+	};
 
-	    return _possibleConstructorReturn(this, (CardName.__proto__ || Object.getPrototypeOf(CardName)).apply(this, arguments));
-	  }
+	var CardEmail = function CardEmail(props) {
+	  return React.createElement(
+	    "p",
+	    null,
+	    React.createElement("i", { className: "fa fa-envelope-o" }),
+	    'ywjmpa@gmail.com'
+	  );
+	};
 
-	  _createClass(CardName, [{
-	    key: "render",
-	    value: function render() {
-	      return React.createElement(
-	        "h1",
-	        null,
-	        "Wenjia Yu"
-	      );
-	    }
-	  }]);
+	var CardSocialContact = function CardSocialContact(props) {
+	  return React.createElement(
+	    "div",
+	    { className: "social-contact" },
+	    React.createElement(
+	      "a",
+	      { href: "#" },
+	      React.createElement("i", { className: "fa fa-linkedin-square" })
+	    ),
+	    React.createElement(
+	      "a",
+	      { href: "mailto:somnus.yuwenjia@foxmail.com" },
+	      React.createElement("i", { className: "fa fa-google" })
+	    ),
+	    React.createElement(
+	      "a",
+	      { className: "github", href: "https://github.com/ywjmpa" },
+	      React.createElement("i", { className: "fa fa-github" })
+	    )
+	  );
+	};
 
-	  return CardName;
-	}(React.Component);
-
-	var CardAddress = function (_React$Component2) {
-	  _inherits(CardAddress, _React$Component2);
-
-	  function CardAddress() {
-	    _classCallCheck(this, CardAddress);
-
-	    return _possibleConstructorReturn(this, (CardAddress.__proto__ || Object.getPrototypeOf(CardAddress)).apply(this, arguments));
-	  }
-
-	  _createClass(CardAddress, [{
-	    key: "render",
-	    value: function render() {
-	      return React.createElement(
-	        "p",
-	        null,
-	        React.createElement("i", { className: "fa fa-map-marker" }),
-	        " Beijing, China"
-	      );
-	    }
-	  }]);
-
-	  return CardAddress;
-	}(React.Component);
-
-	var CardEmail = function (_React$Component3) {
-	  _inherits(CardEmail, _React$Component3);
-
-	  function CardEmail() {
-	    _classCallCheck(this, CardEmail);
-
-	    return _possibleConstructorReturn(this, (CardEmail.__proto__ || Object.getPrototypeOf(CardEmail)).apply(this, arguments));
-	  }
-
-	  _createClass(CardEmail, [{
-	    key: "render",
-	    value: function render() {
-	      return React.createElement(
-	        "p",
-	        null,
-	        React.createElement("i", { className: "fa fa-envelope-o" }),
-	        'ywjmpa@gmail.com'
-	      );
-	    }
-	  }]);
-
-	  return CardEmail;
-	}(React.Component);
-
-	var CardSocialContact = function (_React$Component4) {
-	  _inherits(CardSocialContact, _React$Component4);
-
-	  function CardSocialContact() {
-	    _classCallCheck(this, CardSocialContact);
-
-	    return _possibleConstructorReturn(this, (CardSocialContact.__proto__ || Object.getPrototypeOf(CardSocialContact)).apply(this, arguments));
-	  }
-
-	  _createClass(CardSocialContact, [{
-	    key: "render",
-	    value: function render() {
-	      return React.createElement(
-	        "div",
-	        { className: "social-contact" },
-	        React.createElement(
-	          "a",
-	          { href: "#" },
-	          React.createElement("i", { className: "fa fa-linkedin-square" })
-	        ),
-	        React.createElement(
-	          "a",
-	          { href: "mailto:somnus.yuwenjia@foxmail.com" },
-	          React.createElement("i", { className: "fa fa-google" })
-	        ),
-	        React.createElement(
-	          "a",
-	          { className: "github", href: "https://github.com/ywjmpa" },
-	          React.createElement("i", { className: "fa fa-github" })
-	        )
-	      );
-	    }
-	  }]);
-
-	  return CardSocialContact;
-	}(React.Component);
-
-	var ContactCard = function (_React$Component5) {
-	  _inherits(ContactCard, _React$Component5);
-
-	  function ContactCard() {
-	    _classCallCheck(this, ContactCard);
-
-	    return _possibleConstructorReturn(this, (ContactCard.__proto__ || Object.getPrototypeOf(ContactCard)).apply(this, arguments));
-	  }
-
-	  _createClass(ContactCard, [{
-	    key: "render",
-	    value: function render() {
-	      return React.createElement(
-	        "section",
-	        { className: "contact-card" },
-	        React.createElement("img", { src: "http://99pcwallpapers.com/wp-content/uploads/Black-Wallpaper-For-PC.jpg",
-	          alt: "" }),
-	        React.createElement(CardName, null),
-	        React.createElement(CardAddress, null),
-	        React.createElement(CardEmail, null),
-	        React.createElement(CardSocialContact, null),
-	        React.createElement("br", null),
-	        React.createElement(
-	          "button",
-	          { type: "button", name: "button" },
-	          "Contact"
-	        )
-	      );
-	    }
-	  }]);
-
-	  return ContactCard;
-	}(React.Component);
+	var ContactCard = function ContactCard(props) {
+	  return React.createElement(
+	    "section",
+	    { className: "contact-card" },
+	    React.createElement("img", { src: "./image/suit.jpg",
+	      alt: "" }),
+	    React.createElement(CardName, null),
+	    React.createElement(CardAddress, null),
+	    React.createElement(CardEmail, null),
+	    React.createElement(CardSocialContact, null),
+	    React.createElement("br", null),
+	    React.createElement(
+	      "button",
+	      { type: "button", name: "button" },
+	      "Contact"
+	    )
+	  );
+	};
 
 	module.exports = {
 	  contactCard: ContactCard
@@ -22285,176 +22232,93 @@
 
 	"use strict";
 
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
 	var React = __webpack_require__(1);
 
-	var ModalHeader = function (_React$Component) {
-	  _inherits(ModalHeader, _React$Component);
+	var ModalHeader = function ModalHeader(props) {
+	  return React.createElement(
+	    "div",
+	    { className: "modal-header" },
+	    React.createElement(
+	      "span",
+	      { className: "close" },
+	      "\xD7"
+	    ),
+	    React.createElement(
+	      "h3",
+	      null,
+	      "Ywj",
+	      '\'',
+	      "s Blog"
+	    )
+	  );
+	};
 
-	  function ModalHeader() {
-	    _classCallCheck(this, ModalHeader);
-
-	    return _possibleConstructorReturn(this, (ModalHeader.__proto__ || Object.getPrototypeOf(ModalHeader)).apply(this, arguments));
-	  }
-
-	  _createClass(ModalHeader, [{
-	    key: "render",
-	    value: function render() {
-	      return React.createElement(
+	var ModalBody = function ModalBody(props) {
+	  return React.createElement(
+	    "div",
+	    { className: "modal-body" },
+	    React.createElement(
+	      "form",
+	      { action: "#" },
+	      React.createElement(
 	        "div",
-	        { className: "modal-header" },
+	        { className: "form-group" },
 	        React.createElement(
-	          "span",
-	          { className: "close" },
-	          "\xD7"
+	          "label",
+	          { htmlFor: "username" },
+	          "Username:"
 	        ),
+	        React.createElement("input", { type: "text", placeholder: "Username", id: "username" })
+	      ),
+	      React.createElement(
+	        "div",
+	        { className: "form-group" },
 	        React.createElement(
-	          "h3",
-	          null,
-	          "Ywj",
-	          '\'',
-	          "s Blog"
-	        )
-	      );
-	    }
-	  }]);
+	          "label",
+	          { htmlFor: "password" },
+	          "Password:"
+	        ),
+	        React.createElement("input", { type: "password", placeholder: "Password", id: "password" })
+	      ),
+	      React.createElement("input", { type: "submit", value: "Log in", id: "logSubmit" })
+	    )
+	  );
+	};
 
-	  return ModalHeader;
-	}(React.Component);
+	var ModalFooter = function ModalFooter(props) {
+	  return React.createElement(
+	    "div",
+	    { className: "modal-footer" },
+	    "Don",
+	    '\'',
+	    "t have an account? ",
+	    ' ',
+	    React.createElement(
+	      "a",
+	      { href: "" },
+	      "Sign up"
+	    )
+	  );
+	};
 
-	var ModalBody = function (_React$Component2) {
-	  _inherits(ModalBody, _React$Component2);
+	var ModalContent = function ModalContent(props) {
+	  return React.createElement(
+	    "div",
+	    { className: "modal-content" },
+	    React.createElement(ModalHeader, null),
+	    React.createElement("hr", null),
+	    React.createElement(ModalBody, null),
+	    React.createElement(ModalFooter, null)
+	  );
+	};
 
-	  function ModalBody() {
-	    _classCallCheck(this, ModalBody);
-
-	    return _possibleConstructorReturn(this, (ModalBody.__proto__ || Object.getPrototypeOf(ModalBody)).apply(this, arguments));
-	  }
-
-	  _createClass(ModalBody, [{
-	    key: "render",
-	    value: function render() {
-	      return React.createElement(
-	        "div",
-	        { className: "modal-body" },
-	        React.createElement(
-	          "form",
-	          { action: "#" },
-	          React.createElement(
-	            "div",
-	            { className: "form-group" },
-	            React.createElement(
-	              "label",
-	              { htmlFor: "username" },
-	              "Username:"
-	            ),
-	            React.createElement("input", { type: "text", placeholder: "Username", id: "username" })
-	          ),
-	          React.createElement(
-	            "div",
-	            { className: "form-group" },
-	            React.createElement(
-	              "label",
-	              { htmlFor: "password" },
-	              "Password:"
-	            ),
-	            React.createElement("input", { type: "password", placeholder: "Password", id: "password" })
-	          ),
-	          React.createElement("input", { type: "submit", value: "Log in", id: "logSubmit" })
-	        )
-	      );
-	    }
-	  }]);
-
-	  return ModalBody;
-	}(React.Component);
-
-	var ModalFooter = function (_React$Component3) {
-	  _inherits(ModalFooter, _React$Component3);
-
-	  function ModalFooter() {
-	    _classCallCheck(this, ModalFooter);
-
-	    return _possibleConstructorReturn(this, (ModalFooter.__proto__ || Object.getPrototypeOf(ModalFooter)).apply(this, arguments));
-	  }
-
-	  _createClass(ModalFooter, [{
-	    key: "render",
-	    value: function render() {
-	      return React.createElement(
-	        "div",
-	        { className: "modal-footer" },
-	        "Don",
-	        '\'',
-	        "t have an account? ",
-	        ' ',
-	        React.createElement(
-	          "a",
-	          { href: "" },
-	          "Sign up"
-	        )
-	      );
-	    }
-	  }]);
-
-	  return ModalFooter;
-	}(React.Component);
-
-	var ModalContent = function (_React$Component4) {
-	  _inherits(ModalContent, _React$Component4);
-
-	  function ModalContent() {
-	    _classCallCheck(this, ModalContent);
-
-	    return _possibleConstructorReturn(this, (ModalContent.__proto__ || Object.getPrototypeOf(ModalContent)).apply(this, arguments));
-	  }
-
-	  _createClass(ModalContent, [{
-	    key: "render",
-	    value: function render() {
-	      return React.createElement(
-	        "div",
-	        { className: "modal-content" },
-	        React.createElement(ModalHeader, null),
-	        React.createElement("hr", null),
-	        React.createElement(ModalBody, null),
-	        React.createElement(ModalFooter, null)
-	      );
-	    }
-	  }]);
-
-	  return ModalContent;
-	}(React.Component);
-
-	var MyModal = function (_React$Component5) {
-	  _inherits(MyModal, _React$Component5);
-
-	  function MyModal() {
-	    _classCallCheck(this, MyModal);
-
-	    return _possibleConstructorReturn(this, (MyModal.__proto__ || Object.getPrototypeOf(MyModal)).apply(this, arguments));
-	  }
-
-	  _createClass(MyModal, [{
-	    key: "render",
-	    value: function render() {
-	      return React.createElement(
-	        "div",
-	        { id: "modal", className: "modal" },
-	        React.createElement(ModalContent, null)
-	      );
-	    }
-	  }]);
-
-	  return MyModal;
-	}(React.Component);
+	var MyModal = function MyModal(props) {
+	  return React.createElement(
+	    "div",
+	    { id: "modal", className: "modal" },
+	    React.createElement(ModalContent, null)
+	  );
+	};
 
 	module.exports = {
 	  modal: MyModal
