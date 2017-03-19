@@ -181,16 +181,20 @@ const isValidEmail = (val) => {
 }
 
 const popMsg = (text, that) => {
+  clearTimeout(that.state.msgbarTimeout);
   that.setState({
     msgbar: true,
     msgbarText: text
   });
-  setTimeout(() => {
+  const timeout = setTimeout(() => {
     that.setState({
       msgbar: false,
       msgbarText: ''
     });
-  }, 3000);
+  }, 4500);
+  that.setState({
+    msgbarTimeout:timeout
+  });
 };
 
 // header
@@ -317,7 +321,8 @@ class Homepage extends React.Component{
         'email': ''
       },
       msgbar: false,
-      msgbarText: ''
+      msgbarText: '',
+      msgbarTimeout: null
     };
     this.handleCommentClick = this.handleCommentClick.bind(this);
     this.handleCommentChange = this.handleCommentChange.bind(this);
@@ -361,14 +366,14 @@ class Homepage extends React.Component{
     }
   }
   handleLogInSubmit(e) {
+    // no server to submit to, submit button offer the "keyCode=13" keypress event
+    e.preventDefault();
     if(this.state.logInData.username === '') {
       popMsg('Username can\'t be empty', this);
-      e.preventDefault();
       return;
     }
     if(this.state.logInData.password === '') {
       popMsg('Password can\'t be empty', this);
-      e.preventDefault();
       return;
     }
     const userDataArr = this.state.userData;
@@ -397,18 +402,14 @@ class Homepage extends React.Component{
             })
           }
           this.handleLogInModal();
-          // no server to submit to
-          e.preventDefault();
           return;
         } else {
           // password wrong
           popMsg('The password you’ve entered is incorrect.', this);
-          e.preventDefault();
           return;
         }
       }
     }
-    e.preventDefault();
     // no such an user
     popMsg('The email or phone number you’ve entered doesn’t match any account. Sign up for an account.', this)
   }
@@ -559,15 +560,16 @@ class Homepage extends React.Component{
       }
     }));
   }
-  handleSignUpSubmit() {
+  handleSignUpSubmit(e) {
+    e.preventDefault();
     const signUpData = this.state.signUpData;
     if (!isEmptyInput(signUpData.username)) {
       if (!isEmptyInput(signUpData.password)) {
-        if(!isEmptyInput(signUpData.passwordTwo &&
-          signUpData.password === signUpData.passwordTwo)) {
+        if(!isEmptyInput(signUpData.passwordTwo)) {
+          if ( signUpData.password === signUpData.passwordTwo) {
             if (!isEmptyInput(signUpData.firstname)) {
               if (!isEmptyInput(signUpData.lastname)) {
-                if(!isValidEmail(signUpData.email)) {
+                if(isValidEmail(signUpData.email)) {
                   this.setState((preState) => ({
                     userData: preState.userData.concat([{
                       "id": preState.userData.length,
@@ -595,15 +597,36 @@ class Homepage extends React.Component{
                     },
                     mainPage: 'home'
                   }));
+                } else {
+                  // email not valid
+                  popMsg('please enter an valid email', this);
                 }
+              } else {
+                // lastname can't be empty
+                popMsg('lastname can\'t be empty', this);
               }
+            } else {
+              // firstname can't be empty
+              popMsg('firstname can\'t be empty', this);
             }
+          } else {
+            // two password not match
+            popMsg('please confirm your password again', this);
+          }
+        } else {
+          // comfirm password can't be empty
+          popMsg('please input your password again', this);
         }
+      } else {
+        // password can't be empty
+        popMsg('password can\'t be empty', this);
       }
-    }else{
-
+    } else {
+      // username can't be empty
+      popMsg('username can\'t be empty', this);
     }
   }
+
   // Main Component come from ./js/main.js
   render() {
     return (

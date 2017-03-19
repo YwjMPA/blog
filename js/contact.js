@@ -14,7 +14,7 @@ const CardAddress = (props) => {
 
 const CardEmail = (props) => {
   return (
-    <p><i className="fa fa-envelope-o"></i>{'ywjmpa@gmail.com'}</p>
+    <p><i className="fa fa-envelope-o"></i>{' somnus.yuwenjia@foxmail.com'}</p>
   );
 };
 

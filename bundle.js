@@ -190,16 +190,20 @@
 	};
 
 	var popMsg = function popMsg(text, that) {
+	  clearTimeout(that.state.msgbarTimeout);
 	  that.setState({
 	    msgbar: true,
 	    msgbarText: text
 	  });
-	  setTimeout(function () {
+	  var timeout = setTimeout(function () {
 	    that.setState({
 	      msgbar: false,
 	      msgbarText: ''
 	    });
-	  }, 3000);
+	  }, 4500);
+	  that.setState({
+	    msgbarTimeout: timeout
+	  });
 	};
 
 	// header
@@ -380,7 +384,8 @@
 	        'email': ''
 	      },
 	      msgbar: false,
-	      msgbarText: ''
+	      msgbarText: '',
+	      msgbarTimeout: null
 	    };
 	    _this.handleCommentClick = _this.handleCommentClick.bind(_this);
 	    _this.handleCommentChange = _this.handleCommentChange.bind(_this);
@@ -433,14 +438,14 @@
 	  }, {
 	    key: 'handleLogInSubmit',
 	    value: function handleLogInSubmit(e) {
+	      // no server to submit to, submit button offer the "keyCode=13" keypress event
+	      e.preventDefault();
 	      if (this.state.logInData.username === '') {
 	        popMsg('Username can\'t be empty', this);
-	        e.preventDefault();
 	        return;
 	      }
 	      if (this.state.logInData.password === '') {
 	        popMsg('Password can\'t be empty', this);
-	        e.preventDefault();
 	        return;
 	      }
 	      var userDataArr = this.state.userData;
@@ -469,18 +474,14 @@
 	              });
 	            }
 	            this.handleLogInModal();
-	            // no server to submit to
-	            e.preventDefault();
 	            return;
 	          } else {
 	            // password wrong
 	            popMsg('The password you’ve entered is incorrect.', this);
-	            e.preventDefault();
 	            return;
 	          }
 	        }
 	      }
-	      e.preventDefault();
 	      // no such an user
 	      popMsg('The email or phone number you’ve entered doesn’t match any account. Sign up for an account.', this);
 	    }
@@ -688,50 +689,75 @@
 	    }
 	  }, {
 	    key: 'handleSignUpSubmit',
-	    value: function handleSignUpSubmit() {
+	    value: function handleSignUpSubmit(e) {
+	      e.preventDefault();
 	      var signUpData = this.state.signUpData;
 	      if (!isEmptyInput(signUpData.username)) {
 	        if (!isEmptyInput(signUpData.password)) {
-	          if (!isEmptyInput(signUpData.passwordTwo && signUpData.password === signUpData.passwordTwo)) {
-	            if (!isEmptyInput(signUpData.firstname)) {
-	              if (!isEmptyInput(signUpData.lastname)) {
-	                if (!isValidEmail(signUpData.email)) {
-	                  this.setState(function (preState) {
-	                    return {
-	                      userData: preState.userData.concat([{
-	                        "id": preState.userData.length,
-	                        'firstname': preState.signUpData.firstname,
-	                        'lastname': preState.signUpData.lastname,
-	                        'username': preState.signUpData.username,
-	                        'password': preState.signUpData.password,
-	                        'email': preState.signUpData.email
-	                      }]),
-	                      signUpData: {
-	                        'firstname': '',
-	                        'lastname': '',
-	                        'username': '',
-	                        'password': '',
-	                        'email': ''
-	                      },
-	                      ifLogged: true,
-	                      currentUser: {
-	                        'id': preState.userData.length,
-	                        'firstname': preState.signUpData.firstname,
-	                        'lastname': preState.signUpData.lastname,
-	                        'username': preState.signUpData.username,
-	                        'password': preState.signUpData.password,
-	                        'email': preState.signUpData.email
-	                      },
-	                      mainPage: 'home'
-	                    };
-	                  });
+	          if (!isEmptyInput(signUpData.passwordTwo)) {
+	            if (signUpData.password === signUpData.passwordTwo) {
+	              if (!isEmptyInput(signUpData.firstname)) {
+	                if (!isEmptyInput(signUpData.lastname)) {
+	                  if (isValidEmail(signUpData.email)) {
+	                    this.setState(function (preState) {
+	                      return {
+	                        userData: preState.userData.concat([{
+	                          "id": preState.userData.length,
+	                          'firstname': preState.signUpData.firstname,
+	                          'lastname': preState.signUpData.lastname,
+	                          'username': preState.signUpData.username,
+	                          'password': preState.signUpData.password,
+	                          'email': preState.signUpData.email
+	                        }]),
+	                        signUpData: {
+	                          'firstname': '',
+	                          'lastname': '',
+	                          'username': '',
+	                          'password': '',
+	                          'email': ''
+	                        },
+	                        ifLogged: true,
+	                        currentUser: {
+	                          'id': preState.userData.length,
+	                          'firstname': preState.signUpData.firstname,
+	                          'lastname': preState.signUpData.lastname,
+	                          'username': preState.signUpData.username,
+	                          'password': preState.signUpData.password,
+	                          'email': preState.signUpData.email
+	                        },
+	                        mainPage: 'home'
+	                      };
+	                    });
+	                  } else {
+	                    // email not valid
+	                    popMsg('please enter an valid email', this);
+	                  }
+	                } else {
+	                  // lastname can't be empty
+	                  popMsg('lastname can\'t be empty', this);
 	                }
+	              } else {
+	                // firstname can't be empty
+	                popMsg('firstname can\'t be empty', this);
 	              }
+	            } else {
+	              // two password not match
+	              popMsg('please confirm your password again', this);
 	            }
+	          } else {
+	            // comfirm password can't be empty
+	            popMsg('please input your password again', this);
 	          }
+	        } else {
+	          // password can't be empty
+	          popMsg('password can\'t be empty', this);
 	        }
-	      } else {}
+	      } else {
+	        // username can't be empty
+	        popMsg('username can\'t be empty', this);
+	      }
 	    }
+
 	    // Main Component come from ./js/main.js
 
 	  }, {
@@ -22687,7 +22713,7 @@
 	    "p",
 	    null,
 	    React.createElement("i", { className: "fa fa-envelope-o" }),
-	    'ywjmpa@gmail.com'
+	    ' somnus.yuwenjia@foxmail.com'
 	  );
 	};
 
@@ -22813,8 +22839,8 @@
 	};
 
 	var SignUp = function SignUp(props) {
-	  var handleSignUpSubmit = function handleSignUpSubmit() {
-	    props.handleSignUpSubmit();
+	  var handleSignUpSubmit = function handleSignUpSubmit(e) {
+	    props.handleSignUpSubmit(e);
 	  };
 	  return _react2.default.createElement(
 	    "section",
@@ -22839,7 +22865,7 @@
 	        handleSignUpFNameChange: props.handleSignUpFNameChange }),
 	      _react2.default.createElement(SignUpEmail, { email: props.signUpData.email,
 	        handleSignUpEmailChange: props.handleSignUpEmailChange }),
-	      _react2.default.createElement("input", { type: "button", value: "confirm", id: "signUpSubmit", onClick: handleSignUpSubmit })
+	      _react2.default.createElement("input", { type: "submit", value: "confirm", id: "signUpSubmit", onClick: handleSignUpSubmit })
 	    )
 	  );
 	};

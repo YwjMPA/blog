@@ -65,8 +65,8 @@ const SignUpEmail = (props) => {
 }
 
 const SignUp = (props) => {
-  const handleSignUpSubmit = () => {
-    props.handleSignUpSubmit();
+  const handleSignUpSubmit = (e) => {
+    props.handleSignUpSubmit(e);
   }
   return (
     <section className="sign-up-section">
@@ -84,7 +84,7 @@ const SignUp = (props) => {
             handleSignUpFNameChange={props.handleSignUpFNameChange}/>
         <SignUpEmail email={props.signUpData.email}
             handleSignUpEmailChange={props.handleSignUpEmailChange}/>
-        <input type="button" value='confirm' id="signUpSubmit" onClick={handleSignUpSubmit}/>
+        <input type="submit" value='confirm' id="signUpSubmit" onClick={handleSignUpSubmit}/>
       </form>
     </section>
   );
