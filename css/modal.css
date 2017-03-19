@@ -49,26 +49,26 @@
   padding:15px 15px 0;
 }
 
-.form-group {
+.modal-form-group {
   padding: 0 0 10px;
   width: 90%;
   margin: 0 auto;
   display: flex;
 }
 
-.form-group label{
+.modal-form-group label{
   width: 30%;
   align-self: center;
 }
-.form-group input{
+.modal-form-group input{
   width: 70%;
   border: 1px solid #aaa;
   border-radius: 4px;
   padding: 6px 12px;
   outline: none;
 }
-.form-group input:focus,
-.form-group input:hover {
+.modal-form-group input:focus,
+.modal-form-group input:hover {
   box-shadow: 0 0 10px 0 #484848;
 }
 

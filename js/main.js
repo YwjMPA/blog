@@ -78,7 +78,13 @@ const Main = (props) => {
               handleArticleClick={props.handleArticleClick}
               handleTagClick={props.handleTagClick}/>
   }else if (props.mainPage === 'signUp') {
-    mainSection = <SignUp />
+    mainSection = <SignUp handleSignUpUsernameChange={props.handleSignUpUsernameChange}
+              handleSignUpPasswordChange={props.handleSignUpPasswordChange}
+              handleSignUpFNameChange={props.handleSignUpFNameChange}
+              handleSignUpLNameChange={props.handleSignUpLNameChange}
+              handleSignUpEmailChange={props.handleSignUpEmailChange}
+              signUpData={props.signUpData}
+              handleSignUpSubmit={props.handleSignUpSubmit}/>
   }
   return (
     <main className="container" >

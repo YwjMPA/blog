@@ -83,6 +83,58 @@ const dataArticle = [
   }
 ]
 
+const fakecommentData = [
+  {
+    "articleId":1,
+    "user": "Joker Yu",
+    "time": "3/18/2017, 9:39:42 AM",
+    "content": "interesting!"
+  },
+  {
+    "articleId":2,
+    "user": "Joker Yu",
+    "time": "23/18/2017, 9:39:21 AM",
+    "content": "interesting!!"
+  },
+  {
+    "articleId":3,
+    "user": "Joker Yu",
+    "time": "3/18/2017, 9:39:40 AM",
+    "content": "interesting!!!"
+  },
+  {
+    "articleId":4,
+    "user": "Joker Yu",
+    "time": "3/18/2017, 9:39:39 AM",
+    "content": "interesting!!!!"
+  },
+  {
+    "articleId":1,
+    "user": "Joker Yu",
+    "time": "3/18/2017, 9:39:41 AM",
+    "content": "interesting!!!!!"
+  }
+];
+
+const fakeuserData = [
+  {
+    'id':1,
+    'firstname':'Wenjia',
+    'lastname':'Yu',
+    'username':'ywj',
+    'password':'yuwenjia',
+    'email':'somnus.yuwenjia@foxmail.com'
+  },
+  {
+    'id':2,
+    'firstname':'Joker',
+    'lastname':'Yu',
+    'username':'joker',
+    'password':'joker',
+    'email':'joker@yu.cn'
+  }
+];
+
 // header
 const Nav = (props) => {
   const handleHomeClick = () => {
@@ -128,8 +180,8 @@ const Header = (props) => {
   return (
     <header className={!props.navToggle? 'navbar-close':'navbar-open'}>
       <div className="row">
-        <div className="nav-brand" onClick={handleBrandClick}>
-          Ywj{'\''}s Blog
+        <div className="nav-brand">
+          <span  onClick={handleBrandClick}>Ywj{'\''}s Blog</span>
         </div>
         <div className={!props.navToggle? 'navbar-toggle':'navbar-toggle open'}  onClick={handleNavToggle}>
           <span className="icon-bar"></span>
@@ -172,57 +224,16 @@ class Homepage extends React.Component{
       navToggle: false,
       modalToggle: false,
       // fake comment data
-      commentData: [
-        {
-          "articleId":1,
-          "user": "Joker Yu",
-          "time": "3/18/2017, 9:39:42 AM",
-          "content": "interesting!"
-        },
-        {
-          "articleId":2,
-          "user": "Joker Yu",
-          "time": "23/18/2017, 9:39:21 AM",
-          "content": "interesting!!"
-        },
-        {
-          "articleId":3,
-          "user": "Joker Yu",
-          "time": "3/18/2017, 9:39:40 AM",
-          "content": "interesting!!!"
-        },
-        {
-          "articleId":4,
-          "user": "Joker Yu",
-          "time": "3/18/2017, 9:39:39 AM",
-          "content": "interesting!!!!"
-        },
-        {
-          "articleId":1,
-          "user": "Joker Yu",
-          "time": "3/18/2017, 9:39:41 AM",
-          "content": "interesting!!!!!"
-        }
-      ],
+      commentData: fakecommentData,
       // fake user data
-      userData: [
-        {
-          'id':1,
-          'firstname':'Wenjia',
-          'lastname':'Yu',
-          'username':'ywj',
-          'password':'yuwenjia',
-          'email':'somnus.yuwenjia@foxmail.com'
-        },
-        {
-          'id':2,
-          'firstname':'Joker',
-          'lastname':'Yu',
-          'username':'joker',
-          'password':'joker',
-          'email':'joker@yu.cn'
-        }
-      ]
+      userData: fakeuserData,
+      signUpData: {
+        'firstname': '',
+        'lastname': '',
+        'username': '',
+        'password': '',
+        'email': ''
+      }
     };
     this.handleCommentClick = this.handleCommentClick.bind(this);
     this.handleCommentChange = this.handleCommentChange.bind(this);
@@ -233,8 +244,54 @@ class Homepage extends React.Component{
     this.handleSignUp = this.handleSignUp.bind(this);
     this.handleNavToggle = this.handleNavToggle.bind(this);
     this.handleLogInModal = this.handleLogInModal.bind(this);
+    this.handleSignUpUsernameChange = this.handleSignUpUsernameChange.bind(this);
+    this.handleSignUpPasswordChange = this.handleSignUpPasswordChange.bind(this);
+    this.handleSignUpFNameChange = this.handleSignUpFNameChange.bind(this);
+    this.handleSignUpLNameChange = this.handleSignUpLNameChange.bind(this);
+    this.handleSignUpEmailChange = this.handleSignUpEmailChange.bind(this);
+    this.handleSignUpSubmit = this.handleSignUpSubmit.bind(this);
   }
-  // handleCommentClick modify fake data*****
+  // all the event handler
+  // navbar event
+  handleLogInModal() {
+    this.setState((preState) => ({
+      modalToggle:!preState.modalToggle
+    }));
+  }
+  handleNavToggle() {
+    this.setState((preState) => ({
+      navToggle:!preState.navToggle
+    }));
+  }
+  handleSignUp() {
+    this.handleLogInModal();
+    this.setState({
+      mainPage:'signUp'
+    });
+  }
+  handleBrandClick() {
+    this.setState({
+      mainPage:'home',
+      tagFilter: null
+    });
+  }
+  handleContactClick() {
+    this.setState({
+      mainPage:'contact'
+    });
+  }
+  // article page
+  handleArticleClick(id) {
+    this.setState({
+      mainPage:'article',
+      articleId: id
+    });
+  }
+  handleCommentChange(value) {
+    this.setState({
+      commentText: value
+    });
+  }
   handleCommentClick(articleId, user, content) {
     if (content === '') {
       return ;
@@ -250,48 +307,89 @@ class Homepage extends React.Component{
       }])
     }));
   }
-  handleLogInModal() {
-    this.setState((preState) => ({
-      modalToggle:!preState.modalToggle
-    }));
-  }
-  handleNavToggle() {
-    this.setState((preState) => ({
-      navToggle:!preState.navToggle
-    }));
-  }
-  handleSignUp() {
-    this.setState({
-      mainPage:'signUp'
-    });
-  }
-  handleCommentChange(value) {
-    this.setState({
-      commentText: value
-    });
-  }
-  handleBrandClick() {
-    this.setState({
-      mainPage:'home',
-      tagFilter: null
-    });
-  }
-  handleContactClick() {
-    this.setState({
-      mainPage:'contact'
-    });
-  }
-  handleArticleClick(id) {
-    this.setState({
-      mainPage:'article',
-      articleId: id
-    });
-  }
+  // main page
   handleTagClick(id) {
     this.setState({
       mainPage:'home',
       tagFilter:id
     });
+  }
+  // signup page
+  handleSignUpUsernameChange(val) {
+    this.setState((preState) => ({
+      signUpData:{
+        'firstname': preState.signUpData.firstname,
+        'lastname': preState.signUpData.lastname,
+        'username':val,
+        'password': preState.signUpData.password,
+        'email':preState.signUpData.email
+      }
+    }));
+  }
+  handleSignUpPasswordChange(val) {
+    this.setState((preState) => ({
+      signUpData:{
+        'firstname': preState.signUpData.firstname,
+        'lastname': preState.signUpData.lastname,
+        'username': preState.signUpData.username,
+        'password': val,
+        'email':preState.signUpData.email
+      }
+    }));
+  }
+  handleSignUpFNameChange(val) {
+    this.setState((preState) => ({
+      signUpData:{
+        'firstname': val,
+        'lastname': preState.signUpData.lastname,
+        'username': preState.signUpData.username,
+        'password': preState.signUpData.password,
+        'email':preState.signUpData.email
+      }
+    }));
+  }
+  handleSignUpLNameChange(val) {
+    this.setState((preState) => ({
+      signUpData:{
+        'firstname': preState.signUpData.firstname,
+        'lastname': val,
+        'username': preState.signUpData.username,
+        'password': preState.signUpData.password,
+        'email':preState.signUpData.email
+      }
+    }));
+  }
+  handleSignUpEmailChange(val) {
+    this.setState((preState) => ({
+      signUpData:{
+        'firstname': preState.signUpData.firstname,
+        'lastname': preState.signUpData.lastname,
+        'username': preState.signUpData.username,
+        'password': preState.signUpData.password,
+        'email': val
+      }
+    }));
+  }
+  handleSignUpSubmit() {
+    if (valid) {
+      this.setState((preState) => ({
+        commentData: preState.commentData.concat([{
+          "id": preState.commentData.length,
+          'firstname': preState.signUpData.firstname,
+          'lastname': preState.signUpData.lastname,
+          'username': preState.signUpData.username,
+          'password': preState.signUpData.password,
+          'email': preState.signUpData.email
+        }]),
+        signUpData: {
+          'firstname': '',
+          'lastname': '',
+          'username': '',
+          'password': '',
+          'email': ''
+        }
+      }));
+    }
   }
   // Main Component come from ./js/main.js
   render() {
@@ -316,7 +414,14 @@ class Homepage extends React.Component{
               handleArticleClick={this.handleArticleClick}
               articleId={this.state.articleId}
               tagFilter={this.state.tagFilter}
-              handleTagClick={this.handleTagClick}/>
+              handleTagClick={this.handleTagClick}
+              handleSignUpUsernameChange={this.handleSignUpUsernameChange}
+              handleSignUpPasswordChange={this.handleSignUpPasswordChange}
+              handleSignUpFNameChange={this.handleSignUpFNameChange}
+              handleSignUpLNameChange={this.handleSignUpLNameChange}
+              handleSignUpEmailChange={this.handleSignUpEmailChange}
+              signUpData={this.state.signUpData}
+              handleSignUpSubmit={this.handleSignUpSubmit}/>
         <Footer />
       </div>
     );

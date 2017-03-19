@@ -125,6 +125,49 @@
 	  "tags": [3, 6]
 	}];
 
+	var fakecommentData = [{
+	  "articleId": 1,
+	  "user": "Joker Yu",
+	  "time": "3/18/2017, 9:39:42 AM",
+	  "content": "interesting!"
+	}, {
+	  "articleId": 2,
+	  "user": "Joker Yu",
+	  "time": "23/18/2017, 9:39:21 AM",
+	  "content": "interesting!!"
+	}, {
+	  "articleId": 3,
+	  "user": "Joker Yu",
+	  "time": "3/18/2017, 9:39:40 AM",
+	  "content": "interesting!!!"
+	}, {
+	  "articleId": 4,
+	  "user": "Joker Yu",
+	  "time": "3/18/2017, 9:39:39 AM",
+	  "content": "interesting!!!!"
+	}, {
+	  "articleId": 1,
+	  "user": "Joker Yu",
+	  "time": "3/18/2017, 9:39:41 AM",
+	  "content": "interesting!!!!!"
+	}];
+
+	var fakeuserData = [{
+	  'id': 1,
+	  'firstname': 'Wenjia',
+	  'lastname': 'Yu',
+	  'username': 'ywj',
+	  'password': 'yuwenjia',
+	  'email': 'somnus.yuwenjia@foxmail.com'
+	}, {
+	  'id': 2,
+	  'firstname': 'Joker',
+	  'lastname': 'Yu',
+	  'username': 'joker',
+	  'password': 'joker',
+	  'email': 'joker@yu.cn'
+	}];
+
 	// header
 	var Nav = function Nav(props) {
 	  var handleHomeClick = function handleHomeClick() {
@@ -198,10 +241,14 @@
 	      { className: 'row' },
 	      React.createElement(
 	        'div',
-	        { className: 'nav-brand', onClick: handleBrandClick },
-	        'Ywj',
-	        '\'',
-	        's Blog'
+	        { className: 'nav-brand' },
+	        React.createElement(
+	          'span',
+	          { onClick: handleBrandClick },
+	          'Ywj',
+	          '\'',
+	          's Blog'
+	        )
 	      ),
 	      React.createElement(
 	        'div',
@@ -257,48 +304,16 @@
 	      navToggle: false,
 	      modalToggle: false,
 	      // fake comment data
-	      commentData: [{
-	        "articleId": 1,
-	        "user": "Joker Yu",
-	        "time": "3/18/2017, 9:39:42 AM",
-	        "content": "interesting!"
-	      }, {
-	        "articleId": 2,
-	        "user": "Joker Yu",
-	        "time": "23/18/2017, 9:39:21 AM",
-	        "content": "interesting!!"
-	      }, {
-	        "articleId": 3,
-	        "user": "Joker Yu",
-	        "time": "3/18/2017, 9:39:40 AM",
-	        "content": "interesting!!!"
-	      }, {
-	        "articleId": 4,
-	        "user": "Joker Yu",
-	        "time": "3/18/2017, 9:39:39 AM",
-	        "content": "interesting!!!!"
-	      }, {
-	        "articleId": 1,
-	        "user": "Joker Yu",
-	        "time": "3/18/2017, 9:39:41 AM",
-	        "content": "interesting!!!!!"
-	      }],
+	      commentData: fakecommentData,
 	      // fake user data
-	      userData: [{
-	        'id': 1,
-	        'firstname': 'Wenjia',
-	        'lastname': 'Yu',
-	        'username': 'ywj',
-	        'password': 'yuwenjia',
-	        'email': 'somnus.yuwenjia@foxmail.com'
-	      }, {
-	        'id': 2,
-	        'firstname': 'Joker',
-	        'lastname': 'Yu',
-	        'username': 'joker',
-	        'password': 'joker',
-	        'email': 'joker@yu.cn'
-	      }]
+	      userData: fakeuserData,
+	      signUpData: {
+	        'firstname': '',
+	        'lastname': '',
+	        'username': '',
+	        'password': '',
+	        'email': ''
+	      }
 	    };
 	    _this.handleCommentClick = _this.handleCommentClick.bind(_this);
 	    _this.handleCommentChange = _this.handleCommentChange.bind(_this);
@@ -309,31 +324,19 @@
 	    _this.handleSignUp = _this.handleSignUp.bind(_this);
 	    _this.handleNavToggle = _this.handleNavToggle.bind(_this);
 	    _this.handleLogInModal = _this.handleLogInModal.bind(_this);
+	    _this.handleSignUpUsernameChange = _this.handleSignUpUsernameChange.bind(_this);
+	    _this.handleSignUpPasswordChange = _this.handleSignUpPasswordChange.bind(_this);
+	    _this.handleSignUpFNameChange = _this.handleSignUpFNameChange.bind(_this);
+	    _this.handleSignUpLNameChange = _this.handleSignUpLNameChange.bind(_this);
+	    _this.handleSignUpEmailChange = _this.handleSignUpEmailChange.bind(_this);
+	    _this.handleSignUpSubmit = _this.handleSignUpSubmit.bind(_this);
 	    return _this;
 	  }
-	  // handleCommentClick modify fake data*****
+	  // all the event handler
+	  // navbar event
 
 
 	  _createClass(Homepage, [{
-	    key: 'handleCommentClick',
-	    value: function handleCommentClick(articleId, user, content) {
-	      if (content === '') {
-	        return;
-	      }
-	      var timeNow = new Date().toLocaleString() + new Date().getMilliseconds();
-	      this.setState(function (preState) {
-	        return {
-	          commentText: '',
-	          commentData: preState.commentData.concat([{
-	            "articleId": articleId,
-	            "user": user,
-	            "time": timeNow,
-	            "content": content
-	          }])
-	        };
-	      });
-	    }
-	  }, {
 	    key: 'handleLogInModal',
 	    value: function handleLogInModal() {
 	      this.setState(function (preState) {
@@ -354,15 +357,9 @@
 	  }, {
 	    key: 'handleSignUp',
 	    value: function handleSignUp() {
+	      this.handleLogInModal();
 	      this.setState({
 	        mainPage: 'signUp'
-	      });
-	    }
-	  }, {
-	    key: 'handleCommentChange',
-	    value: function handleCommentChange(value) {
-	      this.setState({
-	        commentText: value
 	      });
 	    }
 	  }, {
@@ -380,6 +377,8 @@
 	        mainPage: 'contact'
 	      });
 	    }
+	    // article page
+
 	  }, {
 	    key: 'handleArticleClick',
 	    value: function handleArticleClick(id) {
@@ -389,12 +388,142 @@
 	      });
 	    }
 	  }, {
+	    key: 'handleCommentChange',
+	    value: function handleCommentChange(value) {
+	      this.setState({
+	        commentText: value
+	      });
+	    }
+	  }, {
+	    key: 'handleCommentClick',
+	    value: function handleCommentClick(articleId, user, content) {
+	      if (content === '') {
+	        return;
+	      }
+	      var timeNow = new Date().toLocaleString() + new Date().getMilliseconds();
+	      this.setState(function (preState) {
+	        return {
+	          commentText: '',
+	          commentData: preState.commentData.concat([{
+	            "articleId": articleId,
+	            "user": user,
+	            "time": timeNow,
+	            "content": content
+	          }])
+	        };
+	      });
+	    }
+	    // main page
+
+	  }, {
 	    key: 'handleTagClick',
 	    value: function handleTagClick(id) {
 	      this.setState({
 	        mainPage: 'home',
 	        tagFilter: id
 	      });
+	    }
+	    // signup page
+
+	  }, {
+	    key: 'handleSignUpUsernameChange',
+	    value: function handleSignUpUsernameChange(val) {
+	      this.setState(function (preState) {
+	        return {
+	          signUpData: {
+	            'firstname': preState.signUpData.firstname,
+	            'lastname': preState.signUpData.lastname,
+	            'username': val,
+	            'password': preState.signUpData.password,
+	            'email': preState.signUpData.email
+	          }
+	        };
+	      });
+	    }
+	  }, {
+	    key: 'handleSignUpPasswordChange',
+	    value: function handleSignUpPasswordChange(val) {
+	      this.setState(function (preState) {
+	        return {
+	          signUpData: {
+	            'firstname': preState.signUpData.firstname,
+	            'lastname': preState.signUpData.lastname,
+	            'username': preState.signUpData.username,
+	            'password': val,
+	            'email': preState.signUpData.email
+	          }
+	        };
+	      });
+	    }
+	  }, {
+	    key: 'handleSignUpFNameChange',
+	    value: function handleSignUpFNameChange(val) {
+	      this.setState(function (preState) {
+	        return {
+	          signUpData: {
+	            'firstname': val,
+	            'lastname': preState.signUpData.lastname,
+	            'username': preState.signUpData.username,
+	            'password': preState.signUpData.password,
+	            'email': preState.signUpData.email
+	          }
+	        };
+	      });
+	    }
+	  }, {
+	    key: 'handleSignUpLNameChange',
+	    value: function handleSignUpLNameChange(val) {
+	      this.setState(function (preState) {
+	        return {
+	          signUpData: {
+	            'firstname': preState.signUpData.firstname,
+	            'lastname': val,
+	            'username': preState.signUpData.username,
+	            'password': preState.signUpData.password,
+	            'email': preState.signUpData.email
+	          }
+	        };
+	      });
+	    }
+	  }, {
+	    key: 'handleSignUpEmailChange',
+	    value: function handleSignUpEmailChange(val) {
+	      this.setState(function (preState) {
+	        return {
+	          signUpData: {
+	            'firstname': preState.signUpData.firstname,
+	            'lastname': preState.signUpData.lastname,
+	            'username': preState.signUpData.username,
+	            'password': preState.signUpData.password,
+	            'email': val
+	          }
+	        };
+	      });
+	    }
+	  }, {
+	    key: 'handleSignUpSubmit',
+	    value: function handleSignUpSubmit() {
+	      if (valid) {
+	        this.setState(function (preState) {
+	          return {
+	            commentData: preState.commentData.concat([{
+	              "id": preState.commentData.length,
+	              'firstname': preState.signUpData.firstname,
+	              'lastname': preState.signUpData.lastname,
+	              'username': preState.signUpData.username,
+	              'password': preState.signUpData.password,
+	              'email': preState.signUpData.email
+	            }]),
+	            signUpData: {
+	              'firstname': '',
+	              'lastname': '',
+	              'username': '',
+	              'password': '',
+	              'email': ''
+	            }
+	          };
+	        });
+	      }
 	    }
 	    // Main Component come from ./js/main.js
 
@@ -423,7 +552,14 @@
 	          handleArticleClick: this.handleArticleClick,
 	          articleId: this.state.articleId,
 	          tagFilter: this.state.tagFilter,
-	          handleTagClick: this.handleTagClick }),
+	          handleTagClick: this.handleTagClick,
+	          handleSignUpUsernameChange: this.handleSignUpUsernameChange,
+	          handleSignUpPasswordChange: this.handleSignUpPasswordChange,
+	          handleSignUpFNameChange: this.handleSignUpFNameChange,
+	          handleSignUpLNameChange: this.handleSignUpLNameChange,
+	          handleSignUpEmailChange: this.handleSignUpEmailChange,
+	          signUpData: this.state.signUpData,
+	          handleSignUpSubmit: this.handleSignUpSubmit }),
 	        React.createElement(Footer, null)
 	      );
 	    }
@@ -21958,7 +22094,13 @@
 	      handleArticleClick: props.handleArticleClick,
 	      handleTagClick: props.handleTagClick });
 	  } else if (props.mainPage === 'signUp') {
-	    mainSection = React.createElement(SignUp, null);
+	    mainSection = React.createElement(SignUp, { handleSignUpUsernameChange: props.handleSignUpUsernameChange,
+	      handleSignUpPasswordChange: props.handleSignUpPasswordChange,
+	      handleSignUpFNameChange: props.handleSignUpFNameChange,
+	      handleSignUpLNameChange: props.handleSignUpLNameChange,
+	      handleSignUpEmailChange: props.handleSignUpEmailChange,
+	      signUpData: props.signUpData,
+	      handleSignUpSubmit: props.handleSignUpSubmit });
 	  }
 	  return React.createElement(
 	    'main',
@@ -22392,61 +22534,59 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var SignUpUsername = function SignUpUsername(props) {
+	  var handleSignUpUsernameChange = function handleSignUpUsernameChange(e) {
+	    props.handleSignUpUsernameChange(e.target.value);
+	  };
 	  return _react2.default.createElement(
 	    "div",
-	    { className: "form-group" },
-	    _react2.default.createElement(
-	      "label",
-	      { htmlFor: "username" },
-	      "Username:"
-	    ),
-	    _react2.default.createElement("input", { type: "text", placeholder: "Username", id: "username" })
+	    { className: "sign-up-form-group" },
+	    _react2.default.createElement("input", { type: "text", placeholder: "Username", value: props.username,
+	      onChange: handleSignUpUsernameChange })
 	  );
 	};
 	var SignUpPassword = function SignUpPassword(props) {
+	  var handleSignUpPasswordChange = function handleSignUpPasswordChange(e) {
+	    props.handleSignUpPasswordChange(e.target.value);
+	  };
 	  return _react2.default.createElement(
 	    "div",
-	    { className: "form-group" },
-	    _react2.default.createElement(
-	      "label",
-	      { htmlFor: "password" },
-	      "Password:"
-	    ),
-	    _react2.default.createElement("input", { type: "password", placeholder: "Password", id: "password" })
+	    { className: "sign-up-form-group" },
+	    _react2.default.createElement("input", { type: "password", placeholder: "Password", value: props.password,
+	      onChange: handleSignUpPasswordChange })
 	  );
 	};
 	var SignUpName = function SignUpName(props) {
+	  var handleSignUpFNameChange = function handleSignUpFNameChange(e) {
+	    props.handleSignUpFNameChange(e.target.value);
+	  };
+	  var handleSignUpLNameChange = function handleSignUpLNameChange(e) {
+	    props.handleSignUpLNameChange(e.target.value);
+	  };
 	  return _react2.default.createElement(
 	    "div",
-	    { className: "form-group" },
-	    _react2.default.createElement(
-	      "label",
-	      { htmlFor: "firstName" },
-	      "First name:"
-	    ),
-	    _react2.default.createElement("input", { type: "text", placeholder: "First name", id: "firstName" }),
-	    _react2.default.createElement(
-	      "label",
-	      { htmlFor: "lastName" },
-	      "Last name:"
-	    ),
-	    _react2.default.createElement("input", { type: "text", placeholder: "Last name", id: "lastName" })
+	    { className: "sign-up-form-group" },
+	    _react2.default.createElement("input", { type: "text", placeholder: "First name", value: props.firstname,
+	      onChange: handleSignUpFNameChange }),
+	    _react2.default.createElement("input", { type: "text", placeholder: "Last name", value: props.lastname,
+	      onChange: handleSignUpLNameChange })
 	  );
 	};
 	var SignUpEmail = function SignUpEmail(props) {
+	  var handleSignUpEmailChange = function handleSignUpEmailChange(e) {
+	    props.handleSignUpEmailChange(e.target.value);
+	  };
 	  return _react2.default.createElement(
 	    "div",
-	    { className: "form-group" },
-	    _react2.default.createElement(
-	      "label",
-	      { htmlFor: "Email" },
-	      "Email:"
-	    ),
-	    _react2.default.createElement("input", { type: "email", placeholder: "Email", id: "Email" })
+	    { className: "sign-up-form-group" },
+	    _react2.default.createElement("input", { type: "email", placeholder: "Email", value: props.email,
+	      onChange: handleSignUpEmailChange })
 	  );
 	};
 
 	var SignUp = function SignUp(props) {
+	  var handleSignUpSubmit = function handleSignUpSubmit() {
+	    props.handleSignUpSubmit();
+	  };
 	  return _react2.default.createElement(
 	    "section",
 	    { className: "sign-up-section" },
@@ -22457,12 +22597,18 @@
 	    ),
 	    _react2.default.createElement(
 	      "form",
-	      null,
-	      _react2.default.createElement(SignUpUsername, null),
-	      _react2.default.createElement(SignUpPassword, null),
-	      _react2.default.createElement(SignUpName, null),
-	      _react2.default.createElement(SignUpEmail, null),
-	      _react2.default.createElement("input", { type: "submit", value: "confirm", id: "signUpSubmit" })
+	      { className: "sign-up-form" },
+	      _react2.default.createElement(SignUpUsername, { username: props.signUpData.username,
+	        handleSignUpUsernameChange: props.handleSignUpUsernameChange }),
+	      _react2.default.createElement(SignUpPassword, { password: props.signUpData.password,
+	        handleSignUpPasswordChange: props.handleSignUpPasswordChange }),
+	      _react2.default.createElement(SignUpName, { firstname: props.signUpData.firstname,
+	        lastname: props.signUpData.lastname,
+	        handleSignUpLNameChange: props.handleSignUpLNameChange,
+	        handleSignUpFNameChange: props.handleSignUpFNameChange }),
+	      _react2.default.createElement(SignUpEmail, { email: props.signUpData.email,
+	        handleSignUpEmailChange: props.handleSignUpEmailChange }),
+	      _react2.default.createElement("input", { type: "submit", value: "confirm", id: "signUpSubmit", onClick: handleSignUpSubmit })
 	    )
 	  );
 	};
@@ -22518,7 +22664,7 @@
 	      { action: "#" },
 	      React.createElement(
 	        "div",
-	        { className: "form-group" },
+	        { className: "modal-form-group" },
 	        React.createElement(
 	          "label",
 	          { htmlFor: "username" },
@@ -22528,7 +22674,7 @@
 	      ),
 	      React.createElement(
 	        "div",
-	        { className: "form-group" },
+	        { className: "modal-form-group" },
 	        React.createElement(
 	          "label",
 	          { htmlFor: "password" },

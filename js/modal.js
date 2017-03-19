@@ -16,11 +16,11 @@ const ModalBody = (props) => {
   return (
     <div className="modal-body">
       <form action="#">
-        <div className="form-group">
+        <div className="modal-form-group">
           <label htmlFor="username">Username:</label>
           <input type="text" placeholder="Username" id="username"/>
         </div>
-        <div className="form-group">
+        <div className="modal-form-group">
           <label htmlFor="password">Password:</label>
           <input type="password" placeholder="Password" id="password"/>
         </div>
@@ -37,7 +37,7 @@ const ModalFooter = (props) => {
   return (
     <div className="modal-footer">
       Don{'\''}t have an account? {' '}
-      <a id="signUp"  onClick={handleSignUp}>Sign up</a>
+      <a id="signUp" onClick={handleSignUp}>Sign up</a>
     </div>
   );
 };
