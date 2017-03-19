@@ -13,18 +13,29 @@ const ModalHeader = (props) => {
 };
 
 const ModalBody = (props) => {
+  const handleLogUsernameChange = (e) => {
+    props.handleLogUsernameChange(e.target.value);
+  };
+  const handleLogPasswordChange = (e) => {
+    props.handleLogPasswordChange(e.target.value);
+  };
+  const handleLogInSubmit = () => {
+    props.handleLogInSubmit();
+  };
   return (
     <div className="modal-body">
       <form action="#">
         <div className="modal-form-group">
           <label htmlFor="username">Username:</label>
-          <input type="text" placeholder="Username" id="username"/>
+          <input type="text" placeholder="Username" id="username"
+              onChange={handleLogUsernameChange} value={props.logInData.username}/>
         </div>
         <div className="modal-form-group">
           <label htmlFor="password">Password:</label>
-          <input type="password" placeholder="Password" id="password"/>
+          <input type="password" placeholder="Password" id="password"
+              onChange={handleLogPasswordChange} value={props.logInData.password}/>
         </div>
-        <input type="submit" value="Log in"  id="logSubmit"/>
+        <input type="submit" value="Log in"  id="logSubmit" onClick={handleLogInSubmit}/>
       </form>
     </div>
   );
@@ -47,7 +58,10 @@ const ModalContent = (props) => {
     <div className="modal-content">
       <ModalHeader handleModalCloseClick={props.handleModalCloseClick}/>
       <hr />
-      <ModalBody />
+      <ModalBody handleLogUsernameChange={props.handleLogUsernameChange}
+          handleLogPasswordChange={props.handleLogPasswordChange}
+          logInData={props.logInData}
+          handleLogInSubmit={props.handleLogInSubmit}/>
       <ModalFooter handleSignUp={props.handleSignUp}/>
     </div>
   );
@@ -59,7 +73,11 @@ class MyModal extends React.Component {
       <div id='modal' className={!this.props.modalToggle? 'modal':'modal modal-open'}
         ref={(modal) => { this.modal = modal; }} >
         <ModalContent handleSignUp={this.props.handleSignUp}
-            handleModalCloseClick={this.props.handleModalCloseClick}/>
+            handleModalCloseClick={this.props.handleModalCloseClick}
+            handleLogUsernameChange={this.props.handleLogUsernameChange}
+            handleLogPasswordChange={this.props.handleLogPasswordChange}
+            logInData={this.props.logInData}
+            handleLogInSubmit={this.props.handleLogInSubmit}/>
       </div>
     );
   }

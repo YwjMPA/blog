@@ -28,12 +28,20 @@ header {
 .nav-brand {
   width: 86%;
   font-size: 17px;
-  padding: 10px 6%;
+  padding: 10px 0 10px 6%;
   font-family: fantasy;
-
+  display: flex;
 }
-.nav-brand span{
+.nav-brand span:first-child:;{
   cursor: pointer;
+  width: 30%;
+}
+
+.welcome {
+  font-size: 10px;
+  width: 70%;
+  align-self: center;
+  text-align: right;
 }
 
 .navbar-toggle {

@@ -64,7 +64,7 @@ const CommentSection = (props) => {
     props.onCommentChange(e.target.value);
   }
   const handleClick = () => {
-    props.handleCommentClick(props.articleId, 'Anonymous', props.commentText);
+    props.handleCommentClick(props.articleId, props.commentText);
   }
   return (
     <div className='comment-section'>
@@ -80,7 +80,6 @@ const CommentSection = (props) => {
 
 const CommentList = (props) => {
   const commentData = [];
-  // console.log(props.commentData);
   props.commentData.forEach((val) => {
     if (val.articleId == props.articleId) {
       commentData.push(val);

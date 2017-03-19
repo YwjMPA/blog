@@ -163,7 +163,7 @@ const Nav = (props) => {
         </li>
       </ul>
       <div className="nav-user" id='logIn' onClick={handleLogInModal}>
-        <i className="fa fa-user-circle-o"></i> Log in
+        <i className="fa fa-user-circle-o"></i> {props.ifLogged? 'Log out':'Log in'}
       </div>
     </nav>
   );
@@ -182,8 +182,12 @@ const Header = (props) => {
       <div className="row">
         <div className="nav-brand">
           <span  onClick={handleBrandClick}>Ywj{'\''}s Blog</span>
+          <span className="welcome">
+            {props.ifLogged? 'welcome,' + props.currentUser.firstname:''}
+          </span>
         </div>
-        <div className={!props.navToggle? 'navbar-toggle':'navbar-toggle open'}  onClick={handleNavToggle}>
+        <div className={!props.navToggle? 'navbar-toggle':'navbar-toggle open'}
+              onClick={handleNavToggle} >
           <span className="icon-bar"></span>
           <span className="icon-bar"></span>
           <span className="icon-bar"></span>
@@ -192,9 +196,14 @@ const Header = (props) => {
       <Nav handleHomeClick={props.handleHomeClick}
           handleContactClick={props.handleContactClick}
           handleLogInModal={props.handleLogInModal}
-          handleNavToggle={props.handleNavToggle}/>
+          handleNavToggle={props.handleNavToggle}
+          ifLogged={props.ifLogged}/>
       <Modal handleSignUp={props.handleSignUp} modalToggle={props.modalToggle}
-          handleModalCloseClick={props.handleModalCloseClick}/>
+          handleModalCloseClick={props.handleModalCloseClick}
+          handleLogUsernameChange={props.handleLogUsernameChange}
+          handleLogPasswordChange={props.handleLogPasswordChange}
+          logInData={props.logInData}
+          handleLogInSubmit={props.handleLogInSubmit}/>
     </header>
   )
 };
@@ -223,11 +232,24 @@ class Homepage extends React.Component{
       commentText: '',
       navToggle: false,
       modalToggle: false,
+      ifLogged:false,
       // fake comment data
       commentData: fakecommentData,
       // fake user data
       userData: fakeuserData,
       signUpData: {
+        'firstname': '',
+        'lastname': '',
+        'username': '',
+        'password': '',
+        'email': ''
+      },
+      logInData: {
+        'username': '',
+        'password': ''
+      },
+      currentUser: {
+        'id': null,
         'firstname': '',
         'lastname': '',
         'username': '',
@@ -250,12 +272,68 @@ class Homepage extends React.Component{
     this.handleSignUpLNameChange = this.handleSignUpLNameChange.bind(this);
     this.handleSignUpEmailChange = this.handleSignUpEmailChange.bind(this);
     this.handleSignUpSubmit = this.handleSignUpSubmit.bind(this);
+    this.handleLogUsernameChange = this.handleLogUsernameChange.bind(this);
+    this.handleLogPasswordChange = this.handleLogPasswordChange.bind(this);
+    this.handleLogInSubmit = this.handleLogInSubmit.bind(this);
   }
   // all the event handler
   // navbar event
   handleLogInModal() {
+    if (this.state.ifLogged) {
+      this.setState({
+        ifLogged:false,
+        currentUser: null
+      });
+    }else{
+      this.setState((preState) => ({
+        modalToggle:!preState.modalToggle
+      }));
+    }
+  }
+  handleLogInSubmit() {
+    // for loop is better, find match and break
+    this.state.userData.forEach((val) => {
+      if (val.username === this.state.logInData.username) {
+        if (val.password === this.state.logInData.password) {
+          this.setState({
+            ifLogged:true,
+            currentUser: {
+              'id':val.id,
+              'firstname': val.firstname,
+              'lastname': val.lastname,
+              'username': val.username,
+              'password': val.password,
+              'email': val.email
+            },
+            logInData: {
+              'username': '',
+              'password': ''
+            }
+          });
+          this.handleLogInModal();
+        } else {
+          // password wrong
+        }
+      } else {
+        // no such an user
+      }
+    });
+    console.log(this.state.ifLogged);
+  }
+  handleLogUsernameChange(val) {
     this.setState((preState) => ({
-      modalToggle:!preState.modalToggle
+      logInData: {
+        'username': val,
+        'password': preState.logInData.password
+      }
+    }));
+  }
+  handleLogPasswordChange(val) {
+    this.setState((preState) => ({
+      logInData: {
+        'username': preState.logInData.username,
+        'password': val
+      }
     }));
   }
   handleNavToggle() {
@@ -292,16 +370,19 @@ class Homepage extends React.Component{
       commentText: value
     });
   }
-  handleCommentClick(articleId, user, content) {
+  handleCommentClick(articleId, content) {
     if (content === '') {
       return ;
     }
     const timeNow = new Date().toLocaleString() + new Date().getMilliseconds();
+    const user = this.state.currentUser;
+    console.log(user);
+    const name = user.id? user.firstname+' '+user.lastname:'Anonymous';
     this.setState((preState) => ({
       commentText: '',
       commentData: preState.commentData.concat([{
         "articleId":articleId,
-        "user": user,
+        "user": name || 'Anonymous' ,
         "time": timeNow,
         "content": content
       }])
@@ -403,7 +484,13 @@ class Homepage extends React.Component{
                 handleLogInModal={this.handleLogInModal}
                 navToggle={this.state.navToggle}
                 modalToggle={this.state.modalToggle}
-                handleModalCloseClick={this.handleLogInModal}/>
+                handleModalCloseClick={this.handleLogInModal}
+                handleLogUsernameChange={this.handleLogUsernameChange}
+                handleLogPasswordChange={this.handleLogPasswordChange}
+                logInData={this.state.logInData}
+                handleLogInSubmit={this.handleLogInSubmit}
+                ifLogged={this.state.ifLogged}
+                currentUser={this.state.currentUser}/>
         <Main dataArticle={this.props.dataArticle}
               dataTag={this.props.dataTag}
               commentData={this.state.commentData}

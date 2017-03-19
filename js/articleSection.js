@@ -38,7 +38,7 @@ const ArticleTag = (props) => {
   });
   return (
     <span>
-      <i className="fa fa-tag"></i><a href="">{tagList.join()}</a>.
+      <i className="fa fa-tag"></i><a >{tagList.join()}</a>.
     </span>
   );
 };
@@ -54,7 +54,7 @@ const ArticleTime = (props) => {
 
 const ArticleComment = (props) => {
   return (
-    <span><i className="fa fa-comment-o"></i>(<a href="">1</a>)</span>
+    <span><i className="fa fa-comment-o"></i>(<a >1</a>)</span>
   );
 };
 
@@ -62,7 +62,7 @@ const ArticleView = (props) => {
   return (
     <span>
       <i className="fa fa-eye"></i>
-      (<a href="">{props.clickCount}</a>)
+      (<a >{props.clickCount}</a>)
     </span>
   );
 };

@@ -220,7 +220,8 @@
 	      'div',
 	      { className: 'nav-user', id: 'logIn', onClick: handleLogInModal },
 	      React.createElement('i', { className: 'fa fa-user-circle-o' }),
-	      ' Log in'
+	      ' ',
+	      props.ifLogged ? 'Log out' : 'Log in'
 	    )
 	  );
 	};
@@ -248,11 +249,17 @@
 	          'Ywj',
 	          '\'',
 	          's Blog'
+	        ),
+	        React.createElement(
+	          'span',
+	          { className: 'welcome' },
+	          props.ifLogged ? 'welcome,' + props.currentUser.firstname : ''
 	        )
 	      ),
 	      React.createElement(
 	        'div',
-	        { className: !props.navToggle ? 'navbar-toggle' : 'navbar-toggle open', onClick: handleNavToggle },
+	        { className: !props.navToggle ? 'navbar-toggle' : 'navbar-toggle open',
+	          onClick: handleNavToggle },
 	        React.createElement('span', { className: 'icon-bar' }),
 	        React.createElement('span', { className: 'icon-bar' }),
 	        React.createElement('span', { className: 'icon-bar' })
@@ -261,9 +268,14 @@
 	    React.createElement(Nav, { handleHomeClick: props.handleHomeClick,
 	      handleContactClick: props.handleContactClick,
 	      handleLogInModal: props.handleLogInModal,
-	      handleNavToggle: props.handleNavToggle }),
+	      handleNavToggle: props.handleNavToggle,
+	      ifLogged: props.ifLogged }),
 	    React.createElement(Modal, { handleSignUp: props.handleSignUp, modalToggle: props.modalToggle,
-	      handleModalCloseClick: props.handleModalCloseClick })
+	      handleModalCloseClick: props.handleModalCloseClick,
+	      handleLogUsernameChange: props.handleLogUsernameChange,
+	      handleLogPasswordChange: props.handleLogPasswordChange,
+	      logInData: props.logInData,
+	      handleLogInSubmit: props.handleLogInSubmit })
 	  );
 	};
 
@@ -303,11 +315,24 @@
 	      commentText: '',
 	      navToggle: false,
 	      modalToggle: false,
+	      ifLogged: false,
 	      // fake comment data
 	      commentData: fakecommentData,
 	      // fake user data
 	      userData: fakeuserData,
 	      signUpData: {
+	        'firstname': '',
+	        'lastname': '',
+	        'username': '',
+	        'password': '',
+	        'email': ''
+	      },
+	      logInData: {
+	        'username': '',
+	        'password': ''
+	      },
+	      currentUser: {
+	        'id': null,
 	        'firstname': '',
 	        'lastname': '',
 	        'username': '',
@@ -330,6 +355,9 @@
 	    _this.handleSignUpLNameChange = _this.handleSignUpLNameChange.bind(_this);
 	    _this.handleSignUpEmailChange = _this.handleSignUpEmailChange.bind(_this);
 	    _this.handleSignUpSubmit = _this.handleSignUpSubmit.bind(_this);
+	    _this.handleLogUsernameChange = _this.handleLogUsernameChange.bind(_this);
+	    _this.handleLogPasswordChange = _this.handleLogPasswordChange.bind(_this);
+	    _this.handleLogInSubmit = _this.handleLogInSubmit.bind(_this);
 	    return _this;
 	  }
 	  // all the event handler
@@ -339,9 +367,74 @@
 	  _createClass(Homepage, [{
 	    key: 'handleLogInModal',
 	    value: function handleLogInModal() {
+	      if (this.state.ifLogged) {
+	        this.setState({
+	          ifLogged: false,
+	          currentUser: null
+	        });
+	      } else {
+	        this.setState(function (preState) {
+	          return {
+	            modalToggle: !preState.modalToggle
+	          };
+	        });
+	      }
+	    }
+	  }, {
+	    key: 'handleLogInSubmit',
+	    value: function handleLogInSubmit() {
+	      var _this2 = this;
+
+	      // for loop is better, find match and break
+	      this.state.userData.forEach(function (val) {
+	        if (val.username === _this2.state.logInData.username) {
+	          if (val.password === _this2.state.logInData.password) {
+	            _this2.setState({
+	              ifLogged: true,
+	              currentUser: {
+	                'id': val.id,
+	                'firstname': val.firstname,
+	                'lastname': val.lastname,
+	                'username': val.username,
+	                'password': val.password,
+	                'email': val.email
+	              },
+	              logInData: {
+	                'username': '',
+	                'password': ''
+	              }
+	            });
+	            _this2.handleLogInModal();
+	          } else {
+	            // password wrong
+	          }
+	        } else {
+	            // no such an user
+	          }
+	      });
+	      console.log(this.state.ifLogged);
+	    }
+	  }, {
+	    key: 'handleLogUsernameChange',
+	    value: function handleLogUsernameChange(val) {
 	      this.setState(function (preState) {
 	        return {
-	          modalToggle: !preState.modalToggle
+	          logInData: {
+	            'username': val,
+	            'password': preState.logInData.password
+	          }
+	        };
+	      });
+	    }
+	  }, {
+	    key: 'handleLogPasswordChange',
+	    value: function handleLogPasswordChange(val) {
+	      this.setState(function (preState) {
+	        return {
+	          logInData: {
+	            'username': preState.logInData.username,
+	            'password': val
+	          }
 	        };
 	      });
 	    }
@@ -396,17 +489,20 @@
 	    }
 	  }, {
 	    key: 'handleCommentClick',
-	    value: function handleCommentClick(articleId, user, content) {
+	    value: function handleCommentClick(articleId, content) {
 	      if (content === '') {
 	        return;
 	      }
 	      var timeNow = new Date().toLocaleString() + new Date().getMilliseconds();
+	      var user = this.state.currentUser;
+	      console.log(user);
+	      var name = user.id ? user.firstname + ' ' + user.lastname : 'Anonymous';
 	      this.setState(function (preState) {
 	        return {
 	          commentText: '',
 	          commentData: preState.commentData.concat([{
 	            "articleId": articleId,
-	            "user": user,
+	            "user": name || 'Anonymous',
 	            "time": timeNow,
 	            "content": content
 	          }])
@@ -541,7 +637,13 @@
 	          handleLogInModal: this.handleLogInModal,
 	          navToggle: this.state.navToggle,
 	          modalToggle: this.state.modalToggle,
-	          handleModalCloseClick: this.handleLogInModal }),
+	          handleModalCloseClick: this.handleLogInModal,
+	          handleLogUsernameChange: this.handleLogUsernameChange,
+	          handleLogPasswordChange: this.handleLogPasswordChange,
+	          logInData: this.state.logInData,
+	          handleLogInSubmit: this.handleLogInSubmit,
+	          ifLogged: this.state.ifLogged,
+	          currentUser: this.state.currentUser }),
 	        React.createElement(Main, { dataArticle: this.props.dataArticle,
 	          dataTag: this.props.dataTag,
 	          commentData: this.state.commentData,
@@ -22167,7 +22269,7 @@
 	    React.createElement('i', { className: 'fa fa-tag' }),
 	    React.createElement(
 	      'a',
-	      { href: '' },
+	      null,
 	      tagList.join()
 	    ),
 	    '.'
@@ -22191,7 +22293,7 @@
 	    '(',
 	    React.createElement(
 	      'a',
-	      { href: '' },
+	      null,
 	      '1'
 	    ),
 	    ')'
@@ -22206,7 +22308,7 @@
 	    '(',
 	    React.createElement(
 	      'a',
-	      { href: '' },
+	      null,
 	      props.clickCount
 	    ),
 	    ')'
@@ -22334,7 +22436,7 @@
 	    props.onCommentChange(e.target.value);
 	  };
 	  var handleClick = function handleClick() {
-	    props.handleCommentClick(props.articleId, 'Anonymous', props.commentText);
+	    props.handleCommentClick(props.articleId, props.commentText);
 	  };
 	  return React.createElement(
 	    'div',
@@ -22358,7 +22460,6 @@
 
 	var CommentList = function CommentList(props) {
 	  var commentData = [];
-	  // console.log(props.commentData);
 	  props.commentData.forEach(function (val) {
 	    if (val.articleId == props.articleId) {
 	      commentData.push(val);
@@ -22656,6 +22757,15 @@
 	};
 
 	var ModalBody = function ModalBody(props) {
+	  var handleLogUsernameChange = function handleLogUsernameChange(e) {
+	    props.handleLogUsernameChange(e.target.value);
+	  };
+	  var handleLogPasswordChange = function handleLogPasswordChange(e) {
+	    props.handleLogPasswordChange(e.target.value);
+	  };
+	  var handleLogInSubmit = function handleLogInSubmit() {
+	    props.handleLogInSubmit();
+	  };
 	  return React.createElement(
 	    "div",
 	    { className: "modal-body" },
@@ -22670,7 +22780,8 @@
 	          { htmlFor: "username" },
 	          "Username:"
 	        ),
-	        React.createElement("input", { type: "text", placeholder: "Username", id: "username" })
+	        React.createElement("input", { type: "text", placeholder: "Username", id: "username",
+	          onChange: handleLogUsernameChange, value: props.logInData.username })
 	      ),
 	      React.createElement(
 	        "div",
@@ -22680,9 +22791,10 @@
 	          { htmlFor: "password" },
 	          "Password:"
 	        ),
-	        React.createElement("input", { type: "password", placeholder: "Password", id: "password" })
+	        React.createElement("input", { type: "password", placeholder: "Password", id: "password",
+	          onChange: handleLogPasswordChange, value: props.logInData.password })
 	      ),
-	      React.createElement("input", { type: "submit", value: "Log in", id: "logSubmit" })
+	      React.createElement("input", { type: "submit", value: "Log in", id: "logSubmit", onClick: handleLogInSubmit })
 	    )
 	  );
 	};
@@ -22712,7 +22824,10 @@
 	    { className: "modal-content" },
 	    React.createElement(ModalHeader, { handleModalCloseClick: props.handleModalCloseClick }),
 	    React.createElement("hr", null),
-	    React.createElement(ModalBody, null),
+	    React.createElement(ModalBody, { handleLogUsernameChange: props.handleLogUsernameChange,
+	      handleLogPasswordChange: props.handleLogPasswordChange,
+	      logInData: props.logInData,
+	      handleLogInSubmit: props.handleLogInSubmit }),
 	    React.createElement(ModalFooter, { handleSignUp: props.handleSignUp })
 	  );
 	};
@@ -22738,7 +22853,11 @@
 	            _this2.modal = modal;
 	          } },
 	        React.createElement(ModalContent, { handleSignUp: this.props.handleSignUp,
-	          handleModalCloseClick: this.props.handleModalCloseClick })
+	          handleModalCloseClick: this.props.handleModalCloseClick,
+	          handleLogUsernameChange: this.props.handleLogUsernameChange,
+	          handleLogPasswordChange: this.props.handleLogPasswordChange,
+	          logInData: this.props.logInData,
+	          handleLogInSubmit: this.props.handleLogInSubmit })
 	      );
 	    }
 	  }, {
