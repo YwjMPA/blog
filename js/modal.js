@@ -19,8 +19,8 @@ const ModalBody = (props) => {
   const handleLogPasswordChange = (e) => {
     props.handleLogPasswordChange(e.target.value);
   };
-  const handleLogInSubmit = () => {
-    props.handleLogInSubmit();
+  const handleLogInSubmit = (e) => {
+    props.handleLogInSubmit(e);
   };
   return (
     <div className="modal-body">
@@ -35,7 +35,8 @@ const ModalBody = (props) => {
           <input type="password" placeholder="Password" id="password"
               onChange={handleLogPasswordChange} value={props.logInData.password}/>
         </div>
-        <input type="button" value="Log in"  id="logSubmit" onClick={handleLogInSubmit}/>
+        <input type="submit" value="Log in"  id="logSubmit"
+            onClick={handleLogInSubmit} />
       </form>
     </div>
   );

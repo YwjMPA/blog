@@ -179,6 +179,29 @@
 	  'email': 'joker@yu.cn'
 	}];
 
+	// input Validation
+	var isEmptyInput = function isEmptyInput(val) {
+	  return val.length === 0;
+	};
+
+	var isValidEmail = function isValidEmail(val) {
+	  return (/^(\w+\.)*\w+@(\w+\.)+\w+$/.test(val)
+	  );
+	};
+
+	var popMsg = function popMsg(text, that) {
+	  that.setState({
+	    msgbar: true,
+	    msgbarText: text
+	  });
+	  setTimeout(function () {
+	    that.setState({
+	      msgbar: false,
+	      msgbarText: ''
+	    });
+	  }, 3000);
+	};
+
 	// header
 	var Nav = function Nav(props) {
 	  var handleHomeClick = function handleHomeClick() {
@@ -291,10 +314,15 @@
 	};
 
 	// Footer component
-	var Footer = function Footer() {
+	var Footer = function Footer(props) {
 	  return React.createElement(
 	    'footer',
 	    null,
+	    React.createElement(
+	      'div',
+	      { id: 'msgbar', className: props.msgbar ? 'show' : '' },
+	      props.msgbarText
+	    ),
 	    React.createElement(
 	      'span',
 	      null,
@@ -350,7 +378,9 @@
 	        'username': '',
 	        'password': '',
 	        'email': ''
-	      }
+	      },
+	      msgbar: false,
+	      msgbarText: ''
 	    };
 	    _this.handleCommentClick = _this.handleCommentClick.bind(_this);
 	    _this.handleCommentChange = _this.handleCommentChange.bind(_this);
@@ -402,41 +432,57 @@
 	    }
 	  }, {
 	    key: 'handleLogInSubmit',
-	    value: function handleLogInSubmit() {
-	      var _this2 = this;
-
-	      // for loop is better, find match and break
-	      this.state.userData.forEach(function (val) {
-	        if (val.username === _this2.state.logInData.username) {
-	          if (val.password === _this2.state.logInData.password) {
-	            _this2.setState({
+	    value: function handleLogInSubmit(e) {
+	      if (this.state.logInData.username === '') {
+	        popMsg('Username can\'t be empty', this);
+	        e.preventDefault();
+	        return;
+	      }
+	      if (this.state.logInData.password === '') {
+	        popMsg('Password can\'t be empty', this);
+	        e.preventDefault();
+	        return;
+	      }
+	      var userDataArr = this.state.userData;
+	      var userDataArrLen = this.state.userData.length;
+	      for (var i = 0; i < userDataArrLen; i++) {
+	        if (userDataArr[i].username === this.state.logInData.username) {
+	          if (userDataArr[i].password === this.state.logInData.password) {
+	            this.setState({
 	              ifLogged: true,
 	              currentUser: {
-	                'id': val.id,
-	                'firstname': val.firstname,
-	                'lastname': val.lastname,
-	                'username': val.username,
-	                'password': val.password,
-	                'email': val.email
+	                'id': userDataArr[i].id,
+	                'firstname': userDataArr[i].firstname,
+	                'lastname': userDataArr[i].lastname,
+	                'username': userDataArr[i].username,
+	                'password': userDataArr[i].password,
+	                'email': userDataArr[i].email
 	              },
 	              logInData: {
 	                'username': '',
 	                'password': ''
 	              }
 	            });
-	            if (_this2.state.mainPage === 'signUp') {
-	              _this2.setState({
+	            if (this.state.mainPage === 'signUp') {
+	              this.setState({
 	                mainPage: 'home'
 	              });
 	            }
-	            _this2.handleLogInModal();
+	            this.handleLogInModal();
+	            // no server to submit to
+	            e.preventDefault();
+	            return;
 	          } else {
 	            // password wrong
+	            popMsg('The password you’ve entered is incorrect.', this);
+	            e.preventDefault();
+	            return;
 	          }
-	        } else {
-	            // no such an user
-	          }
-	      });
+	        }
+	      }
+	      e.preventDefault();
+	      // no such an user
+	      popMsg('The email or phone number you’ve entered doesn’t match any account. Sign up for an account.', this);
 	    }
 	  }, {
 	    key: 'handleLogUsernameChange',
@@ -643,38 +689,48 @@
 	  }, {
 	    key: 'handleSignUpSubmit',
 	    value: function handleSignUpSubmit() {
-	      // if (valid) {
-	      this.setState(function (preState) {
-	        return {
-	          userData: preState.userData.concat([{
-	            "id": preState.userData.length,
-	            'firstname': preState.signUpData.firstname,
-	            'lastname': preState.signUpData.lastname,
-	            'username': preState.signUpData.username,
-	            'password': preState.signUpData.password,
-	            'email': preState.signUpData.email
-	          }]),
-	          signUpData: {
-	            'firstname': '',
-	            'lastname': '',
-	            'username': '',
-	            'password': '',
-	            'email': ''
-	          },
-	          ifLogged: true,
-	          currentUser: {
-	            'id': preState.userData.length,
-	            'firstname': preState.signUpData.firstname,
-	            'lastname': preState.signUpData.lastname,
-	            'username': preState.signUpData.username,
-	            'password': preState.signUpData.password,
-	            'email': preState.signUpData.email
-	          },
-	          mainPage: 'home'
-	        };
-	      });
-
-	      // }
+	      var signUpData = this.state.signUpData;
+	      if (!isEmptyInput(signUpData.username)) {
+	        if (!isEmptyInput(signUpData.password)) {
+	          if (!isEmptyInput(signUpData.passwordTwo && signUpData.password === signUpData.passwordTwo)) {
+	            if (!isEmptyInput(signUpData.firstname)) {
+	              if (!isEmptyInput(signUpData.lastname)) {
+	                if (!isValidEmail(signUpData.email)) {
+	                  this.setState(function (preState) {
+	                    return {
+	                      userData: preState.userData.concat([{
+	                        "id": preState.userData.length,
+	                        'firstname': preState.signUpData.firstname,
+	                        'lastname': preState.signUpData.lastname,
+	                        'username': preState.signUpData.username,
+	                        'password': preState.signUpData.password,
+	                        'email': preState.signUpData.email
+	                      }]),
+	                      signUpData: {
+	                        'firstname': '',
+	                        'lastname': '',
+	                        'username': '',
+	                        'password': '',
+	                        'email': ''
+	                      },
+	                      ifLogged: true,
+	                      currentUser: {
+	                        'id': preState.userData.length,
+	                        'firstname': preState.signUpData.firstname,
+	                        'lastname': preState.signUpData.lastname,
+	                        'username': preState.signUpData.username,
+	                        'password': preState.signUpData.password,
+	                        'email': preState.signUpData.email
+	                      },
+	                      mainPage: 'home'
+	                    };
+	                  });
+	                }
+	              }
+	            }
+	          }
+	        }
+	      } else {}
 	    }
 	    // Main Component come from ./js/main.js
 
@@ -718,7 +774,8 @@
 	          handleSignUpEmailChange: this.handleSignUpEmailChange,
 	          signUpData: this.state.signUpData,
 	          handleSignUpSubmit: this.handleSignUpSubmit }),
-	        React.createElement(Footer, null)
+	        React.createElement(Footer, { msgbar: this.state.msgbar,
+	          msgbarText: this.state.msgbarText })
 	      );
 	    }
 	  }]);
@@ -22836,8 +22893,8 @@
 	  var handleLogPasswordChange = function handleLogPasswordChange(e) {
 	    props.handleLogPasswordChange(e.target.value);
 	  };
-	  var handleLogInSubmit = function handleLogInSubmit() {
-	    props.handleLogInSubmit();
+	  var handleLogInSubmit = function handleLogInSubmit(e) {
+	    props.handleLogInSubmit(e);
 	  };
 	  return React.createElement(
 	    "div",
@@ -22867,7 +22924,8 @@
 	        React.createElement("input", { type: "password", placeholder: "Password", id: "password",
 	          onChange: handleLogPasswordChange, value: props.logInData.password })
 	      ),
-	      React.createElement("input", { type: "button", value: "Log in", id: "logSubmit", onClick: handleLogInSubmit })
+	      React.createElement("input", { type: "submit", value: "Log in", id: "logSubmit",
+	        onClick: handleLogInSubmit })
 	    )
 	  );
 	};

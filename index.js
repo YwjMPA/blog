@@ -171,6 +171,28 @@ const fakeuserData = [
   }
 ];
 
+// input Validation
+const isEmptyInput = (val) => {
+  return val.length === 0;
+}
+
+const isValidEmail = (val) => {
+  return /^(\w+\.)*\w+@(\w+\.)+\w+$/.test(val);
+}
+
+const popMsg = (text, that) => {
+  that.setState({
+    msgbar: true,
+    msgbarText: text
+  });
+  setTimeout(() => {
+    that.setState({
+      msgbar: false,
+      msgbarText: ''
+    });
+  }, 3000);
+};
+
 // header
 const Nav = (props) => {
   const handleHomeClick = () => {
@@ -245,9 +267,10 @@ const Header = (props) => {
 };
 
 // Footer component
-const Footer = () => {
+const Footer = (props) => {
   return (
     <footer>
+      <div id="msgbar" className={props.msgbar?'show':''}>{props.msgbarText}</div>
       <span>&copy; 2017 Wenjia Yu
         <a className="github" href="https://github.com/ywjmpa">{' '}
           <i className="fa fa-github"></i>
@@ -292,7 +315,9 @@ class Homepage extends React.Component{
         'username': '',
         'password': '',
         'email': ''
-      }
+      },
+      msgbar: false,
+      msgbarText: ''
     };
     this.handleCommentClick = this.handleCommentClick.bind(this);
     this.handleCommentChange = this.handleCommentChange.bind(this);
@@ -335,20 +360,31 @@ class Homepage extends React.Component{
       }));
     }
   }
-  handleLogInSubmit() {
-    // for loop is better, find match and break
-    this.state.userData.forEach((val) => {
-      if (val.username === this.state.logInData.username) {
-        if (val.password === this.state.logInData.password) {
+  handleLogInSubmit(e) {
+    if(this.state.logInData.username === '') {
+      popMsg('Username can\'t be empty', this);
+      e.preventDefault();
+      return;
+    }
+    if(this.state.logInData.password === '') {
+      popMsg('Password can\'t be empty', this);
+      e.preventDefault();
+      return;
+    }
+    const userDataArr = this.state.userData;
+    const userDataArrLen = this.state.userData.length;
+    for (let i = 0; i < userDataArrLen; i++) {
+      if (userDataArr[i].username === this.state.logInData.username) {
+        if (userDataArr[i].password === this.state.logInData.password) {
           this.setState({
             ifLogged:true,
             currentUser: {
-              'id':val.id,
-              'firstname': val.firstname,
-              'lastname': val.lastname,
-              'username': val.username,
-              'password': val.password,
-              'email': val.email
+              'id':userDataArr[i].id,
+              'firstname': userDataArr[i].firstname,
+              'lastname': userDataArr[i].lastname,
+              'username': userDataArr[i].username,
+              'password': userDataArr[i].password,
+              'email': userDataArr[i].email
             },
             logInData: {
               'username': '',
@@ -361,13 +397,20 @@ class Homepage extends React.Component{
             })
           }
           this.handleLogInModal();
+          // no server to submit to
+          e.preventDefault();
+          return;
         } else {
           // password wrong
+          popMsg('The password you’ve entered is incorrect.', this);
+          e.preventDefault();
+          return;
         }
-      } else {
-        // no such an user
       }
-    });
+    }
+    e.preventDefault();
+    // no such an user
+    popMsg('The email or phone number you’ve entered doesn’t match any account. Sign up for an account.', this)
   }
   handleLogUsernameChange(val) {
     this.setState((preState) => ({
@@ -517,36 +560,49 @@ class Homepage extends React.Component{
     }));
   }
   handleSignUpSubmit() {
-    // if (valid) {
-      this.setState((preState) => ({
-        userData: preState.userData.concat([{
-          "id": preState.userData.length,
-          'firstname': preState.signUpData.firstname,
-          'lastname': preState.signUpData.lastname,
-          'username': preState.signUpData.username,
-          'password': preState.signUpData.password,
-          'email': preState.signUpData.email
-        }]),
-        signUpData: {
-          'firstname': '',
-          'lastname': '',
-          'username': '',
-          'password': '',
-          'email': ''
-        },
-        ifLogged:true,
-        currentUser: {
-          'id': preState.userData.length,
-          'firstname': preState.signUpData.firstname,
-          'lastname': preState.signUpData.lastname,
-          'username': preState.signUpData.username,
-          'password': preState.signUpData.password,
-          'email': preState.signUpData.email
-        },
-        mainPage: 'home'
-      }));
+    const signUpData = this.state.signUpData;
+    if (!isEmptyInput(signUpData.username)) {
+      if (!isEmptyInput(signUpData.password)) {
+        if(!isEmptyInput(signUpData.passwordTwo &&
+          signUpData.password === signUpData.passwordTwo)) {
+            if (!isEmptyInput(signUpData.firstname)) {
+              if (!isEmptyInput(signUpData.lastname)) {
+                if(!isValidEmail(signUpData.email)) {
+                  this.setState((preState) => ({
+                    userData: preState.userData.concat([{
+                      "id": preState.userData.length,
+                      'firstname': preState.signUpData.firstname,
+                      'lastname': preState.signUpData.lastname,
+                      'username': preState.signUpData.username,
+                      'password': preState.signUpData.password,
+                      'email': preState.signUpData.email
+                    }]),
+                    signUpData: {
+                      'firstname': '',
+                      'lastname': '',
+                      'username': '',
+                      'password': '',
+                      'email': ''
+                    },
+                    ifLogged:true,
+                    currentUser: {
+                      'id': preState.userData.length,
+                      'firstname': preState.signUpData.firstname,
+                      'lastname': preState.signUpData.lastname,
+                      'username': preState.signUpData.username,
+                      'password': preState.signUpData.password,
+                      'email': preState.signUpData.email
+                    },
+                    mainPage: 'home'
+                  }));
+                }
+              }
+            }
+        }
+      }
+    }else{
 
-    // }
+    }
   }
   // Main Component come from ./js/main.js
   render() {
@@ -586,7 +642,8 @@ class Homepage extends React.Component{
               handleSignUpEmailChange={this.handleSignUpEmailChange}
               signUpData={this.state.signUpData}
               handleSignUpSubmit={this.handleSignUpSubmit}/>
-        <Footer />
+        <Footer msgbar={this.state.msgbar}
+            msgbarText={this.state.msgbarText}/>
       </div>
     );
   }
