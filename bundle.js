@@ -81,48 +81,59 @@
 	}, {
 	  "id": 7,
 	  "name": "webpack"
+	}, {
+	  "id": 8,
+	  "name": "npm"
 	}];
 
 	var dataArticle = [{
 	  "id": 1,
 	  "title": "HTML",
 	  "content": "HyperText Markup Language (HTML) is the standard markup language for creating web pages and web applications. With Cascading Style Sheets (CSS), and JavaScript, it forms a triad of cornerstone technologies for the World Wide Web. Web browsers receive HTML documents from a webserver or from local storage and render them into multimedia web pages. HTML describes the structure of a web page semantically and originally included cues for the appearance of the document.",
-	  "click_count": 201,
-	  "date_publish": "2016-09-28 06:19:59.123412",
+	  "click_count": 123,
+	  "date_publish": "2017-01-28 06:19:59.123412",
 	  "description": "HTML is a markup language for describing web documents (web pages).",
 	  "tags": [1]
 	}, {
 	  "id": 2,
 	  "title": "CSS",
-	  "content": "HyperText Markup Language (HTML) is the standard markup language for creating web pages and web applications. With Cascading Style Sheets (CSS), and JavaScript, it forms a triad of cornerstone technologies for the World Wide Web. Web browsers receive HTML documents from a webserver or from local storage and render them into multimedia web pages. HTML describes the structure of a web page semantically and originally included cues for the appearance of the document.",
+	  "content": 'Cascading Style Sheets (CSS) is a style sheet language used for describing the presentation of a document written in a markup language. Although most often used to set the visual style of web pages and user interfaces written in HTML and XHTML, the language can be applied to any XML document, including plain XML, SVG and XUL, and is applicable to rendering in speech, or on other media. Along with HTML and JavaScript, CSS is a cornerstone technology used by most websites to create visually engaging webpages, user interfaces for web applications, and user interfaces for many mobile applications.\nCSS is designed primarily to enable the separation of document content from document presentation, including aspects such as the layout, colors, and fonts.This separation can improve content accessibility, provide more flexibility and control in the specification of presentation characteristics, enable multiple HTML pages to share formatting by specifying the relevant CSS in a separate .css file, and reduce complexity and repetition in the structural content.\nSeparation of formatting and content makes it possible to present the same markup page in different styles for different rendering methods, such as on-screen, in print, by voice (via speech-based browser or screen reader), and on Braille-based tactile devices. It can also display the web page differently depending on the screen size or viewing device. Readers can also specify a different style sheet, such as a CSS file stored on their own computer, to override the one the author specified.',
 	  "click_count": 201,
-	  "date_publish": "2016-10-17 08:29:33.433422",
+	  "date_publish": "2017-02-17 08:29:33.433422",
 	  "description": "Cascading Style Sheets (CSS) is a style sheet language used for describing the presentation of a document written in a markup language.",
 	  "tags": [2]
 	}, {
 	  "id": 3,
 	  "title": "JavaScript",
-	  "content": "HyperText Markup Language (HTML) is the standard markup language for creating web pages and web applications. With Cascading Style Sheets (CSS), and JavaScript, it forms a triad of cornerstone technologies for the World Wide Web. Web browsers receive HTML documents from a webserver or from local storage and render them into multimedia web pages. HTML describes the structure of a web page semantically and originally included cues for the appearance of the document.",
-	  "click_count": 201,
-	  "date_publish": "2016-11-02 16:39:19.987321",
+	  "content": 'JavaScript (/\u02C8d\u0292\u0251\u02D0v\u0259\u02CCskr\u026Apt/) is a high-level, dynamic, untyped, and interpreted programming language. It has been standardized in the ECMAScript language specification. Alongside HTML and CSS, it is one of the three core technologies of World Wide Web content production; the majority of websites employ it and it is supported by all modern Web browsers without plug-ins. JavaScript is prototype-based with first-class functions, making it a multi-paradigm language, supporting object-oriented, imperative, and functional programming styles. It has an API for working with text, arrays, dates and regular expressions, but does not include any I/O, such as networking, storage, or graphics facilities, relying for these upon the host environment in which it is embedded.\nAlthough there are strong outward similarities between JavaScript and Java, including language name, syntax, and respective standard libraries, the two are distinct languages and differ greatly in their design. JavaScript was influenced by programming languages such as Self and Scheme.\nJavaScript is also used in environments that are not Web-based, such as PDF documents, site-specific browsers, and desktop widgets. Newer and faster JavaScript virtual machines (VMs) and platforms built upon them have also increased the popularity of JavaScript for server-side Web applications. On the client side, JavaScript has been traditionally implemented as an interpreted language, but more recent browsers perform just-in-time compilation. It is also used in game development, the creation of desktop and mobile applications, and server-side network programming with run-time environments such as Node.js.',
+	  "click_count": 101,
+	  "date_publish": "2016-03-02 16:39:19.987321",
 	  "description": "JavaScript is a high-level, dynamic, untyped, and interpreted programming language.",
 	  "tags": [3]
 	}, {
 	  "id": 4,
 	  "title": "React",
-	  "content": "HyperText Markup Language (HTML) is the standard markup language for creating web pages and web applications. With Cascading Style Sheets (CSS), and JavaScript, it forms a triad of cornerstone technologies for the World Wide Web. Web browsers receive HTML documents from a webserver or from local storage and render them into multimedia web pages. HTML describes the structure of a web page semantically and originally included cues for the appearance of the document.",
-	  "click_count": 201,
-	  "date_publish": "2016-12-15 19:39:19.987321",
-	  "description": "JavaScript is a high-level, dynamic, untyped, and interpreted programming language.",
+	  "content": 'React (sometimes styled React.js or ReactJS) is an open-source JavaScript library for building user interfaces.\n    It is maintained by Facebook, Instagram and a community of individual developers and corporations. According to JavaScript analytics service Libscore, React is currently being used on the websites of Netflix, Imgur, Bleacher Report, Feedly, Airbnb, SeatGeek, HelloSign, Walmart, Paviljons Concept Store and others.',
+	  "click_count": 345,
+	  "date_publish": "2016-03-15 19:39:19.987321",
+	  "description": "React is a declarative, efficient, and flexible JavaScript library for building user interfaces. React has a few different kinds of components, but we'll start with React.Component subclasses:",
 	  "tags": [1, 3, 4]
 	}, {
 	  "id": 5,
 	  "title": "Nodejs",
-	  "content": "HyperText Markup Language (HTML) is the standard markup language for creating web pages and web applications. With Cascading Style Sheets (CSS), and JavaScript, it forms a triad of cornerstone technologies for the World Wide Web. Web browsers receive HTML documents from a webserver or from local storage and render them into multimedia web pages. HTML describes the structure of a web page semantically and originally included cues for the appearance of the document.",
-	  "click_count": 201,
-	  "date_publish": "2016-12-31 05:39:19.987321",
-	  "description": "JavaScript is a high-level, dynamic, untyped, and interpreted programming language.",
-	  "tags": [3, 6]
+	  "content": 'Node.js is not a JavaScript framework, many of its basic modules are written in JavaScript, and developers can write new modules in JavaScript. The runtime environment interprets JavaScript using Google\'s V8 JavaScript engine.\n    Node.js has an event-driven architecture capable of asynchronous I/O. These design choices aim to optimize throughput and scalability in Web applications with many input/output operations, as well as for real-time Web applications (e.g., real-time communication programs and browser games).\n    The Node.js distributed development project, governed by the Node.js Foundation, is facilitated by the Linux Foundation\'s Collaborative Projects program.',
+	  "click_count": 333,
+	  "date_publish": "2016-03-18 05:39:19.987321",
+	  "description": "Node.js is an open-source, cross-platform JavaScript runtime environment for developing a diverse variety of server tools and applications.",
+	  "tags": [3, 6, 8]
+	}, {
+	  "id": 6,
+	  "title": "Webpack",
+	  "content": 'Webpack takes modules with dependencies and generates static assets representing those modules. It takes the dependencies and generates a dependency graph allowing you to use a modular approach for your web application development purposes. The bundler can be used from the command line, or can be configured using a config file which is named webpack.config.js.You will need node.js for installing webpack. Another important aspect about webpack is that it is highly extensible by the use of loaders. Loaders allow you to write custom tasks that you want to perform when bundling files together.',
+	  "click_count": 229,
+	  "date_publish": "2016-03-11 09:39:19.987321",
+	  "description": "Webpack is an open-source JavaScript module bundler. ",
+	  "tags": [3, 6, 7, 8]
 	}];
 
 	var fakecommentData = [{
@@ -132,24 +143,24 @@
 	  "content": "interesting!"
 	}, {
 	  "articleId": 2,
-	  "user": "Joker Yu",
-	  "time": "23/18/2017, 9:39:21 AM",
-	  "content": "interesting!!"
+	  "user": "Legacy Yu",
+	  "time": "23/18/2017, 8:39:21 AM",
+	  "content": "Awesome!!"
 	}, {
 	  "articleId": 3,
-	  "user": "Joker Yu",
-	  "time": "3/18/2017, 9:39:40 AM",
-	  "content": "interesting!!!"
+	  "user": "Selena Gomez",
+	  "time": "3/18/2017, 19:32:40 AM",
+	  "content": "fascinating!!!"
 	}, {
 	  "articleId": 4,
 	  "user": "Joker Yu",
-	  "time": "3/18/2017, 9:39:39 AM",
+	  "time": "3/18/2017, 11:29:39 AM",
 	  "content": "interesting!!!!"
 	}, {
 	  "articleId": 1,
-	  "user": "Joker Yu",
-	  "time": "3/18/2017, 9:39:41 AM",
-	  "content": "interesting!!!!!"
+	  "user": "Ariana Grande",
+	  "time": "3/19/2017, 18:11:31 AM",
+	  "content": 'This article is soooooooooooooooo\n\n\u2282_\u30FD\n\u3000 \uFF3C\uFF3C \uFF3F\n\u3000\u3000 \uFF3C(\u3000\u2022_\u2022) F\n\u3000\u3000\u3000 <\u3000\u2312\u30FD A\n\u3000\u3000\u3000/ \u3000 \u3078\uFF3C B\n\u3000\u3000 /\u3000\u3000/\u3000\uFF3C\uFF3C U\n\u3000\u3000 \uFF9A\u3000\u30CE\u3000\u3000 \u30FD_\u3064 L\n\u3000\u3000/\u3000/ O\n\u3000 /\u3000/ U\n\u3000(\u3000(\u30FD S\n\u3000|\u3000|\u3001\uFF3C.\n\u3000| \u4E3F \uFF3C \u2312)\n\u3000| |\u3000\u3000) /\n\u30CE )\u3000\u3000L\uFF89__\n(\uFF0F___\uFEFF'
 	}];
 
 	var fakeuserData = [{
@@ -287,7 +298,7 @@
 	    React.createElement(
 	      'span',
 	      null,
-	      '\xA9 2016 Wenjia Yu',
+	      '\xA9 2017 Wenjia Yu',
 	      React.createElement(
 	        'a',
 	        { className: 'github', href: 'https://github.com/ywjmpa' },
@@ -411,6 +422,11 @@
 	                'password': ''
 	              }
 	            });
+	            if (_this2.state.mainPage === 'signUp') {
+	              _this2.setState({
+	                mainPage: 'home'
+	              });
+	            }
 	            _this2.handleLogInModal();
 	          } else {
 	            // password wrong
@@ -22776,7 +22792,7 @@
 	    { className: "modal-body" },
 	    React.createElement(
 	      "form",
-	      { action: "#" },
+	      null,
 	      React.createElement(
 	        "div",
 	        { className: "modal-form-group" },
@@ -22799,7 +22815,7 @@
 	        React.createElement("input", { type: "password", placeholder: "Password", id: "password",
 	          onChange: handleLogPasswordChange, value: props.logInData.password })
 	      ),
-	      React.createElement("input", { type: "submit", value: "Log in", id: "logSubmit", onClick: handleLogInSubmit })
+	      React.createElement("input", { type: "button", value: "Log in", id: "logSubmit", onClick: handleLogInSubmit })
 	    )
 	  );
 	};

@@ -24,7 +24,7 @@ const ModalBody = (props) => {
   };
   return (
     <div className="modal-body">
-      <form action="#">
+      <form >
         <div className="modal-form-group">
           <label htmlFor="username">Username:</label>
           <input type="text" placeholder="Username" id="username"
@@ -35,7 +35,7 @@ const ModalBody = (props) => {
           <input type="password" placeholder="Password" id="password"
               onChange={handleLogPasswordChange} value={props.logInData.password}/>
         </div>
-        <input type="submit" value="Log in"  id="logSubmit" onClick={handleLogInSubmit}/>
+        <input type="button" value="Log in"  id="logSubmit" onClick={handleLogInSubmit}/>
       </form>
     </div>
   );
