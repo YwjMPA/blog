@@ -336,6 +336,7 @@
 	        'lastname': '',
 	        'username': '',
 	        'password': '',
+	        'passwordTwo': '',
 	        'email': ''
 	      },
 	      logInData: {
@@ -362,6 +363,7 @@
 	    _this.handleLogInModal = _this.handleLogInModal.bind(_this);
 	    _this.handleSignUpUsernameChange = _this.handleSignUpUsernameChange.bind(_this);
 	    _this.handleSignUpPasswordChange = _this.handleSignUpPasswordChange.bind(_this);
+	    _this.handleSignUpPasswordTwoChange = _this.handleSignUpPasswordTwoChange.bind(_this);
 	    _this.handleSignUpFNameChange = _this.handleSignUpFNameChange.bind(_this);
 	    _this.handleSignUpLNameChange = _this.handleSignUpLNameChange.bind(_this);
 	    _this.handleSignUpEmailChange = _this.handleSignUpEmailChange.bind(_this);
@@ -552,6 +554,7 @@
 	            'lastname': preState.signUpData.lastname,
 	            'username': val,
 	            'password': preState.signUpData.password,
+	            'passwordTwo': preState.signUpData.passwordTwo,
 	            'email': preState.signUpData.email
 	          }
 	        };
@@ -567,6 +570,23 @@
 	            'lastname': preState.signUpData.lastname,
 	            'username': preState.signUpData.username,
 	            'password': val,
+	            'passwordTwo': preState.signUpData.passwordTwo,
+	            'email': preState.signUpData.email
+	          }
+	        };
+	      });
+	    }
+	  }, {
+	    key: 'handleSignUpPasswordTwoChange',
+	    value: function handleSignUpPasswordTwoChange(val) {
+	      this.setState(function (preState) {
+	        return {
+	          signUpData: {
+	            'firstname': preState.signUpData.firstname,
+	            'lastname': preState.signUpData.lastname,
+	            'username': preState.signUpData.username,
+	            'password': preState.signUpData.password,
+	            'passwordTwo': val,
 	            'email': preState.signUpData.email
 	          }
 	        };
@@ -582,6 +602,7 @@
 	            'lastname': preState.signUpData.lastname,
 	            'username': preState.signUpData.username,
 	            'password': preState.signUpData.password,
+	            'passwordTwo': preState.signUpData.passwordTwo,
 	            'email': preState.signUpData.email
 	          }
 	        };
@@ -597,6 +618,7 @@
 	            'lastname': val,
 	            'username': preState.signUpData.username,
 	            'password': preState.signUpData.password,
+	            'passwordTwo': preState.signUpData.passwordTwo,
 	            'email': preState.signUpData.email
 	          }
 	        };
@@ -612,6 +634,7 @@
 	            'lastname': preState.signUpData.lastname,
 	            'username': preState.signUpData.username,
 	            'password': preState.signUpData.password,
+	            'passwordTwo': preState.signUpData.passwordTwo,
 	            'email': val
 	          }
 	        };
@@ -620,27 +643,38 @@
 	  }, {
 	    key: 'handleSignUpSubmit',
 	    value: function handleSignUpSubmit() {
-	      if (valid) {
-	        this.setState(function (preState) {
-	          return {
-	            commentData: preState.commentData.concat([{
-	              "id": preState.commentData.length,
-	              'firstname': preState.signUpData.firstname,
-	              'lastname': preState.signUpData.lastname,
-	              'username': preState.signUpData.username,
-	              'password': preState.signUpData.password,
-	              'email': preState.signUpData.email
-	            }]),
-	            signUpData: {
-	              'firstname': '',
-	              'lastname': '',
-	              'username': '',
-	              'password': '',
-	              'email': ''
-	            }
-	          };
-	        });
-	      }
+	      // if (valid) {
+	      this.setState(function (preState) {
+	        return {
+	          userData: preState.userData.concat([{
+	            "id": preState.userData.length,
+	            'firstname': preState.signUpData.firstname,
+	            'lastname': preState.signUpData.lastname,
+	            'username': preState.signUpData.username,
+	            'password': preState.signUpData.password,
+	            'email': preState.signUpData.email
+	          }]),
+	          signUpData: {
+	            'firstname': '',
+	            'lastname': '',
+	            'username': '',
+	            'password': '',
+	            'email': ''
+	          },
+	          ifLogged: true,
+	          currentUser: {
+	            'id': preState.userData.length,
+	            'firstname': preState.signUpData.firstname,
+	            'lastname': preState.signUpData.lastname,
+	            'username': preState.signUpData.username,
+	            'password': preState.signUpData.password,
+	            'email': preState.signUpData.email
+	          },
+	          mainPage: 'home'
+	        };
+	      });
+
+	      // }
 	    }
 	    // Main Component come from ./js/main.js
 
@@ -678,6 +712,7 @@
 	          handleTagClick: this.handleTagClick,
 	          handleSignUpUsernameChange: this.handleSignUpUsernameChange,
 	          handleSignUpPasswordChange: this.handleSignUpPasswordChange,
+	          handleSignUpPasswordTwoChange: this.handleSignUpPasswordTwoChange,
 	          handleSignUpFNameChange: this.handleSignUpFNameChange,
 	          handleSignUpLNameChange: this.handleSignUpLNameChange,
 	          handleSignUpEmailChange: this.handleSignUpEmailChange,
@@ -22219,6 +22254,7 @@
 	  } else if (props.mainPage === 'signUp') {
 	    mainSection = React.createElement(SignUp, { handleSignUpUsernameChange: props.handleSignUpUsernameChange,
 	      handleSignUpPasswordChange: props.handleSignUpPasswordChange,
+	      handleSignUpPasswordTwoChange: props.handleSignUpPasswordTwoChange,
 	      handleSignUpFNameChange: props.handleSignUpFNameChange,
 	      handleSignUpLNameChange: props.handleSignUpLNameChange,
 	      handleSignUpEmailChange: props.handleSignUpEmailChange,
@@ -22666,6 +22702,7 @@
 	      onChange: handleSignUpUsernameChange })
 	  );
 	};
+
 	var SignUpPassword = function SignUpPassword(props) {
 	  var handleSignUpPasswordChange = function handleSignUpPasswordChange(e) {
 	    props.handleSignUpPasswordChange(e.target.value);
@@ -22677,6 +22714,19 @@
 	      onChange: handleSignUpPasswordChange })
 	  );
 	};
+
+	var SignUpPasswordTwo = function SignUpPasswordTwo(props) {
+	  var handleSignUpPasswordTwoChange = function handleSignUpPasswordTwoChange(e) {
+	    props.handleSignUpPasswordTwoChange(e.target.value);
+	  };
+	  return _react2.default.createElement(
+	    "div",
+	    { className: "sign-up-form-group" },
+	    _react2.default.createElement("input", { type: "password", placeholder: "Comfirm password", value: props.password,
+	      onChange: handleSignUpPasswordTwoChange })
+	  );
+	};
+
 	var SignUpName = function SignUpName(props) {
 	  var handleSignUpFNameChange = function handleSignUpFNameChange(e) {
 	    props.handleSignUpFNameChange(e.target.value);
@@ -22724,13 +22774,15 @@
 	        handleSignUpUsernameChange: props.handleSignUpUsernameChange }),
 	      _react2.default.createElement(SignUpPassword, { password: props.signUpData.password,
 	        handleSignUpPasswordChange: props.handleSignUpPasswordChange }),
+	      _react2.default.createElement(SignUpPasswordTwo, { password: props.signUpData.passwordTwo,
+	        handleSignUpPasswordTwoChange: props.handleSignUpPasswordTwoChange }),
 	      _react2.default.createElement(SignUpName, { firstname: props.signUpData.firstname,
 	        lastname: props.signUpData.lastname,
 	        handleSignUpLNameChange: props.handleSignUpLNameChange,
 	        handleSignUpFNameChange: props.handleSignUpFNameChange }),
 	      _react2.default.createElement(SignUpEmail, { email: props.signUpData.email,
 	        handleSignUpEmailChange: props.handleSignUpEmailChange }),
-	      _react2.default.createElement("input", { type: "submit", value: "confirm", id: "signUpSubmit", onClick: handleSignUpSubmit })
+	      _react2.default.createElement("input", { type: "button", value: "confirm", id: "signUpSubmit", onClick: handleSignUpSubmit })
 	    )
 	  );
 	};

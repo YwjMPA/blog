@@ -80,6 +80,7 @@ const Main = (props) => {
   }else if (props.mainPage === 'signUp') {
     mainSection = <SignUp handleSignUpUsernameChange={props.handleSignUpUsernameChange}
               handleSignUpPasswordChange={props.handleSignUpPasswordChange}
+              handleSignUpPasswordTwoChange={props.handleSignUpPasswordTwoChange}
               handleSignUpFNameChange={props.handleSignUpFNameChange}
               handleSignUpLNameChange={props.handleSignUpLNameChange}
               handleSignUpEmailChange={props.handleSignUpEmailChange}

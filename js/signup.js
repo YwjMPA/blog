@@ -11,6 +11,7 @@ const SignUpUsername = (props) => {
     </div>
   );
 }
+
 const SignUpPassword = (props) => {
   const handleSignUpPasswordChange = (e) => {
     props.handleSignUpPasswordChange(e.target.value);
@@ -22,6 +23,19 @@ const SignUpPassword = (props) => {
     </div>
   );
 }
+
+const SignUpPasswordTwo = (props) => {
+  const handleSignUpPasswordTwoChange = (e) => {
+    props.handleSignUpPasswordTwoChange(e.target.value);
+  };
+  return (
+    <div className="sign-up-form-group">
+      <input type="password" placeholder="Comfirm password" value={props.password}
+          onChange={handleSignUpPasswordTwoChange}/>
+    </div>
+  );
+}
+
 const SignUpName = (props) => {
   const handleSignUpFNameChange = (e) => {
     props.handleSignUpFNameChange(e.target.value);
@@ -62,13 +76,15 @@ const SignUp = (props) => {
             handleSignUpUsernameChange={props.handleSignUpUsernameChange}/>
         <SignUpPassword password={props.signUpData.password}
             handleSignUpPasswordChange={props.handleSignUpPasswordChange}/>
+        <SignUpPasswordTwo password={props.signUpData.passwordTwo}
+            handleSignUpPasswordTwoChange={props.handleSignUpPasswordTwoChange}/>
         <SignUpName  firstname={props.signUpData.firstname}
             lastname={props.signUpData.lastname}
             handleSignUpLNameChange={props.handleSignUpLNameChange}
             handleSignUpFNameChange={props.handleSignUpFNameChange}/>
         <SignUpEmail email={props.signUpData.email}
             handleSignUpEmailChange={props.handleSignUpEmailChange}/>
-        <input type="submit" value='confirm' id="signUpSubmit" onClick={handleSignUpSubmit}/>
+        <input type="button" value='confirm' id="signUpSubmit" onClick={handleSignUpSubmit}/>
       </form>
     </section>
   );

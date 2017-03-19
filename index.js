@@ -278,6 +278,7 @@ class Homepage extends React.Component{
         'lastname': '',
         'username': '',
         'password': '',
+        'passwordTwo': '',
         'email': ''
       },
       logInData: {
@@ -304,6 +305,7 @@ class Homepage extends React.Component{
     this.handleLogInModal = this.handleLogInModal.bind(this);
     this.handleSignUpUsernameChange = this.handleSignUpUsernameChange.bind(this);
     this.handleSignUpPasswordChange = this.handleSignUpPasswordChange.bind(this);
+    this.handleSignUpPasswordTwoChange = this.handleSignUpPasswordTwoChange.bind(this);
     this.handleSignUpFNameChange = this.handleSignUpFNameChange.bind(this);
     this.handleSignUpLNameChange = this.handleSignUpLNameChange.bind(this);
     this.handleSignUpEmailChange = this.handleSignUpEmailChange.bind(this);
@@ -449,6 +451,7 @@ class Homepage extends React.Component{
         'lastname': preState.signUpData.lastname,
         'username':val,
         'password': preState.signUpData.password,
+        'passwordTwo': preState.signUpData.passwordTwo,
         'email':preState.signUpData.email
       }
     }));
@@ -460,6 +463,19 @@ class Homepage extends React.Component{
         'lastname': preState.signUpData.lastname,
         'username': preState.signUpData.username,
         'password': val,
+        'passwordTwo': preState.signUpData.passwordTwo,
+        'email':preState.signUpData.email
+      }
+    }));
+  }
+  handleSignUpPasswordTwoChange(val) {
+    this.setState((preState) => ({
+      signUpData:{
+        'firstname': preState.signUpData.firstname,
+        'lastname': preState.signUpData.lastname,
+        'username': preState.signUpData.username,
+        'password': preState.signUpData.password,
+        'passwordTwo': val,
         'email':preState.signUpData.email
       }
     }));
@@ -471,6 +487,7 @@ class Homepage extends React.Component{
         'lastname': preState.signUpData.lastname,
         'username': preState.signUpData.username,
         'password': preState.signUpData.password,
+        'passwordTwo': preState.signUpData.passwordTwo,
         'email':preState.signUpData.email
       }
     }));
@@ -482,6 +499,7 @@ class Homepage extends React.Component{
         'lastname': val,
         'username': preState.signUpData.username,
         'password': preState.signUpData.password,
+        'passwordTwo': preState.signUpData.passwordTwo,
         'email':preState.signUpData.email
       }
     }));
@@ -493,15 +511,16 @@ class Homepage extends React.Component{
         'lastname': preState.signUpData.lastname,
         'username': preState.signUpData.username,
         'password': preState.signUpData.password,
+        'passwordTwo': preState.signUpData.passwordTwo,
         'email': val
       }
     }));
   }
   handleSignUpSubmit() {
-    if (valid) {
+    // if (valid) {
       this.setState((preState) => ({
-        commentData: preState.commentData.concat([{
-          "id": preState.commentData.length,
+        userData: preState.userData.concat([{
+          "id": preState.userData.length,
           'firstname': preState.signUpData.firstname,
           'lastname': preState.signUpData.lastname,
           'username': preState.signUpData.username,
@@ -514,9 +533,20 @@ class Homepage extends React.Component{
           'username': '',
           'password': '',
           'email': ''
-        }
+        },
+        ifLogged:true,
+        currentUser: {
+          'id': preState.userData.length,
+          'firstname': preState.signUpData.firstname,
+          'lastname': preState.signUpData.lastname,
+          'username': preState.signUpData.username,
+          'password': preState.signUpData.password,
+          'email': preState.signUpData.email
+        },
+        mainPage: 'home'
       }));
-    }
+
+    // }
   }
   // Main Component come from ./js/main.js
   render() {
@@ -550,6 +580,7 @@ class Homepage extends React.Component{
               handleTagClick={this.handleTagClick}
               handleSignUpUsernameChange={this.handleSignUpUsernameChange}
               handleSignUpPasswordChange={this.handleSignUpPasswordChange}
+              handleSignUpPasswordTwoChange={this.handleSignUpPasswordTwoChange}
               handleSignUpFNameChange={this.handleSignUpFNameChange}
               handleSignUpLNameChange={this.handleSignUpLNameChange}
               handleSignUpEmailChange={this.handleSignUpEmailChange}
