@@ -370,7 +370,14 @@
 	      if (this.state.ifLogged) {
 	        this.setState({
 	          ifLogged: false,
-	          currentUser: null
+	          currentUser: {
+	            'id': null,
+	            'firstname': '',
+	            'lastname': '',
+	            'username': '',
+	            'password': '',
+	            'email': ''
+	          }
 	        });
 	      } else {
 	        this.setState(function (preState) {
@@ -412,7 +419,6 @@
 	            // no such an user
 	          }
 	      });
-	      console.log(this.state.ifLogged);
 	    }
 	  }, {
 	    key: 'handleLogUsernameChange',
@@ -495,7 +501,6 @@
 	      }
 	      var timeNow = new Date().toLocaleString() + new Date().getMilliseconds();
 	      var user = this.state.currentUser;
-	      console.log(user);
 	      var name = user.id ? user.firstname + ' ' + user.lastname : 'Anonymous';
 	      this.setState(function (preState) {
 	        return {

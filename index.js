@@ -212,7 +212,7 @@ const Header = (props) => {
 const Footer = () => {
   return (
     <footer>
-      <span>&copy; 2016 Wenjia Yu
+      <span>&copy; 2017 Wenjia Yu
         <a className="github" href="https://github.com/ywjmpa">{' '}
           <i className="fa fa-github"></i>
         </a>
@@ -282,7 +282,14 @@ class Homepage extends React.Component{
     if (this.state.ifLogged) {
       this.setState({
         ifLogged:false,
-        currentUser: null
+        currentUser: {
+          'id': null,
+          'firstname': '',
+          'lastname': '',
+          'username': '',
+          'password': '',
+          'email': ''
+        }
       });
     }else{
       this.setState((preState) => ({
@@ -318,7 +325,6 @@ class Homepage extends React.Component{
         // no such an user
       }
     });
-    console.log(this.state.ifLogged);
   }
   handleLogUsernameChange(val) {
     this.setState((preState) => ({
@@ -376,7 +382,6 @@ class Homepage extends React.Component{
     }
     const timeNow = new Date().toLocaleString() + new Date().getMilliseconds();
     const user = this.state.currentUser;
-    console.log(user);
     const name = user.id? user.firstname+' '+user.lastname:'Anonymous';
     this.setState((preState) => ({
       commentText: '',
